@@ -4,11 +4,11 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Big+Shoulders+Display:wght@600;700;800&family=Big+Shoulders+Stencil+Display:wght@800&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
 :root{
-  /* Diseño: consola de cámara frigorífica con la identidad de Carnes JC. Carcasa color vino (marca, estado
-     de red y pestañas fijas) sobre un área de trabajo neutra; la estructura de los racks en vino y el producto
+  /* Diseño: consola de cámara frigorífica con la identidad de Carnes JC. Carcasa en el rojo de Carnes JC (#AB1A2D, más profundo en la carcasa) (marca, estado
+     de red y pestañas fijas) sobre un área de trabajo neutra; la estructura de los racks en rojo JC y el producto
      congelado en azul hielo. PC de cortina: mapa | ficha. Terminal de mano: una columna, ficha como hoja
      inferior. Códigos de ubicación y lotes en monoespaciada tabular, como la etiqueta del rack. */
-  --ground:#EDE8E9;
+  --ground:#EFE9EA;
   --surface:#FBF9F9;
   --surface-2:#E2D9DB;
   --sunken:#F4F0F1;
@@ -17,21 +17,21 @@
   --ink-3:#76636A;
   --line:#CBBCC1;
   --line-2:#E0D5D8;
-  --shell:#4B1120;
-  --shell-2:#62192C;
-  --shell-ink:#FBEFF2;
-  --shell-ink-2:#DDB5BF;
-  --shell-accent:#F4B6C4;
-  --shell-ok:#86E3AC;
-  --shell-warn:#F7C960;
-  --accent:#8E1B32;
+  --shell:#7A1121;
+  --shell-2:#93192C;
+  --shell-ink:#FFF1F3;
+  --shell-ink-2:#EBBBC4;
+  --shell-accent:#FFC3CE;
+  --shell-ok:#8BE6B0;
+  --shell-warn:#FFD06A;
+  --accent:#AB1A2D;
   --accent-ink:#FFFFFF;
-  --accent-soft:#F4DCE2;
+  --accent-soft:#F8DDE1;
   --tgt:#C6490A;
   --on-tgt:#FFFFFF;
   --tgt-soft:#F6C7A9;
   --lane:#D9A514;
-  --rack:#6E1F30;
+  --rack:#9A1C2F;
   --pallet:#A9875C;
   --floor:#D8CED1;
   --paper:#FCFBFB;
@@ -54,8 +54,8 @@
   --on-chk:#FFFFFF;
   --shade:#14060A;
   --glint:#FFFFFF;
-  --pop:#4B1120;
-  --pop-line:#4B1120;
+  --pop:#7A1121;
+  --pop-line:#7A1121;
   --shadow:0 1px 2px rgba(37,21,26,.08),0 8px 24px rgba(37,21,26,.14);
   --f-display:"Big Shoulders Display","Arial Narrow","Roboto Condensed",sans-serif;
   --f-stencil:"Big Shoulders Stencil Display","Big Shoulders Display","Arial Narrow",sans-serif;
@@ -68,14 +68,14 @@
   :root:not([data-theme="light"]){
     --ground:#120A0D;--surface:#1B1115;--surface-2:#291A20;--sunken:#160D10;
     --ink:#F2E7EA;--ink-2:#C2A9B0;--ink-3:#9A8188;--line:#3D2A31;--line-2:#2B1E23;
-    --shell:#2B0912;--shell-2:#43131F;--shell-ink:#F7E9ED;--shell-ink-2:#C99AA6;--shell-accent:#F4B6C4;--shell-ok:#7FDCA3;--shell-warn:#F2BC4D;
-    --accent:#E8899D;--accent-ink:#2A0710;--accent-soft:#4A1825;
+    --shell:#3B0911;--shell-2:#5A1220;--shell-ink:#FBECEF;--shell-ink-2:#D3A0AB;--shell-accent:#FFC3CE;--shell-ok:#7FDCA3;--shell-warn:#F2BC4D;
+    --accent:#F08094;--accent-ink:#2A0710;--accent-soft:#521824;
     --tgt:#FF7A33;--on-tgt:#1A0A00;--tgt-soft:#5A2A10;
-    --lane:#B88A12;--rack:#C0566D;--pallet:#7A6142;--floor:#22161A;
+    --lane:#B88A12;--rack:#D9536A;--pallet:#7A6142;--floor:#22161A;
     --paper:#E8DEE1;--paper-ink:#25151A;
     --ok:#4CC27E;--ok-soft:#10301F;--warn:#E9B13B;--warn-soft:#382A0B;--bad:#F2766C;--bad-soft:#3B1613;
     --st-free:#1B1115;--st-occ:#3A6C93;--on-occ:#EAF2F7;--st-due:#D99A17;--on-due:#1A1200;--st-blk:#E25247;--on-blk:#1A0605;--st-chk:#9A7BE3;--st-chk-2:#8A6AD8;--on-chk:#120A24;
-    --shade:#000000;--glint:#FFFFFF;--pop:#43131F;--pop-line:#7A3445;
+    --shade:#000000;--glint:#FFFFFF;--pop:#5A1220;--pop-line:#8A3445;
     --shadow:0 1px 2px rgba(0,0,0,.45),0 10px 28px rgba(0,0,0,.45);
     color-scheme:dark;
   }
@@ -83,14 +83,14 @@
 :root[data-theme="dark"]{
   --ground:#120A0D;--surface:#1B1115;--surface-2:#291A20;--sunken:#160D10;
   --ink:#F2E7EA;--ink-2:#C2A9B0;--ink-3:#9A8188;--line:#3D2A31;--line-2:#2B1E23;
-  --shell:#2B0912;--shell-2:#43131F;--shell-ink:#F7E9ED;--shell-ink-2:#C99AA6;--shell-accent:#F4B6C4;--shell-ok:#7FDCA3;--shell-warn:#F2BC4D;
-  --accent:#E8899D;--accent-ink:#2A0710;--accent-soft:#4A1825;
+  --shell:#3B0911;--shell-2:#5A1220;--shell-ink:#FBECEF;--shell-ink-2:#D3A0AB;--shell-accent:#FFC3CE;--shell-ok:#7FDCA3;--shell-warn:#F2BC4D;
+  --accent:#F08094;--accent-ink:#2A0710;--accent-soft:#521824;
   --tgt:#FF7A33;--on-tgt:#1A0A00;--tgt-soft:#5A2A10;
-  --lane:#B88A12;--rack:#C0566D;--pallet:#7A6142;--floor:#22161A;
+  --lane:#B88A12;--rack:#D9536A;--pallet:#7A6142;--floor:#22161A;
   --paper:#E8DEE1;--paper-ink:#25151A;
   --ok:#4CC27E;--ok-soft:#10301F;--warn:#E9B13B;--warn-soft:#382A0B;--bad:#F2766C;--bad-soft:#3B1613;
   --st-free:#1B1115;--st-occ:#3A6C93;--on-occ:#EAF2F7;--st-due:#D99A17;--on-due:#1A1200;--st-blk:#E25247;--on-blk:#1A0605;--st-chk:#9A7BE3;--st-chk-2:#8A6AD8;--on-chk:#120A24;
-  --shade:#000000;--glint:#FFFFFF;--pop:#43131F;--pop-line:#7A3445;
+  --shade:#000000;--glint:#FFFFFF;--pop:#5A1220;--pop-line:#8A3445;
   --shadow:0 1px 2px rgba(0,0,0,.45),0 10px 28px rgba(0,0,0,.45);
   color-scheme:dark;
 }
@@ -130,6 +130,9 @@ svg.ic{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-wid
 .bm-tgt{fill:var(--tgt)}
 .brand-name{font:800 2.1rem/.9 var(--f-stencil);letter-spacing:.015em}
 .brand-sub{font:500 .8125rem/1.3 var(--f-body);color:var(--shell-ink-2);margin-top:3px}
+.client{display:inline-flex;align-items:center;gap:8px;font:500 .75rem/1.2 var(--f-body);color:var(--shell-ink-2)}
+.client-logo{width:40px;height:40px;border-radius:6px;display:block;flex:none;box-shadow:0 0 0 1px var(--shell-ink-2)}
+.client-txt b{display:block;color:var(--shell-ink);font-weight:700;font-size:.875rem}
 .sim-tag{font:600 .6875rem/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;padding:6px 8px;border:1px dashed var(--shell-ink-2);color:var(--shell-ink-2);border-radius:3px;white-space:nowrap}
 .mast-ctrls{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
 .ctl{display:inline-flex;align-items:center;gap:8px;font-size:.8125rem;color:var(--shell-ink-2)}
@@ -509,6 +512,8 @@ details.tview summary{cursor:pointer;min-height:44px;display:inline-flex;align-i
   .brand-mark{width:34px;height:34px}
   .brand-name{font-size:1.65rem}
   .sim-tag{font-size:.5625rem;padding:4px 6px}
+  .client-logo{width:32px;height:32px}
+  .client-txt{display:none}
   .mast-ctrls{width:100%;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
   .mast-ctrls .ctl,.mast-ctrls .switch{grid-column:span 3}
   .mast-ctrls .ctl select{width:100%}
@@ -543,6 +548,7 @@ details.tview summary{cursor:pointer;min-height:44px;display:inline-flex;align-i
           <div class="brand-sub">Tradición trazable: cada tarima en su lugar</div>
         </div>
         <span class="sim-tag">Prototipo · datos simulados</span>
+        <span class="client"><img class="client-logo" src="data:image/png;base64,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" alt="Logotipo de Carnes JC" width="40" height="40"><span class="client-txt">Propuesta para <b>Carnes JC</b></span></span>
       </div>
       <div class="mast-ctrls">
         <label class="ctl" for="user-sel"><span class="lg-only">Usuario</span>
