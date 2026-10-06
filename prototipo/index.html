@@ -517,7 +517,7 @@ details.tview summary{cursor:pointer;min-height:44px;display:inline-flex;align-i
   .toast{padding:10px 12px;font-size:.875rem}
   .mast-ctrls .switch .sw-track{width:34px}
   .mast-ctrls .switch input:checked + .sw-track .sw-knob{transform:translateX(12px)}
-  .cam-grid{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:minmax(112px,1fr);overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
+  .cam-grid{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:104px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
   .map-tools .inp{min-height:44px;font-size:.9375rem}
 }
 @media (prefers-reduced-motion: reduce){
@@ -1119,6 +1119,8 @@ function toast(text, kind, opts) {
   el.setAttribute('role', kind === 'bad' || kind === 'warn' ? 'alert' : 'status');
   el.innerHTML = icon({ok: 'check', warn: 'alert', bad: 'lock', info: 'info'}[kind] || 'info') + '<div class="t-body"><div class="t-txt"></div></div>';
   el.querySelector('.t-txt').textContent = text;
+  // Tocar el aviso (fuera de sus botones) lo cierra: en teléfono tapa el contenido de arriba
+  el.addEventListener('click', e => { if (!e.target.closest('button')) el.remove(); });
   if (opts.actions) {
     const row = document.createElement('div');
     row.className = 'btn-row';
@@ -2250,7 +2252,8 @@ function drawSearchChart() {
     showTip('<b>' + data[i].secs.toFixed(1) + ' s</b> · búsqueda ' + (i + 1) + ' de ' + data.length + '<br>' + fmtT(data[i].ts), ev.clientX, ev.clientY);
   };
   hit.addEventListener('pointermove', move);
-  hit.addEventListener('pointerleave', () => { cross.setAttribute('visibility', 'hidden'); hideTip(); });
+  hit.addEventListener('pointerdown', move);
+  hit.addEventListener('pointerleave', e => { if (e.pointerType === 'touch') return; cross.setAttribute('visibility', 'hidden'); hideTip(); });
 }
 
 const RENDER = {map: renderMap, put: renderPut, find: renderFind, out: renderOut, move: renderMove, count: renderCount, log: renderLog, kpi: renderKpi};
@@ -2261,6 +2264,7 @@ const RENDER = {map: renderMap, put: renderPut, find: renderFind, out: renderOut
 let themeMode = 'auto';
 const hostTheme = document.documentElement.getAttribute('data-theme');
 try { themeMode = localStorage.getItem(KEY + '-tema') || 'auto'; } catch (e) { themeMode = 'auto'; }
+if (!['auto', 'dark', 'light'].includes(themeMode)) themeMode = 'auto';
 function applyTheme() {
   const r = document.documentElement;
   if (themeMode === 'auto') { if (hostTheme) r.setAttribute('data-theme', hostTheme); else r.removeAttribute('data-theme'); }
@@ -2482,7 +2486,12 @@ document.addEventListener('submit', e => {
   switch (f.dataset.form) {
     case 'find': {
       S.ui.q = v; updateFind();
-      if (lastFind && lastFind.n === 0 && v.length >= 2) { S.searches.push({ts: Date.now(), secs: null, ok: false, q: v}); toast('Sin resultados para “' + v + '”: se registró como búsqueda fallida.', 'warn'); findStart = 0; }
+      if (lastFind && lastFind.n === 0 && v.length >= 2) {
+        const prev = S.searches[S.searches.length - 1];
+        if (prev && !prev.ok && prev.q === v) toast('“' + v + '” ya quedó registrada como búsqueda fallida.', 'info');   // no duplicar al presionar Buscar dos veces
+        else { S.searches.push({ts: Date.now(), secs: null, ok: false, q: v}); toast('Sin resultados para “' + v + '”: se registró como búsqueda fallida.', 'warn'); }
+        findStart = 0;
+      }
       save();
       break;
     }
@@ -2546,7 +2555,10 @@ document.addEventListener('keydown', e => {
 });
 // Tooltip para barras de indicadores y para la vista 3D
 document.addEventListener('pointerover', e => { const r = e.target.closest && e.target.closest('[data-tip]'); if (r) { const b = r.getBoundingClientRect(); showTip(r.dataset.tip, b.left + b.width / 2, b.top); } });
-document.addEventListener('pointerout', e => { const r = e.target.closest && e.target.closest('[data-tip]'); if (r && !r.contains(e.relatedTarget)) hideTip(); });
+document.addEventListener('pointerout', e => { if (e.pointerType === 'touch') return; const r = e.target.closest && e.target.closest('[data-tip]'); if (r && !r.contains(e.relatedTarget)) hideTip(); });
+// En pantallas táctiles el tooltip se queda hasta el siguiente toque o al desplazar la página
+document.addEventListener('pointerdown', e => { if (e.pointerType === 'touch' && !(e.target.closest && e.target.closest('[data-tip], #srch-hit, #iso'))) hideTip(); });
+window.addEventListener('scroll', () => { if (!tip.hidden) hideTip(); }, {passive: true});
 document.addEventListener('focusin', e => { const r = e.target.closest && e.target.closest('[data-tip]'); if (r) { const b = r.getBoundingClientRect(); showTip(r.dataset.tip, b.left + b.width / 2, b.top); } });
 document.addEventListener('focusout', e => { if (e.target.closest && e.target.closest('[data-tip]')) hideTip(); });
 document.addEventListener('pointermove', e => {

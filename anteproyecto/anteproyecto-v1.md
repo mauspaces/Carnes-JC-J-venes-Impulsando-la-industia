@@ -17,7 +17,7 @@ Diseñar y validar, del 13 de octubre al 27 de noviembre de 2026, UbicaJC, un si
 1. Diagnosticar en la semana 1 (S1) el flujo de la cámara piloto y medir su línea base de tiempos, exactitud, búsquedas fallidas y capturas.
 2. Codificar en S2 el 100% de las ubicaciones de la cámara piloto con etiquetas para congelación legibles al primer intento en 98% o más de los casos.
 3. Desarrollar en S3 y S4 un prototipo funcional en servidor local con alta, acomodo, búsqueda, salida, reubicación y conteo por doble escaneo, que lea Odoo sin escribir en él.
-4. Programar en S4 la asignación automática (capacidad, fresco o congelado, caducidad) y el mapa 2D/3D, con cero asignaciones a posiciones ocupadas o incompatibles.
+4. Programar la asignación automática (capacidad, fresco o congelado, caducidad) y el mapa 2D/3D, sin asignaciones a posiciones ocupadas o incompatibles.
 5. Comprobar en S5 y S6 la operación sin internet en el 100% de al menos 5 cortes simulados, sin perder movimientos.
 6. Ejecutar en S6 la prueba piloto con el personal de la cámara y medir los indicadores de la línea base.
 7. Entregar en S7 el costo-beneficio, el diseño del escaneo en recepción y el plan de escalamiento y sostenimiento para las 6 cámaras.
@@ -34,9 +34,9 @@ La empresa reporta control parcial de inventarios, tiempos de búsqueda elevados
 
 | Etapa | Lo observado | Implicación |
 |---|---|---|
-| Recepción de canales | 2 camiones y ~120 canales al día. Cada canal se registra con su lote en Odoo y a mano en una hoja; en el mismo equipo había un Excel abierto (uso por confirmar). La etiqueta del canal trae número y datos impresos, probablemente sin código de barras. No hay escáner. | Doble captura, quizá triple. Estimación del personal: ~40 canales más por día con escáner (~33%). |
+| Recepción de canales | 2 camiones y ~120 canales al día. Cada canal se registra con su lote en Odoo y a mano en una hoja; había además un Excel abierto (uso por confirmar). Su etiqueta trae número y datos impresos, probablemente sin código de barras; no hay escáner. | Doble captura, posiblemente triple. Estimación del personal: ~40 canales más por día con escáner (~33%). |
 | Corte, vacío y embalaje | Corte en ~3 líneas (2 en uso, por confirmar); vacío en Super Vac (~20 s por ciclo) y Smart Vac (~1 min). Cada caja se etiqueta y la tarima emplayada lleva una etiqueta master con código de barras; Odoo registra la producción y el montacarguista, con pistola de escaneo, valida la tarima. | La tarima ya tiene identidad digital: es el punto de partida de UbicaJC. |
-| Cámaras | 6 cámaras (C1, C2, C3A, C3B, C4 y C5): 4 de congelados y 2 de frescos (C4 congelados y C5 frescos; el resto por confirmar), con 16 o 32 racks de 5 niveles a ambos lados de un pasillo central; 4 cortinas con una PC cada una y 2 montacargas por turno. La tarima se da de alta en “Zorro”, software antiguo sin conexión con Odoo y dependiente de internet. Solo algunos racks están identificados. | Aquí se rompe el vínculo entre lo físico y lo digital. |
+| Cámaras | 6 cámaras (C1, C2, C3A, C3B, C4 y C5): 4 de congelados y 2 de frescos (C4 congelados, C5 frescos; resto por confirmar), de 16 o 32 racks con 5 niveles a ambos lados de un pasillo; 4 cortinas con PC y 2 montacargas por turno. La tarima se da de alta en “Zorro” (así llamado por su ícono), software antiguo sin conexión con Odoo y dependiente de internet. Solo algunos racks están identificados. | Aquí se rompe el vínculo entre lo físico y lo digital. |
 
 ### Problema central y causas raíz
 
@@ -94,7 +94,7 @@ Un prototipo navegable con datos simulados ya muestra estos flujos, incluidas un
 | Captura | La pistola actual, si es compatible, o un lector industrial inalámbrico que guarda lecturas; interfaz de “escanear primero” para usar con guantes. | Reutiliza lo que ya existe. |
 | Etiquetas | Ubicación: Code 128 con texto grande y adhesivo aplicable a −23 °C o menos, impresa en planta, y etiqueta multinivel a la altura de la mano para los niveles 4 y 5. Tarima: la master; al escalar, GS1-128 con SSCC, lote, fechas y peso. | Los adhesivos comunes fallan en frío[^etiquetas]; GS1-128 es el estándar cárnico y Odoo lo interpreta[^gs1]. |
 
-**Odoo nativo o capa propia (se decide en S2).** Odoo nativo no acomoda por caducidad ni reparte cantidades, y su app de escaneo es de Enterprise[^odoo-limites]; un sistema aislado como Zorro duplica la captura. Se recomienda el esquema híbrido, a confirmar con la versión, edición, hospedaje y plan de Odoo; al escalar, UbicaJC escribirá los movimientos en Odoo, que quedará como única fuente de verdad, y Zorro podrá retirarse.
+**Odoo nativo o capa propia (se decide en S2).** Odoo nativo no acomoda por caducidad ni reparte cantidades, y su app de escaneo es de Enterprise[^odoo-limites]; un sistema aislado como Zorro duplica la captura. Se recomienda el esquema híbrido; al escalar, UbicaJC escribirá los movimientos en Odoo, que quedará como única fuente de verdad, y Zorro podrá retirarse.
 
 ### Prueba piloto: esquema de validación
 
@@ -104,18 +104,18 @@ Un prototipo navegable con datos simulados ya muestra estos flujos, incluidas un
 
 ### Mejora rápida complementaria: escaneo en recepción (solo diseño)
 
-Hoy se capturan ~120 canales al día en Odoo y en hoja; el personal estima ~40 canales más por día con escáner (~33%), dato que se validará cronometrando 20 capturas en S1. Diseño: código de barras en la etiqueta del canal, acordado con el proveedor (sin él no hay ahorro); lector USB 2D en modo teclado que escribe en Odoo sin programar ($1,069–2,489 MXN por estación)[^hid], y fin de la hoja. En S7 se entrega su costo-beneficio.
+Hoy se capturan ~120 canales al día; el personal estima ~40 canales más por día con escáner (~33%), dato que se validará cronometrando 20 capturas en S1. Diseño: código de barras en la etiqueta del canal, acordado con el proveedor (sin él no hay ahorro); lector USB 2D en modo teclado que escribe en Odoo sin programar ($1,069–2,489 MXN por estación)[^hid], y fin de la hoja; costo-beneficio en S7.
 
 ### Qué la hace innovadora
 
 - **Candado contra la ubicación fantasma:** el doble escaneo en el rack ataca la causa, el movimiento sin registro, en lugar de pedir “más cuidado”.
-- **FEFO desde la entrada:** la rotación se decide al acomodar, algo que las reglas nativas de Odoo no hacen.
+- **FEFO desde la entrada:** la rotación se decide al acomodar; Odoo nativo no lo hace.
 - **Inventario que se autocorrige y opera sin internet:** cada “No encontrado” dispara un conteo con su causa (8D si se repite).
-- **Hecha para −18 °C con lo que ya existe:** etiquetas para congelación, niveles altos legibles desde el piso e interfaz para guantes, sobre Odoo, masters y pistolas actuales; el piloto cuesta menos de la cuarta parte de una terminal industrial para congelación.
+- **Hecha para −18 °C con lo que ya existe:** etiquetas para congelación, lectura desde el piso e interfaz para guantes, sobre Odoo, masters y pistolas actuales; el piloto cuesta menos de la cuarta parte de una terminal industrial para congelación.
 
 ### Alcance y exclusiones
 
-- **Incluye:** diagnóstico, diseño, prototipo con lectura de Odoo, piloto en una cámara, capacitación, manual, costo-beneficio y plan de escalamiento; como marca la convocatoria, llega hasta la fase de diseño, no a la implantación en las 6 cámaras.
+- **Incluye:** diagnóstico, diseño, prototipo con lectura de Odoo, piloto en una cámara, capacitación, manual y costo-beneficio, hasta la fase de diseño de la convocatoria.
 - **No incluye:** escritura en Odoo, cambios a Zorro, implantación en recepción, compra de equipo (a cargo de Carnes JC) ni RFID UHF, descartado porque el agua y el hielo de la carne absorben la señal: a 915 MHz se leyó 61.9% de etiquetas con carne fresca contra 97.6% con enlatados[^rfid].
 - **Por confirmar en S1:** datos de Odoo (versión, edición, hospedaje, plan y lotes con caducidad), formato de la master, pistola, tarimas por nivel, cajas sueltas, tipo de C1 a C3B y vida útil comercial.
 
@@ -136,7 +136,7 @@ Precios en línea de octubre de 2026, a cotizar en S2[^precios]. Para escalar, u
 
 | Riesgo o limitación | Mitigación |
 |---|---|
-| Odoo sin API o lotes sin caducidad | Piloto con archivos CSV; para escalar, plan Personalizado (≈$340 contra ≈$228 MXN del Estándar por usuario al mes, por confirmar) o servidor propio |
+| Odoo sin API o lotes sin caducidad | Piloto con archivos CSV; para escalar, plan Personalizado (≈$340 contra ≈$228 MXN del Estándar, por usuario al mes) o servidor propio |
 | La master no se puede ligar a Odoo | Tabla de equivalencias; GS1-128 con SSCC al escalar |
 | Pistola, señal o etiquetas no aptas a −18 °C | Prueba de 7 días y medición de señal en S2; lector DS3678 (de −20 a 50 °C, al límite) o terminal para congelación; cargadores fuera de la cámara y 5 min de espera al salir[^frio] |
 | Movimientos sin escanear durante el paralelo | Capacitación, 2 escaneos por movimiento y auditoría diaria; el “No encontrado” detecta omisiones |
@@ -147,8 +147,8 @@ Precios en línea de octubre de 2026, a cotizar en S2[^precios]. Para escalar, u
 
 | Tipo | Impacto esperado |
 |---|---|
-| Económico | Liberará horas de montacargas y personal hoy dedicadas a buscar y retrabajar; el ahorro se calculará en S7: (tiempo antes − después) × movimientos por día × días de operación. Habrá menos producto fuera de vida comercial. En recepción, el escáner permitiría ~40 canales más por día (~33%, estimación del personal) con $1,069–2,489 MXN por estación. |
-| Operativo y organizacional | Eliminará la doble captura y la dependencia de internet; llevará la exactitud a 97% o más (la mediana de los centros de distribución es 98.4%, según WERC[^werc]) y dejará un procedimiento estándar de doble escaneo y conteo. |
+| Económico | Liberará horas de montacargas y personal hoy dedicadas a buscar y retrabajar; el ahorro se calculará en S7: (tiempo antes − después) × movimientos por día × días de operación. Habrá menos producto fuera de vida comercial. En recepción, el escáner permitiría ~40 canales más por día (~33%, estimación del personal). |
+| Operativo y organizacional | Eliminará la doble captura y la dependencia de internet, llevará la exactitud a 97% o más (mediana de centros de distribución: 98.4%, según WERC[^werc]) y dejará un procedimiento estándar. |
 | Calidad, inocuidad y trazabilidad | Asegurará FEFO desde el acomodo, con evidencia de PEPS (NOM-251); registrará lote, ubicación y movimiento por tarima (art. 25 del RLFSA) y ubicará un lote completo en 30 min o menos, frente a las 24 h que da la autoridad canadiense. |
 | Social y seguridad | Reducirá los minutos dentro de la cámara por movimiento; la NOM-015-STPS-2001 limita la exposición diaria al frío (hasta 8 h entre 0 y −18 °C, y menos por debajo)[^nom015]. |
 | Ambiental y energético | Menos búsquedas y menos tiempo de puerta abierta podrán reducir la carga de refrigeración, de la que la infiltración de aire y sus cargas asociadas pueden ser más de la mitad en almacenes de distribución[^energia]. Se medirá con las aperturas de puerta de S1 y S6. |
@@ -175,34 +175,28 @@ M1 mide el tiempo de localización, no el ciclo completo de surtido, donde los c
 
 | Sem. | Fechas | Fase | Actividades principales | Responsable | Entregable o hito |
 |---|---|---|---|---|---|
-| S1 | 13–16 oct | Inicio y diagnóstico | Acta y alcance; elegir la cámara; levantamiento físico; mapa del proceso; Ishikawa y 5 porqués con el personal; línea base; confirmar Odoo, master y pistola | Mauro · Héctor · Pazos | Línea base y alcance firmados |
+| S1 | 13–16 oct | Inicio y diagnóstico | Acta y alcance; elegir la cámara; levantamiento físico; mapa del proceso; Ishikawa y 5 porqués; línea base; confirmar Odoo, master y pistola | Mauro · Héctor · Pazos | Línea base y alcance firmados |
 | S2 | 19–23 oct | Diseño | Codificación; reglas de asignación; arquitectura; decisión sobre Odoo; prueba de etiquetas y pistola a −18 °C; señal; cotización | Mauro · Héctor · Pazos | Diseño aprobado y cotización |
 | S3 | 26–30 oct | Desarrollo I | Servidor local; lectura de Odoo; alta, acomodo y búsqueda con doble escaneo; etiquetado de la cámara | Héctor · Pazos · Mauro | Registro funcional |
 | S4 | 3–6 nov | Desarrollo II | Motor de asignación; salida, reubicación, conteo y “No encontrado”; mapa y KPIs; pruebas | Héctor · Mauro · Pazos | Demostración a Carnes JC |
 | S5 | 9–13 nov | Integración y pruebas | Prueba integral en la cámara; 3 cortes simulados; respaldo; manual; capacitación | Pazos · Héctor · Mauro | Listo para piloto |
-| S6 | 17–20 nov | Prueba piloto | 2 días en paralelo con Zorro y 2 solo con UbicaJC; soporte; mediciones; 2 cortes; simulacro de rastreo | Equipo completo | Piloto medido |
+| S6 | 17–20 nov (16, feriado) | Prueba piloto | 2 días en paralelo con Zorro y 2 solo con UbicaJC; soporte; mediciones; 2 cortes; simulacro de rastreo | Equipo completo | Piloto medido |
 | S7 | 23–27 nov | Cierre y sostenimiento | Análisis antes y después; costo-beneficio; planes de escalamiento y sostenimiento; informe | Pazos · Héctor · Mauro | Entrega final (27 nov) |
 
-**Horas.** Capacidad de 315 h (3 integrantes × 15 h × 7 semanas): 268 h planeadas (85%; 38 en S1, 40 en S2 a S4, 38 en S5 y S6, 34 en S7; Héctor 90, Mauro 88 y Pazos 90) y 47 h de reserva (15%). El 16 de noviembre es feriado.
+**Horas.** Capacidad de 315 h (3 integrantes × 15 h × 7 semanas): 268 h planeadas (85%; 38 en S1, 40 en S2 a S4, 38 en S5 y S6, 34 en S7; Héctor 90, Mauro 88 y Pazos 90) y 47 h de reserva (15%).
 
 **Roles.** Héctor: software, integración con Odoo, motor de asignación y coordinación. Mauro: levantamiento físico, codificación de ubicaciones, mapa de cámaras y medición de tiempos. Pazos: infraestructura y red local, hardware y etiquetas para −18 °C, cotización, pruebas, capacitación e informe.
 
 **Seguimiento (PMI).** Acta de constitución, Gantt semanal, PPC y PAER cada viernes, reunión semanal de 30 min con el enlace de Carnes JC, control de cambios e hitos de aprobación en S1, S2, S4, S5 y S7.
 
-**Cierre y sostenimiento.** Ciclo PDCA que termina en estandarizar el doble escaneo, el conteo cíclico semanal y la revisión mensual de KPIs; toda desviación repetida se analiza con 8D. El plan de escalamiento a las 6 cámaras fija orden de arranque (congelados primero), equipo y costo por cámara, capacitación, escritura en Odoo, retiro gradual de Zorro si Carnes JC lo aprueba y master en GS1-128.
+**Cierre y sostenimiento.** Ciclo PDCA que cierra estandarizando el doble escaneo, el conteo cíclico semanal y la revisión mensual de KPIs, con 8D para desviaciones repetidas. El plan de escalamiento a las 6 cámaras fija orden de arranque (congelados primero), equipo y costo por cámara, capacitación, escritura en Odoo, retiro gradual de Zorro (si Carnes JC lo aprueba) y master en GS1-128.
 
 ## Referencias
 
-- Aires dos Santos, E. J. (2021). Caso DSV Vila do Conde (tesis de maestría, ISEP). [recipp.ipp.pt](https://recipp.ipp.pt/entities/publication/53d98f57-73b6-4970-80cd-222358863620)
-- ASHRAE. *Handbook—Refrigeration*, “Refrigerated-Facility Loads”, citado en [Plant Engineering](https://www.plantengineering.com/?p=8025).
-- Camcode y Zebra Technologies (fabricantes): [Cold Storage Rack Labels](https://www.camcode.com/wp-content/uploads/2021/09/cold-storage-rack-labels-product-sheet.pdf), [Multi-Level Rack Labels](https://www.camcode.com/multi-level-rack-labels), [DS36X8 Product Reference Guide](https://www.zebra.com/content/dam/zebra_new_ia/en-us/manuals/barcode-scanners/ds36x8-prg-en.pdf), [MC9400/MC9450, aplicaciones de congelación](https://docs.zebra.com/us/en/mobile-computers/handheld/mc9-series/mc9400-mc9450-product-reference-guide/c-using-the-device/c-mc94-95-freezer-applications.html) y [etiquetas Zebra 8000T](https://www.levata.com/zebra-8000t-freeze-labels).
-- CFIA y USDA-FSIS: [Traceability requirements, Safe Food for Canadians Regulations](https://inspection.canada.ca/en/food-safety-industry/toolkit-food-businesses/traceability-requirements) y [Freezing and Food Safety](https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/freezing-and-food-safety).
-- Cleverence (cleverence.com): [How to calculate inventory accuracy rate](https://www.cleverence.com/articles/for-business/how-to-calculate-inventory-accuracy-rate-6381/), con datos de WERC.
-- DeHoratius, N. y Raman, A. (2008). Inventory record inaccuracy: An empirical analysis. *Management Science*, 54(4), 627–641. https://doi.org/10.1287/mnsc.1070.0789
-- GS1 (gs1.org): [Global Meat and Poultry Guideline](https://mocdn.gs1.org/docs/traceability/GS1_Global_Meat_and_Poultry_Guideline_Part1_The_GS1_System.pdf).
-- Laniel y Émond (2010). [Lectura RFID a 915 MHz en un contenedor refrigerado](https://agris.fao.org/search/en/records/65dec9ac0f3e94b9e5d15f3b) (AGRIS, FAO).
-- Normatividad mexicana: [NOM-015-STPS-2001](https://asinom.stps.gob.mx/upload/noms/Nom-015.pdf), [NOM-194-SSA1-2004](https://faolex.fao.org/docs/pdf/mex64059.pdf), [NOM-251-SSA1-2009](https://dof.gob.mx/normasOficiales/3980/salud/salud.htm) y [Reglamento de la Ley Federal de Sanidad Animal, art. 25](https://www.diputados.gob.mx/LeyesBiblio/regley/Reg_LFSA.pdf).
+- Estudios: DeHoratius, N. y Raman, A. (2008). Inventory record inaccuracy: An empirical analysis. *Management Science*, 54(4), 627–641, https://doi.org/10.1287/mnsc.1070.0789 · Laniel y Émond (2010), [lectura RFID a 915 MHz en un contenedor refrigerado](https://agris.fao.org/search/en/records/65dec9ac0f3e94b9e5d15f3b) (AGRIS, FAO) · Aires dos Santos, E. J. (2021), [caso DSV Vila do Conde](https://recipp.ipp.pt/entities/publication/53d98f57-73b6-4970-80cd-222358863620) (tesis, ISEP) · WERC, datos citados por [Cleverence](https://www.cleverence.com/articles/for-business/how-to-calculate-inventory-accuracy-rate-6381/) · ASHRAE, *Handbook—Refrigeration*, citado en [Plant Engineering](https://www.plantengineering.com/?p=8025).
+- Normatividad: [NOM-015-STPS-2001](https://asinom.stps.gob.mx/upload/noms/Nom-015.pdf), [NOM-194-SSA1-2004](https://faolex.fao.org/docs/pdf/mex64059.pdf), [NOM-251-SSA1-2009](https://dof.gob.mx/normasOficiales/3980/salud/salud.htm), [Reglamento de la Ley Federal de Sanidad Animal, art. 25](https://www.diputados.gob.mx/LeyesBiblio/regley/Reg_LFSA.pdf), CFIA, [Safe Food for Canadians Regulations, trazabilidad](https://inspection.canada.ca/en/food-safety-industry/toolkit-food-businesses/traceability-requirements), y USDA-FSIS, [Freezing and Food Safety](https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/freezing-and-food-safety).
 - Odoo S.A. Documentación de Odoo 19.0 y 20.0 (odoo.com/documentation): [ubicaciones](https://www.odoo.com/documentation/19.0/applications/inventory_and_mrp/inventory/warehouses_storage/inventory_management/use_locations.html), [categorías](https://www.odoo.com/documentation/19.0/applications/inventory_and_mrp/inventory/shipping_receiving/daily_operations/storage_category.html), [FEFO](https://www.odoo.com/documentation/19.0/applications/inventory_and_mrp/inventory/shipping_receiving/removal_strategies/fefo.html), [GS1](https://www.odoo.com/documentation/19.0/applications/inventory_and_mrp/barcode/operations/gs1_nomenclature.html), [hardware](https://www.odoo.com/documentation/19.0/applications/inventory_and_mrp/barcode/setup/hardware.html), [API RPC](https://www.odoo.com/documentation/19.0/developer/reference/external_rpc_api.html), [Odoo Online](https://www.odoo.com/documentation/19.0/administration/odoo_online.html) y [modo sin conexión](https://www.odoo.com/documentation/20.0/applications/general/offline_mode.html).
+- Fabricantes y estándares: Camcode ([Cold Storage Rack Labels](https://www.camcode.com/wp-content/uploads/2021/09/cold-storage-rack-labels-product-sheet.pdf), [Multi-Level Rack Labels](https://www.camcode.com/multi-level-rack-labels)), Zebra ([DS36X8 Product Reference Guide](https://www.zebra.com/content/dam/zebra_new_ia/en-us/manuals/barcode-scanners/ds36x8-prg-en.pdf), [MC9400/MC9450 en congelación](https://docs.zebra.com/us/en/mobile-computers/handheld/mc9-series/mc9400-mc9450-product-reference-guide/c-using-the-device/c-mc94-95-freezer-applications.html), [etiquetas 8000T](https://www.levata.com/zebra-8000t-freeze-labels)) y GS1 ([Global Meat and Poultry Guideline](https://mocdn.gs1.org/docs/traceability/GS1_Global_Meat_and_Poultry_Guideline_Part1_The_GS1_System.pdf)).
 - Precios al 6 de octubre de 2026: Cyberpuerta ([DS3678-SR](https://www.cyberpuerta.mx/Opiniones-sobre-Zebra-DS3678-SR-Lector-de-Codigo-de-Barras-LED-1D-2D-Incluye-Base-Cable-USB-y-Fuente-de-Poder-1/), [DS2208](https://www.cyberpuerta.mx/Punto-de-Venta-POS/Lectores-y-Terminales/Lectores-de-Codigo-de-Barras/Zebra-DS2208-Lector-de-Codigo-de-Barras-LED-1D-2D-Incluye-Cable-USB.html), [BE600M1](https://www.cyberpuerta.mx/Energia/Proteccion-Contra-Descargas/No-Break-UPS/No-Break-UPS/No-Break-APC-BE600M1-Linea-Interactiva-330W-600VA-Entrada-92V-139V-Salida-120V-7-Salidas.html)), [Amazon México](https://www.amazon.com.mx/mini-pc-n100-16gb/s?k=mini+pc+n100+16gb), [Mercado Libre](https://listado.mercadolibre.com.mx/etiquetas-transferencia-termica), [ZPS Store](https://zpsstore.com/mc930p-gfeeg4na-zebra-mc9300-mobile-computer), [Spartan POS](https://spartanpos.com/products/ck65-l0n-b8n212f) y [oec.sh](https://oec.sh/odoo-pricing/mexico).
 
 [^nombre]: El nombre es una propuesta para uso interno de Carnes JC, dueña de la marca JC; la titularidad del desarrollo se acordará entre Carnes JC y el TecNM.
