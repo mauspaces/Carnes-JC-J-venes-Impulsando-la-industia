@@ -1,0 +1,2417 @@
+<title>UbicaFrío</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Big+Shoulders+Display:wght@600;700;800&family=Big+Shoulders+Stencil+Display:wght@800&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  /* Diseño: consola de cámara frigorífica. Carcasa de acero oscuro (marca, estado de red y pestañas fijas)
+     sobre un área de trabajo color escarcha. PC de cortina: mapa | ficha. Terminal de mano: una columna,
+     ficha como hoja inferior. Códigos de ubicación y lotes en monoespaciada tabular, como la etiqueta del rack. */
+  --ground:#E3E9ED;
+  --surface:#F5F8FA;
+  --surface-2:#D6DFE5;
+  --sunken:#EBF0F3;
+  --ink:#0D1A23;
+  --ink-2:#4B5F6C;
+  --ink-3:#6E828F;
+  --line:#B6C4CD;
+  --line-2:#D3DCE2;
+  --shell:#0E1C26;
+  --shell-2:#182C3B;
+  --shell-ink:#DDE8EF;
+  --shell-ink-2:#93A8B6;
+  --shell-accent:#72B2F5;
+  --shell-ok:#5FD08F;
+  --shell-warn:#F2BC4D;
+  --accent:#1A5DA8;
+  --accent-ink:#FFFFFF;
+  --accent-soft:#D3E2F2;
+  --tgt:#D9520C;
+  --on-tgt:#FFFFFF;
+  --tgt-soft:#F6C7A9;
+  --lane:#D9A514;
+  --rack:#2C5D93;
+  --pallet:#A9875C;
+  --floor:#CBD6DD;
+  --paper:#FCFDFD;
+  --paper-ink:#0D1A23;
+  --ok:#17804A;
+  --ok-soft:#D6EFDF;
+  --warn:#9A6400;
+  --warn-soft:#FBEBC6;
+  --bad:#B02A22;
+  --bad-soft:#F7DBD8;
+  --st-free:#F5F8FA;
+  --st-occ:#6F9DC4;
+  --on-occ:#0D1A23;
+  --st-due:#D4930A;
+  --on-due:#1A1200;
+  --st-blk:#CC3A30;
+  --on-blk:#FFFFFF;
+  --st-chk:#7C55C7;
+  --st-chk-2:#6743B0;
+  --on-chk:#FFFFFF;
+  --shade:#04101A;
+  --glint:#FFFFFF;
+  --shadow:0 1px 2px rgba(13,26,35,.08),0 8px 24px rgba(13,26,35,.14);
+  --f-display:"Big Shoulders Display","Arial Narrow","Roboto Condensed",sans-serif;
+  --f-stencil:"Big Shoulders Stencil Display","Big Shoulders Display","Arial Narrow",sans-serif;
+  --f-body:"Barlow","Segoe UI",Roboto,system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --r:4px;
+  --gut:clamp(16px,3vw,28px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#0A1117;--surface:#111C24;--surface-2:#1B2933;--sunken:#0D161D;
+    --ink:#E1EAF0;--ink-2:#97AAB7;--ink-3:#71848F;--line:#2B3C48;--line-2:#1F2E38;
+    --shell:#050B10;--shell-2:#132433;--shell-ink:#DDE8EF;--shell-ink-2:#8197A6;--shell-accent:#72B2F5;--shell-ok:#5FD08F;--shell-warn:#F2BC4D;
+    --accent:#62A0EA;--accent-ink:#04111E;--accent-soft:#16304B;
+    --tgt:#FF7A33;--on-tgt:#1A0A00;--tgt-soft:#5A2A10;
+    --lane:#B88A12;--rack:#4F86C2;--pallet:#7A6142;--floor:#17242E;
+    --paper:#D8DFE3;--paper-ink:#0D1A23;
+    --ok:#4CC27E;--ok-soft:#10301F;--warn:#E9B13B;--warn-soft:#382A0B;--bad:#F2766C;--bad-soft:#3B1613;
+    --st-free:#111C24;--st-occ:#3A6C93;--on-occ:#EAF2F7;--st-due:#D99A17;--on-due:#1A1200;--st-blk:#E25247;--on-blk:#1A0605;--st-chk:#9A7BE3;--st-chk-2:#8463D3;--on-chk:#120A24;
+    --shade:#000000;--glint:#FFFFFF;
+    --shadow:0 1px 2px rgba(0,0,0,.45),0 10px 28px rgba(0,0,0,.45);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0A1117;--surface:#111C24;--surface-2:#1B2933;--sunken:#0D161D;
+  --ink:#E1EAF0;--ink-2:#97AAB7;--ink-3:#71848F;--line:#2B3C48;--line-2:#1F2E38;
+  --shell:#050B10;--shell-2:#132433;--shell-ink:#DDE8EF;--shell-ink-2:#8197A6;--shell-accent:#72B2F5;--shell-ok:#5FD08F;--shell-warn:#F2BC4D;
+  --accent:#62A0EA;--accent-ink:#04111E;--accent-soft:#16304B;
+  --tgt:#FF7A33;--on-tgt:#1A0A00;--tgt-soft:#5A2A10;
+  --lane:#B88A12;--rack:#4F86C2;--pallet:#7A6142;--floor:#17242E;
+  --paper:#D8DFE3;--paper-ink:#0D1A23;
+  --ok:#4CC27E;--ok-soft:#10301F;--warn:#E9B13B;--warn-soft:#382A0B;--bad:#F2766C;--bad-soft:#3B1613;
+  --st-free:#111C24;--st-occ:#3A6C93;--on-occ:#EAF2F7;--st-due:#D99A17;--on-due:#1A1200;--st-blk:#E25247;--on-blk:#1A0605;--st-chk:#9A7BE3;--st-chk-2:#8463D3;--on-chk:#120A24;
+  --shade:#000000;--glint:#FFFFFF;
+  --shadow:0 1px 2px rgba(0,0,0,.45),0 10px 28px rgba(0,0,0,.45);
+  color-scheme:dark;
+}
+
+/* ---------- Base ---------- */
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.45;-webkit-font-smoothing:antialiased}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer}
+h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:700;line-height:1.05;letter-spacing:.01em;text-wrap:balance}
+h2{font-size:clamp(1.65rem,1.25rem + 1.3vw,2.15rem)}
+h3{font-size:1.3rem}
+p{margin:0}
+ol,ul{margin:0;padding:0}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.num{font-variant-numeric:tabular-nums}
+.muted{color:var(--ink-2)}
+.small{font-size:.8125rem}
+.b{font-weight:600}
+.eyebrow{font:600 .75rem/1.2 var(--f-body);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2)}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+svg.ic{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* ---------- Carcasa: marca y controles ---------- */
+.shell{background:var(--shell);color:var(--shell-ink)}
+.shell :focus-visible{outline-color:var(--shell-accent)}
+.shell-in{max-width:1320px;margin-inline:auto;padding-inline:var(--gut)}
+.mast .shell-in{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 24px;padding-block:14px 12px}
+.brand{display:flex;align-items:center;gap:12px;min-width:0;flex-wrap:wrap}
+.brand-mark{width:42px;height:42px;flex:none}
+.bm-bg{fill:var(--shell-2)}
+.bm-rack{stroke:var(--shell-accent);stroke-width:2;fill:none}
+.bm-box{fill:var(--shell-ink-2)}
+.bm-tgt{fill:var(--tgt)}
+.brand-name{font:800 2.1rem/.9 var(--f-stencil);letter-spacing:.015em}
+.brand-sub{font:500 .8125rem/1.3 var(--f-body);color:var(--shell-ink-2);margin-top:3px}
+.sim-tag{font:600 .6875rem/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;padding:6px 8px;border:1px dashed var(--shell-ink-2);color:var(--shell-ink-2);border-radius:3px;white-space:nowrap}
+.mast-ctrls{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.ctl{display:inline-flex;align-items:center;gap:8px;font-size:.8125rem;color:var(--shell-ink-2)}
+.ctl select{min-height:44px;background:var(--shell-2);color:var(--shell-ink);border:1px solid var(--shell-ink-2);border-radius:var(--r);padding:0 10px;font-weight:600;font-size:.9375rem}
+.sbtn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 12px;background:transparent;color:var(--shell-ink);border:1px solid var(--shell-ink-2);border-radius:var(--r);font-weight:600;font-size:.875rem}
+.sbtn:hover{background:var(--shell-2)}
+.switch{position:relative;display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:0 12px 0 10px;border:1px solid var(--shell-ink-2);border-radius:var(--r);cursor:pointer;font-size:.875rem;font-weight:600;user-select:none}
+.switch input{position:absolute;opacity:0;width:1px;height:1px;margin:0}
+.sw-track{width:40px;height:22px;border-radius:11px;background:var(--shell-2);border:1px solid var(--shell-ink-2);position:relative;flex:none;transition:background .2s}
+.sw-knob{position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:var(--shell-ink);transition:transform .2s}
+.switch input:checked + .sw-track{background:var(--shell-warn);border-color:var(--shell-warn)}
+.switch input:checked + .sw-track .sw-knob{transform:translateX(18px);background:var(--shell)}
+.switch:has(input:focus-visible){outline:3px solid var(--shell-accent);outline-offset:2px}
+
+/* ---------- Barra fija: red + pestañas ---------- */
+.ops{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;border-top:1px solid var(--shell-2);box-shadow:var(--shadow)}
+.net{display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px;padding-block:7px;font:500 .8125rem/1.25 var(--f-mono);color:var(--shell-ink-2);border-bottom:1px solid var(--shell-2);min-height:34px}
+.net svg.ic{width:15px;height:15px;margin-right:5px;vertical-align:-3px}
+.n-ok{color:var(--shell-ok);font-weight:600}
+.n-warn{color:var(--shell-warn);font-weight:600}
+.n-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:currentColor;margin-right:6px;vertical-align:1px}
+.n-q{padding:1px 7px;border:1px solid var(--shell-warn);color:var(--shell-warn);border-radius:10px}
+.n-prog{display:inline-block;width:90px;height:6px;border-radius:3px;background:var(--shell-2);overflow:hidden;vertical-align:middle}
+.n-prog i{display:block;height:100%;background:var(--shell-ok);transition:width .15s}
+.n-user{margin-left:auto}
+.tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.tabs::-webkit-scrollbar{display:none}
+.tab-btn{flex:none;display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 14px;background:transparent;border:0;border-bottom:3px solid transparent;color:var(--shell-ink-2);font:600 .9375rem/1 var(--f-body);white-space:nowrap}
+.tab-btn:hover{color:var(--shell-ink)}
+.tab-btn kbd{font:500 .6875rem/1 var(--f-mono);border:1px solid currentColor;border-radius:3px;padding:2px 4px;opacity:.7}
+.tab-btn[aria-selected="true"]{color:var(--shell-ink);border-bottom-color:var(--shell-accent);background:var(--shell-2)}
+.tab-badge{font:600 .6875rem/1 var(--f-mono);min-width:20px;padding:3px 5px;border-radius:9px;background:var(--shell-ink);color:var(--shell);text-align:center}
+.tab-badge.warn{background:var(--shell-warn)}
+
+/* ---------- Área de trabajo ---------- */
+.wrap{max-width:1320px;margin-inline:auto;padding-inline:var(--gut)}
+main.wrap{padding-block:20px 36px;display:grid;gap:16px;min-width:0}
+.tab{display:grid;gap:16px;min-width:0}
+.sec-h{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:8px 24px}
+.sec-h > div{display:grid;gap:4px}
+.sec-sub{max-width:62ch;font-size:.9375rem}
+.h-temp{font:500 .55em/1 var(--f-mono);color:var(--ink-2);vertical-align:.25em;margin-left:6px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px;display:grid;gap:14px;min-width:0;align-content:start}
+.panel-h{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 12px}
+.cols{display:grid;gap:16px;grid-template-columns:minmax(0,1fr)}
+@media (min-width:980px){.cols{grid-template-columns:minmax(300px,380px) minmax(0,1fr)}}
+main.wrap,.tab,.panel,.ficha,.step-b,.kpi,.task,.task-res,.chart,.guide,.target,.mini,.msg-x,.sec-h > div,.pend-main,.res-main,.ficha-sum,.fld,.map-main,.hb,.pk-main{grid-template-columns:minmax(0,1fr)}
+.note{display:flex;align-items:flex-start;gap:8px;font-size:.8125rem;color:var(--ink-2)}
+.note svg.ic{width:16px;height:16px;margin-top:2px}
+.offline{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;padding:12px 16px;background:var(--warn-soft);border:1px solid var(--warn);border-radius:var(--r)}
+.offline > svg.ic{width:24px;height:24px;color:var(--warn)}
+.offline p{flex:1 1 280px;min-width:0}
+
+/* Botones */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:10px 16px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface);color:var(--ink);font-weight:600;font-size:.9375rem;line-height:1.1;text-align:center}
+.btn:hover{background:var(--sunken)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn-pri{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn-pri:hover{background:var(--accent);filter:brightness(1.1)}
+.btn-bad{background:var(--bad-soft);border-color:var(--bad);color:var(--ink)}
+.btn-bad:hover{background:var(--bad-soft);filter:brightness(1.05)}
+.btn-sim{border-style:dashed;border-color:var(--ink-3);color:var(--ink-2);background:transparent}
+.btn-sim:hover{color:var(--ink)}
+.btn-row{display:flex;flex-wrap:wrap;gap:8px}
+.lnk{display:inline-flex;align-items:center;min-height:44px;padding:0 6px;margin-inline:-6px;border:0;background:transparent;color:var(--accent);font:inherit;text-decoration:underline;text-underline-offset:3px}
+
+/* Segmentado y campos */
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--surface)}
+.seg-b{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;border:0;background:transparent;font-weight:600;font-size:.9375rem}
+.seg-b + .seg-b{border-left:1px solid var(--line)}
+.seg-b[aria-pressed="true"]{background:var(--ink);color:var(--surface)}
+.fld{display:grid;gap:6px;min-width:0}
+.fld-lab{font-weight:600;font-size:.875rem}
+.fld-inline{display:inline-flex;align-items:center;gap:8px;font-size:.875rem;font-weight:600;min-width:0}
+.inp{min-height:48px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface);padding:0 12px;font-size:1rem;min-width:0;max-width:100%}
+.inp:focus-visible{outline:3px solid var(--accent);outline-offset:1px}
+.scan{position:relative;display:flex;align-items:center;border:2px solid var(--ink-3);border-radius:var(--r);background:var(--sunken);overflow:hidden;min-width:0}
+.scan:focus-within{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.scan > svg.ic{margin-left:12px;width:22px;height:22px;color:var(--ink-2)}
+.scan-in{flex:1;min-width:0;min-height:54px;border:0;background:transparent;padding:0 12px;font:500 1.125rem/1 var(--f-mono);letter-spacing:.02em;text-transform:uppercase;outline:none}
+.scan-in::placeholder{color:var(--ink-3);text-transform:none;letter-spacing:0}
+.scan-in:disabled{cursor:not-allowed}
+.scan .btn{border-radius:0;align-self:stretch;min-height:54px;border-width:0 0 0 1px}
+.scan.sm .scan-in{min-height:46px;font-size:1rem}
+.scan.sm .btn{min-height:46px}
+.scan.is-scan::after{content:"";position:absolute;left:8px;right:8px;top:50%;height:2px;background:var(--tgt);box-shadow:0 0 8px var(--tgt);animation:laser .45s ease-in-out 2;pointer-events:none}
+@keyframes laser{0%{transform:translateY(-16px);opacity:.25}50%{transform:translateY(16px);opacity:1}100%{transform:translateY(-16px);opacity:.25}}
+
+/* Estados: muestras y chips */
+.sw{display:inline-block;position:relative;width:14px;height:14px;border-radius:2px;flex:none}
+.sw.s-free{background:var(--st-free);border:1px dashed var(--ink-3)}
+.sw.s-occ{background:var(--st-occ)}
+.sw.s-due{background:var(--st-due)}
+.sw.s-due::after{content:"";position:absolute;top:0;right:0;border-left:6px solid transparent;border-top:6px solid var(--on-due)}
+.sw.s-blk{background:var(--st-blk)}
+.sw.s-blk::after{content:"";position:absolute;inset:2px;background:linear-gradient(45deg,transparent 43%,var(--on-blk) 43% 57%,transparent 57%),linear-gradient(-45deg,transparent 43%,var(--on-blk) 43% 57%,transparent 57%)}
+.sw.s-chk{background:repeating-linear-gradient(135deg,var(--st-chk) 0 3px,var(--st-chk-2) 3px 6px)}
+.sw.s-tgt{background:transparent;box-shadow:inset 0 0 0 3px var(--tgt)}
+.chip{display:inline-flex;align-items:center;gap:6px;min-height:26px;padding:3px 8px;border-radius:3px;font:600 .75rem/1.1 var(--f-body);letter-spacing:.02em;border:1px solid var(--line);background:var(--surface);color:var(--ink);white-space:nowrap}
+.chip-fefo{border-color:var(--accent);color:var(--accent)}
+.ttag{display:inline-block;font:600 .6875rem/1 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;padding:3px 5px;border-radius:2px;border:1px solid var(--ink-3);color:var(--ink-2);vertical-align:2px}
+.ttag.t-C{border-color:var(--accent);color:var(--accent)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.8125rem;color:var(--ink-2)}
+.lg{display:inline-flex;align-items:center;gap:7px}
+.lg b{color:var(--ink);font-variant-numeric:tabular-nums}
+.placard{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;background:var(--ink);color:var(--surface);border-radius:3px;font:600 1.5rem/1 var(--f-mono);letter-spacing:.03em;font-variant-numeric:tabular-nums;white-space:nowrap}
+.placard.sm{font-size:1rem;padding:5px 8px}
+.placard.xl{font-size:clamp(1.6rem,1.25rem + 1.8vw,2.4rem);padding:10px 14px}
+.placard.tgt{background:var(--tgt);color:var(--on-tgt)}
+
+/* Mensajes */
+.msg{display:grid;grid-template-columns:22px minmax(0,1fr);gap:4px 10px;padding:12px 14px;border-radius:var(--r);border:1px solid var(--line);background:var(--sunken)}
+.msg > svg.ic{width:22px;height:22px;margin-top:1px}
+.msg-x{display:grid;gap:8px;min-width:0}
+.msg-t{font-weight:700}
+.msg-ok{background:var(--ok-soft);border-color:var(--ok)}
+.msg-ok > svg.ic{color:var(--ok)}
+.msg-warn{background:var(--warn-soft);border-color:var(--warn)}
+.msg-warn > svg.ic{color:var(--warn)}
+.msg-bad{background:var(--bad-soft);border-color:var(--bad)}
+.msg-bad > svg.ic{color:var(--bad)}
+.msg-info{background:var(--accent-soft);border-color:var(--accent)}
+.msg-info > svg.ic{color:var(--accent)}
+
+/* ---------- Mapa ---------- */
+.cam-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+@media (min-width:760px){.cam-grid{grid-template-columns:repeat(6,minmax(0,1fr))}}
+.cam{display:grid;gap:5px;text-align:left;padding:10px 12px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface);min-height:44px;min-width:0}
+.cam:hover{border-color:var(--ink-3)}
+.cam[aria-pressed="true"]{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent);background:var(--accent-soft)}
+.cam-top{display:flex;justify-content:space-between;align-items:baseline;gap:6px;flex-wrap:wrap}
+.cam-id{font:700 1.45rem/1 var(--f-display)}
+.cam-temp{font:500 .75rem/1 var(--f-mono);color:var(--ink-2)}
+.cam-type{font-size:.75rem;color:var(--ink-2);line-height:1.2}
+.cam-bar{display:block;height:5px;background:var(--line-2);border-radius:3px;overflow:hidden}
+.cam-bar i{display:block;height:100%;background:var(--accent)}
+.cam-occ{font:500 .75rem/1.2 var(--f-mono);font-variant-numeric:tabular-nums}
+.cam-due{display:inline-flex;align-items:center;gap:5px;font-size:.6875rem;color:var(--ink-2)}
+.cam-due .sw{width:10px;height:10px}
+.map-tools{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+.map-layout{display:grid;gap:16px;grid-template-columns:minmax(0,1fr);align-items:start}
+@media (min-width:1000px){.map-layout{grid-template-columns:minmax(0,1fr) 340px}}
+.map-main{min-width:0;display:grid;gap:8px}
+.rackmap-scroll{overflow-x:auto;position:relative;background:var(--sunken);border:1px solid var(--line);border-radius:var(--r);padding:10px 10px 12px}
+.rackmap{display:grid;grid-template-columns:30px repeat(var(--cols),minmax(42px,1fr));gap:3px}
+.rm-side{grid-column:1 / -1;font:600 .75rem/1 var(--f-body);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);padding-block:2px 4px;position:sticky;left:0}
+.rm-side.b{padding-block:6px 0}
+.rm-lv{font:600 .75rem/44px var(--f-mono);color:var(--ink-2);text-align:center}
+.rm-rk{font:500 .6875rem/1 var(--f-mono);color:var(--ink-2);text-align:center;padding-block:3px}
+.rm-door{display:grid;place-items:center;font:700 .5625rem/1 var(--f-mono);letter-spacing:.08em;color:var(--ink);background:var(--surface-2);border-radius:2px;writing-mode:vertical-rl;transform:rotate(180deg);min-height:42px}
+.rm-aisle{grid-column:2 / -1;display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:42px;padding-inline:10px;background:var(--surface-2);border-block:2px solid var(--lane);font:600 .6875rem/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);white-space:nowrap}
+.cell{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:44px;min-width:0;padding:2px;border:1px solid transparent;border-radius:3px;background:var(--st-occ);color:var(--on-occ);font:600 .6875rem/1 var(--f-mono);font-variant-numeric:tabular-nums;transition:transform .12s}
+.cell:hover{transform:translateY(-1px)}
+.cell .c-d{font-weight:500;font-size:.625rem;opacity:.9}
+.cell.s-free{background:var(--st-free);border:1px dashed var(--line);color:var(--ink-3)}
+.cell.s-due{background:var(--st-due);color:var(--on-due)}
+.cell.s-due::after{content:"";position:absolute;top:2px;right:2px;border-left:8px solid transparent;border-top:8px solid var(--on-due)}
+.cell.s-blk{background:var(--st-blk);color:var(--on-blk)}
+.cell.s-blk::before{content:"";position:absolute;inset:3px;background:linear-gradient(45deg,transparent 48%,var(--on-blk) 48% 52%,transparent 52%),linear-gradient(-45deg,transparent 48%,var(--on-blk) 48% 52%,transparent 52%);opacity:.3;pointer-events:none}
+.cell.s-chk{background:repeating-linear-gradient(135deg,var(--st-chk) 0 5px,var(--st-chk-2) 5px 10px);color:var(--on-chk)}
+.cell.is-sel{outline:3px solid var(--accent);outline-offset:1px;z-index:1}
+.cell.is-tgt{box-shadow:0 0 0 3px var(--tgt),0 0 0 7px var(--tgt-soft);z-index:2;animation:pulse 1.1s ease-in-out 5}
+.cell.is-dim{opacity:.2}
+@keyframes pulse{50%{box-shadow:0 0 0 3px var(--tgt),0 0 0 12px var(--tgt-soft)}}
+.iso-wrap{position:relative;background:var(--sunken);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;min-width:0}
+.iso-wrap canvas{display:block;max-width:100%;cursor:pointer;touch-action:manipulation}
+.iso-cap{font-size:.8125rem;color:var(--ink-2)}
+
+/* Ficha */
+.ficha{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px;display:grid;gap:14px;align-content:start;min-width:0}
+.ficha-h{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px}
+.ficha-h .x{margin-left:auto}
+.ficha-sum{display:grid;gap:4px}
+.ficha-sum b{font-size:1.05rem}
+@media (max-width:999px){
+  .ficha.is-sheet{position:fixed;left:0;right:0;bottom:0;z-index:30;max-height:52vh;overflow:auto;overscroll-behavior:contain;border-radius:10px 10px 0 0;border-bottom:0;box-shadow:var(--shadow);padding:14px 16px calc(16px + env(safe-area-inset-bottom,0px))}
+  .ficha.is-sheet::before{content:"";justify-self:center;width:44px;height:4px;border-radius:2px;background:var(--line);margin-top:-4px}
+  body.has-sheet .app{padding-bottom:52vh}
+}
+.mlabel{background:var(--paper);color:var(--paper-ink);border-radius:3px;padding:10px 12px;display:grid;gap:6px;box-shadow:inset 0 0 0 1px var(--line)}
+.ml-top{display:flex;justify-content:space-between;gap:8px;font:600 .625rem/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase}
+.ml-code{font:600 1.25rem/1 var(--f-mono);letter-spacing:.02em}
+.ml-bars{display:block;width:100%;height:40px}
+.ml-bars rect{fill:var(--paper-ink)}
+.ml-hr{font:500 .625rem/1.35 var(--f-mono);overflow-wrap:anywhere}
+.kv{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:7px 14px;margin:0;font-size:.9375rem}
+.kv dt{color:var(--ink-2);font-size:.8125rem;padding-top:2px}
+.kv dd{margin:0;min-width:0;font-weight:600;overflow-wrap:anywhere}
+.fefo-list{list-style:none;display:grid;gap:6px}
+.fefo-list button{width:100%;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:10px;min-height:44px;padding:6px 10px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface);text-align:left}
+.fefo-list button:hover{background:var(--sunken)}
+.fefo-list .fl-p{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sum-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.sum-grid div{padding:8px 10px;background:var(--sunken);border-radius:3px;display:grid;gap:2px}
+.sum-grid b{font-size:1.25rem;font-weight:600}
+
+/* ---------- Flujos ---------- */
+.flow{gap:20px}
+.step{display:grid;grid-template-columns:34px minmax(0,1fr);gap:12px;align-items:start}
+.step-n{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--ink);color:var(--surface);font:700 1.05rem/1 var(--f-display)}
+.step.is-done .step-n{background:var(--ok);color:var(--surface)}
+.step.is-off{opacity:.45}
+.step-b{display:grid;gap:10px;min-width:0}
+.pend{list-style:none;display:grid;gap:8px}
+.pend-i{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
+.pend-i.is-on{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.pend-main{display:grid;gap:3px;min-width:0}
+.empty{padding:12px;color:var(--ink-2);border:1px dashed var(--line);border-radius:var(--r);list-style:none}
+.why{list-style:none;display:grid;gap:9px}
+.why li{display:grid;grid-template-columns:22px minmax(0,1fr);gap:8px;align-items:start}
+.why li > svg.ic{margin-top:2px}
+.why li.y > svg.ic{color:var(--ok)}
+.why li.n > svg.ic{color:var(--ink-3)}
+.sug-main{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+.score{display:inline-flex;align-items:center;gap:8px;font:600 .875rem/1 var(--f-body)}
+.score-bar{display:inline-block;width:80px;height:6px;border-radius:3px;background:var(--accent-soft);overflow:hidden}
+.score-bar i{display:block;height:100%;background:var(--accent)}
+details.more summary{cursor:pointer;min-height:44px;display:flex;align-items:center;font-weight:600;color:var(--accent)}
+details.more summary:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.alts{list-style:none;display:grid;gap:6px}
+.alts li{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;padding:6px 0;border-top:1px solid var(--line-2)}
+.mini{display:grid;gap:4px;padding:10px 12px;border:1px solid var(--line);border-radius:var(--r);background:var(--sunken)}
+.picklist{list-style:none;display:grid;gap:6px;counter-reset:pk}
+.pk{display:grid;grid-template-columns:28px minmax(0,1fr) auto;align-items:center;gap:10px;padding:8px 10px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
+.pk.is-cur{border-color:var(--tgt);box-shadow:inset 0 0 0 1px var(--tgt)}
+.pk.is-ok{opacity:.7}
+.pk.is-skip{opacity:.55}
+.pk.is-skip .pk-main{text-decoration:line-through}
+.pk-n{font:700 1rem/1 var(--f-display);text-align:center}
+.pk-main{display:grid;gap:2px;min-width:0}
+.out-form{display:grid;gap:12px;grid-template-columns:minmax(0,1fr)}
+@media (min-width:640px){.out-form{grid-template-columns:minmax(0,2fr) minmax(150px,1fr) minmax(150px,1fr)}}
+.qty{display:flex;align-items:stretch}
+.qty .btn{min-width:48px;padding:0;font-size:1.25rem}
+.qty .btn:first-child{border-radius:var(--r) 0 0 var(--r)}
+.qty .btn:last-child{border-radius:0 var(--r) var(--r) 0}
+.qty input{width:100%;min-width:0;text-align:center;border-radius:0;border-inline:0;font-variant-numeric:tabular-nums}
+.target{display:grid;gap:10px;padding:14px;border:2px solid var(--tgt);border-radius:var(--r);background:var(--sunken)}
+.dsteps{display:flex;flex-wrap:wrap;gap:8px}
+.dstep{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:3px;border:1px solid var(--line);font-weight:600;font-size:.875rem;color:var(--ink-2)}
+.dstep.on{border-color:var(--ink);color:var(--ink)}
+.dstep.ok{border-color:var(--ok);color:var(--ok)}
+
+/* Búsqueda */
+.chips-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.qchip{min-height:44px;padding:0 14px;border:1px solid var(--line);border-radius:22px;background:var(--surface);font:500 .875rem/1 var(--f-mono)}
+.qchip:hover{border-color:var(--ink-3)}
+.find-meta{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.875rem;color:var(--ink-2);align-items:baseline}
+.find-meta b{color:var(--ink)}
+.res-list{list-style:none;display:grid;gap:8px}
+.res{display:grid;grid-template-columns:30px minmax(0,1fr);gap:8px 12px;padding:14px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface);align-items:center}
+.res-rank{font:700 1.25rem/1 var(--f-display);color:var(--ink-2);text-align:center;align-self:start}
+.res-main{display:grid;gap:4px;min-width:0}
+.res-prod{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px}
+.res-loc{grid-column:2;display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.res-act{grid-column:2}
+@media (min-width:960px){
+  .res{grid-template-columns:30px minmax(0,1.35fr) minmax(0,1fr) auto}
+  .res-loc,.res-act{grid-column:auto}
+}
+
+/* Conteos */
+.tasks{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr))}
+.task{display:grid;gap:10px;padding:14px;border:1px solid var(--st-chk);border-radius:var(--r);background:var(--surface);align-content:start}
+.task-h{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.task-h .mono{margin-left:auto}
+.task-res{display:grid;gap:10px;padding-top:10px;border-top:1px solid var(--line-2)}
+
+/* Tablas */
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--surface);max-width:100%}
+table{border-collapse:collapse;width:100%;font-size:.875rem}
+th,td{padding:6px 10px;text-align:left;border-bottom:1px solid var(--line-2);white-space:nowrap;vertical-align:middle}
+th{font:600 .7rem/1.2 var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);background:var(--sunken);padding-block:10px}
+td.mono,.tdm{font-family:var(--f-mono);font-size:.8125rem;font-variant-numeric:tabular-nums}
+td.r,th.r{text-align:right}
+tbody tr:last-child td{border-bottom:0}
+.mt{display:inline-block;font:600 .6875rem/1 var(--f-body);letter-spacing:.04em;text-transform:uppercase;padding:4px 6px;border-radius:2px;border:1px solid var(--line);color:var(--ink-2)}
+.mt-in{border-color:var(--accent);color:var(--accent)}
+.mt-out{border-color:var(--ink);color:var(--ink)}
+.mt-bad{border-color:var(--bad);background:var(--bad-soft);color:var(--ink)}
+.mt-adj{border-color:var(--warn);background:var(--warn-soft);color:var(--ink)}
+.mt-chk{border-color:var(--st-chk);color:var(--ink)}
+.sync-ok{color:var(--ok);font-weight:600}
+.sync-q{color:var(--warn);font-weight:600}
+.log-filters{display:grid;gap:12px;grid-template-columns:minmax(0,1fr)}
+@media (min-width:760px){.log-filters{grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,1.3fr) auto;align-items:end}}
+.timeline{list-style:none;display:grid;gap:0;border-left:2px solid var(--line);margin-left:6px}
+.timeline li{position:relative;display:grid;gap:2px;padding:6px 0 10px 18px}
+.timeline li::before{content:"";position:absolute;left:-7px;top:10px;width:12px;height:12px;border-radius:50%;background:var(--surface);border:2px solid var(--ink-3)}
+.timeline li.tl-out::before{border-color:var(--ink);background:var(--ink)}
+.timeline li.tl-bad::before{border-color:var(--bad);background:var(--bad)}
+.trace-pals{list-style:none;display:grid;gap:6px}
+.trace-pals li{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;padding:4px 0;border-bottom:1px solid var(--line-2)}
+.trace-grid{display:grid;gap:16px;grid-template-columns:minmax(0,1fr)}
+@media (min-width:900px){.trace-grid{grid-template-columns:minmax(0,1fr) minmax(0,1.2fr)}}
+
+/* ---------- Indicadores ---------- */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,168px),1fr));gap:12px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px;display:grid;gap:6px;align-content:start}
+.kpi-l{font-size:.8125rem;font-weight:600;color:var(--ink-2)}
+.kpi-v{font:600 2.1rem/1 var(--f-body);letter-spacing:-.01em}
+.kpi-v small{font-size:.5em;font-weight:600;color:var(--ink-2);margin-left:2px}
+.kpi-s{font-size:.8125rem;color:var(--ink-2)}
+.meter{position:relative;height:8px;border-radius:4px;background:var(--accent-soft);margin-top:4px}
+.meter i{position:absolute;inset-block:0;left:0;border-radius:4px;background:var(--accent)}
+.meter b{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--ink)}
+.charts{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr))}
+.chart{display:grid;gap:12px;align-content:start}
+.chart h3{font-size:1.15rem}
+.hb{display:grid;gap:6px}
+.hb-row{display:grid;grid-template-columns:76px minmax(0,1fr) 74px;align-items:center;gap:10px;min-height:32px;border-radius:3px;padding-inline:4px}
+.hb-row:hover,.hb-row:focus-visible{background:var(--sunken)}
+.hb-lab{font:600 .8125rem/1.1 var(--f-mono);display:grid}
+.hb-lab small{font:500 .6875rem/1.1 var(--f-body);color:var(--ink-2)}
+.hb-track{position:relative;height:18px}
+.hb-track.meter-t{background:var(--accent-soft);border-radius:0 4px 4px 0}
+.hb-fill{position:absolute;inset-block:0;left:0;border-radius:0 4px 4px 0;background:var(--accent)}
+.hb-fill.due{background:var(--st-due)}
+.hb-fill.blk{background:var(--st-blk)}
+.hb-thr{position:absolute;top:-5px;bottom:-5px;width:1px;background:var(--ink)}
+.hb-val{font:600 .8125rem/1 var(--f-body);font-variant-numeric:tabular-nums;text-align:right}
+.hb-axis{display:grid;grid-template-columns:76px minmax(0,1fr) 74px;gap:10px;padding-inline:4px;font:500 .6875rem/1 var(--f-mono);color:var(--ink-2)}
+.hb-axis span{display:flex;justify-content:space-between}
+.ch-svg{display:block;width:100%;overflow:visible}
+.ch-grid{stroke:var(--line-2);stroke-width:1}
+.ch-axis{stroke:var(--line);stroke-width:1}
+.ch-txt{fill:var(--ink-2);font:500 11px var(--f-mono)}
+.ch-lab{fill:var(--ink);font:600 12px var(--f-body)}
+.ch-line{fill:none;stroke:var(--accent);stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+.ch-area{fill:var(--accent);opacity:.1}
+.ch-dot{fill:var(--accent);stroke:var(--surface);stroke-width:2}
+.ch-ref{stroke:var(--ink-3);stroke-width:1}
+.ch-cross{stroke:var(--ink-3);stroke-width:1}
+.ch-hit{fill:transparent}
+details.tview summary{cursor:pointer;min-height:44px;display:inline-flex;align-items:center;font-size:.875rem;font-weight:600;color:var(--accent)}
+.lgd{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.8125rem;color:var(--ink-2)}
+.lgd span{display:inline-flex;align-items:center;gap:6px}
+.lgd i{display:inline-block;width:12px;height:12px;border-radius:2px}
+.lgd i.due{background:var(--st-due)}
+.lgd i.blk{background:var(--st-blk)}
+
+/* ---------- Guion, toasts, tooltip, pie ---------- */
+.guide{display:grid;gap:14px;padding:18px;background:var(--surface);border:2px solid var(--ink);border-radius:var(--r)}
+.guide-h{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:10px}
+.guide-steps{list-style:none;display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));counter-reset:g}
+.guide-steps li{display:grid;grid-template-columns:30px minmax(0,1fr) auto;gap:10px;align-items:center;padding:10px 12px;border:1px solid var(--line);border-radius:var(--r);counter-increment:g}
+.guide-steps li::before{content:counter(g);font:700 1.2rem/1 var(--f-display);color:var(--ink-2);text-align:center}
+.keys{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.8125rem;color:var(--ink-2)}
+.keys kbd{font:600 .75rem/1 var(--f-mono);padding:3px 6px;border:1px solid var(--line);border-radius:3px;background:var(--sunken);color:var(--ink)}
+.toasts{position:fixed;z-index:40;right:16px;left:auto;bottom:calc(16px + env(safe-area-inset-bottom,0px));display:grid;gap:8px;width:min(420px,calc(100vw - 32px));pointer-events:none}
+.toast{pointer-events:auto;display:grid;grid-template-columns:24px minmax(0,1fr);gap:10px;align-items:start;padding:12px 14px;background:var(--shell);color:var(--shell-ink);border-radius:var(--r);box-shadow:var(--shadow);font-size:.9375rem;animation:tin .2s ease-out}
+.toast > svg.ic{width:22px;height:22px}
+.toast.t-ok > svg.ic{color:var(--shell-ok)}
+.toast.t-warn > svg.ic,.toast.t-bad > svg.ic{color:var(--shell-warn)}
+.toast.t-info > svg.ic{color:var(--shell-accent)}
+.toast .btn-row{margin-top:8px}
+.toast .btn{background:var(--shell-2);color:var(--shell-ink);border-color:var(--shell-ink-2)}
+.toast .btn-pri{background:var(--shell-accent);color:var(--shell);border-color:var(--shell-accent)}
+@keyframes tin{from{transform:translateY(8px);opacity:0}to{transform:none;opacity:1}}
+.tip{position:fixed;z-index:50;pointer-events:none;background:var(--shell);color:var(--shell-ink);font-size:.8125rem;line-height:1.35;padding:7px 9px;border-radius:3px;max-width:260px;box-shadow:var(--shadow)}
+.tip b{font-weight:700}
+.foot{padding-block:18px 28px;font-size:.8125rem;color:var(--ink-2);border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:space-between}
+@media (max-width:620px){
+  .n-user,.n-time{display:none}
+  .net{font-size:.75rem}
+  .brand-sub{display:none}
+  .mast-ctrls{width:100%}
+  .switch{flex:1 1 100%}
+}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+}
+</style>
+
+<div class="app">
+  <header class="shell mast">
+    <div class="shell-in">
+      <div class="brand">
+        <svg class="brand-mark" viewBox="0 0 42 42" aria-hidden="true">
+          <rect class="bm-bg" x="0" y="0" width="42" height="42" rx="5"></rect>
+          <rect class="bm-box" x="11" y="11" width="8" height="5"></rect>
+          <rect class="bm-box" x="11" y="25" width="8" height="5"></rect>
+          <rect class="bm-box" x="23" y="11" width="8" height="5"></rect>
+          <rect class="bm-tgt" x="23" y="25" width="8" height="5"></rect>
+          <path class="bm-rack" d="M9 7v28M21 7v28M33 7v28M9 17h24M9 31h24"></path>
+        </svg>
+        <div>
+          <div class="brand-name">UbicaFrío</div>
+          <div class="brand-sub">Ubicación y trazabilidad de tarimas en cámaras frigoríficas</div>
+        </div>
+        <span class="sim-tag">Prototipo · datos simulados</span>
+      </div>
+      <div class="mast-ctrls">
+        <label class="ctl" for="user-sel"><span>Usuario</span>
+          <select id="user-sel">
+            <option>Montacarguista 1</option>
+            <option>Almacenista</option>
+            <option>Supervisor</option>
+          </select>
+        </label>
+        <label class="switch" for="net-toggle"><input type="checkbox" id="net-toggle" role="switch"><span class="sw-track" aria-hidden="true"><span class="sw-knob"></span></span><span>Simular caída de internet</span></label>
+        <button type="button" class="sbtn" id="guide-btn" data-act="guide" aria-expanded="false" aria-controls="guide">Guion de demo</button>
+        <button type="button" class="sbtn" id="theme-btn" data-act="theme">Tema: sistema</button>
+        <button type="button" class="sbtn" id="reset-btn" data-act="reset-ask">Reiniciar demo</button>
+      </div>
+    </div>
+  </header>
+  <div class="shell ops">
+    <div class="shell-in">
+      <div class="net" id="net" role="status" aria-live="polite"></div>
+      <nav class="tabs" role="tablist" aria-label="Funciones" id="tabs"></nav>
+    </div>
+  </div>
+  <main class="wrap" id="main">
+    <section id="guide" class="guide" hidden aria-label="Guion de demostración"></section>
+    <div id="offline" class="offline" hidden></div>
+    <section id="tab-map" class="tab" role="tabpanel" aria-labelledby="tb-map"></section>
+    <section id="tab-put" class="tab" role="tabpanel" aria-labelledby="tb-put" hidden></section>
+    <section id="tab-find" class="tab" role="tabpanel" aria-labelledby="tb-find" hidden></section>
+    <section id="tab-out" class="tab" role="tabpanel" aria-labelledby="tb-out" hidden></section>
+    <section id="tab-move" class="tab" role="tabpanel" aria-labelledby="tb-move" hidden></section>
+    <section id="tab-count" class="tab" role="tabpanel" aria-labelledby="tb-count" hidden></section>
+    <section id="tab-log" class="tab" role="tabpanel" aria-labelledby="tb-log" hidden></section>
+    <section id="tab-kpi" class="tab" role="tabpanel" aria-labelledby="tb-kpi" hidden></section>
+  </main>
+  <footer class="wrap foot">
+    <span>Prototipo académico con datos simulados · Propuesta para el reto de Carnes JC · Jóvenes Impulsando la Industria 2026</span>
+    <span>No es un sistema oficial ni contiene datos reales de la empresa.</span>
+  </footer>
+</div>
+<div id="toasts" class="toasts" aria-live="polite"></div>
+<div id="tip" class="tip" role="tooltip" hidden></div>
+
+<script>
+(() => {
+'use strict';
+
+/* =========================================================
+   Utilidades
+   ========================================================= */
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+const esc = v => String(v == null ? '' : v).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const pad = (n, w = 2) => String(n).padStart(w, '0');
+const DAY = 864e5, MIN = 6e4, HOUR = 36e5;
+const RM = window.matchMedia('(prefers-reduced-motion: reduce)');
+const NF = new Intl.NumberFormat('es-MX');
+const NF1 = new Intl.NumberFormat('es-MX', {minimumFractionDigits: 1, maximumFractionDigits: 1});
+const fmtInt = n => NF.format(Math.round(n));
+const fmtKg = n => NF1.format(n) + ' kg';
+const pct = (x, d = 0) => (isFinite(x) ? (x * 100).toFixed(d) : '0') + ' %';
+const sod = ts => { const d = new Date(ts); d.setHours(0, 0, 0, 0); return d.getTime(); };
+const fmtD = ts => { const d = new Date(ts); return pad(d.getDate()) + '/' + pad(d.getMonth() + 1) + '/' + d.getFullYear(); };
+const fmtT = ts => { const d = new Date(ts); return pad(d.getHours()) + ':' + pad(d.getMinutes()); };
+const fmtDT = ts => { const d = new Date(ts); return pad(d.getDate()) + '/' + pad(d.getMonth() + 1) + ' ' + fmtT(ts); };
+const yymmdd = ts => { const d = new Date(ts); return String(d.getFullYear()).slice(2) + pad(d.getMonth() + 1) + pad(d.getDate()); };
+const norm = s => String(s == null ? '' : s).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+const ago = ts => {
+  const m = Math.round((Date.now() - ts) / MIN);
+  if (m < 1) return 'hace un momento';
+  if (m < 60) return 'hace ' + m + ' min';
+  const h = Math.floor(m / 60);
+  if (h < 24) return 'hace ' + h + ' h' + (m % 60 ? ' ' + (m % 60) + ' min' : '');
+  return 'el ' + fmtDT(ts);
+};
+const FONT_MONO = '"IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace';
+
+const ICONS = {
+  check: '<path d="M5 12.5l4.5 4.5L19 7.5"/>',
+  x: '<path d="M6 6l12 12M18 6L6 18"/>',
+  alert: '<path d="M12 3.5l9 16H3z"/><path d="M12 10v4.5M12 17.4v.2"/>',
+  info: '<circle cx="12" cy="12" r="9"/><path d="M12 11v5.5M12 7.6v.2"/>',
+  lock: '<rect x="5" y="10.5" width="14" height="10" rx="1.5"/><path d="M8.5 10.5V7.5a3.5 3.5 0 0 1 7 0v3"/>',
+  scan: '<path d="M3 8V4h4M17 4h4v4M21 16v4h-4M7 20H3v-4"/><path d="M7.5 8v8M10.5 8v8M13.5 8v8M16.5 8v8"/>',
+  search: '<circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/>',
+  pin: '<path d="M12 21s-6.5-5.8-6.5-11a6.5 6.5 0 0 1 13 0c0 5.2-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/>',
+  grid: '<rect x="3" y="4" width="18" height="16" rx="1"/><path d="M3 9.3h18M3 14.7h18M9 4v16M15 4v16"/>',
+  cube: '<path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M4 7.5l8 4.5 8-4.5M12 12v9"/>',
+  rotate: '<path d="M20 12a8 8 0 1 1-2.3-5.6"/><path d="M20 4.5V9h-4.5"/>',
+  move: '<path d="M4 8h14l-3.5-3.5M20 16H6l3.5 3.5"/>',
+  box: '<path d="M3.5 8L12 4l8.5 4v8.5L12 20.5l-8.5-4z"/><path d="M3.5 8l8.5 4 8.5-4M12 12v8.5"/>',
+  wifiOff: '<path d="M3 3l18 18"/><path d="M8.6 16.2a5 5 0 0 1 6.8 0M5.2 12.7a10 10 0 0 1 3.6-2.2M14.8 10.3a10 10 0 0 1 4 2.4M1.9 9.3a15 15 0 0 1 4-2.6M10.6 5.1a15 15 0 0 1 11.5 4.2"/><path d="M12 19.5v.2"/>',
+  sync: '<path d="M20 11.5A8 8 0 0 0 5.6 7.2M4 12.5a8 8 0 0 0 14.4 4.3"/><path d="M5 3.5v4h4M19 20.5v-4h-4"/>',
+  user: '<circle cx="12" cy="8" r="3.6"/><path d="M4.5 20a7.5 7.5 0 0 1 15 0"/>',
+  clip: '<rect x="5" y="4.5" width="14" height="16.5" rx="1.5"/><path d="M9 4.5V3h6v1.5M9 13l2.2 2.2L15.5 11"/>'
+};
+const icon = (n, cls = '') => '<svg class="ic ' + cls + '" viewBox="0 0 24 24" aria-hidden="true">' + (ICONS[n] || '') + '</svg>';
+
+/* =========================================================
+   Configuración (todo es simulado / ilustrativo)
+   ========================================================= */
+const VER = 5;
+const KEY = 'ubicafrio-demo';
+const USERS = ['Montacarguista 1', 'Almacenista', 'Supervisor'];
+const DOCKS = ['Cortina 1', 'Cortina 2', 'Cortina 3', 'Cortina 4'];
+const LV = 5, MAXKG = 1200, MAXOCC = 0.95;
+const TYPE = {
+  C: {name: 'Congelados', one: 'congelado', range: '−18 °C', due: 30},
+  F: {name: 'Frescos', one: 'fresco', range: '0 a 4 °C', due: 5}
+};
+const CHAMBERS = [
+  {id: 'C1', type: 'C', racks: 32, occ: .71, base: -18.4},
+  {id: 'C2', type: 'F', racks: 32, occ: .63, base: 2.2},
+  {id: 'C3A', type: 'C', racks: 16, occ: .74, base: -18.9},
+  {id: 'C3B', type: 'C', racks: 16, occ: .66, base: -18.1},
+  {id: 'C4', type: 'C', racks: 32, occ: .69, base: -18.6},
+  {id: 'C5', type: 'F', racks: 32, occ: .58, base: 1.7}
+];
+const CH = Object.fromEntries(CHAMBERS.map(c => [c.id, c]));
+const CATALOG = [
+  {sku: 'RES-1101', code: 'ARR', name: 'Arrachera', t: 'C', shelf: 365, kgBox: 20},
+  {sku: 'RES-1102', code: 'RIB', name: 'Rib eye', t: 'C', shelf: 365, kgBox: 22.5},
+  {sku: 'RES-1103', code: 'NYK', name: 'New York', t: 'C', shelf: 365, kgBox: 23},
+  {sku: 'RES-1104', code: 'SIR', name: 'Sirloin', t: 'C', shelf: 365, kgBox: 24},
+  {sku: 'RES-1105', code: 'TSR', name: 'Top sirloin', t: 'C', shelf: 365, kgBox: 23.5},
+  {sku: 'RES-1106', code: 'DZM', name: 'Diezmillo', t: 'C', shelf: 365, kgBox: 25},
+  {sku: 'RES-1107', code: 'PNG', name: 'Pulpa negra', t: 'C', shelf: 365, kgBox: 25},
+  {sku: 'RES-1108', code: 'M80', name: 'Molida 80/20', t: 'C', shelf: 365, kgBox: 20},
+  {sku: 'RES-1109', code: 'CCG', name: 'Costilla cargada', t: 'C', shelf: 365, kgBox: 22},
+  {sku: 'RES-1110', code: 'CHB', name: 'Chambarete', t: 'C', shelf: 365, kgBox: 24},
+  {sku: 'RES-1111', code: 'PIC', name: 'Picaña', t: 'C', shelf: 365, kgBox: 18},
+  {sku: 'RES-1112', code: 'TBN', name: 'T-bone', t: 'C', shelf: 365, kgBox: 21},
+  {sku: 'RES-1113', code: 'AGN', name: 'Aguja norteña', t: 'C', shelf: 365, kgBox: 22},
+  {sku: 'RES-2101', code: 'RIB', name: 'Rib eye', t: 'F', shelf: 35, kgBox: 20},
+  {sku: 'RES-2102', code: 'NYK', name: 'New York', t: 'F', shelf: 35, kgBox: 20},
+  {sku: 'RES-2103', code: 'PIC', name: 'Picaña', t: 'F', shelf: 28, kgBox: 16},
+  {sku: 'RES-2104', code: 'ARR', name: 'Arrachera', t: 'F', shelf: 28, kgBox: 18},
+  {sku: 'RES-2105', code: 'M80', name: 'Molida 80/20', t: 'F', shelf: 21, kgBox: 18},
+  {sku: 'RES-2106', code: 'SIR', name: 'Sirloin', t: 'F', shelf: 30, kgBox: 20},
+  {sku: 'RES-2107', code: 'DZM', name: 'Diezmillo', t: 'F', shelf: 30, kgBox: 22},
+  {sku: 'RES-2108', code: 'AGN', name: 'Aguja norteña', t: 'F', shelf: 30, kgBox: 20}
+];
+const PROD = Object.fromEntries(CATALOG.map(p => [p.sku, p]));
+const SKU_IDX = Object.fromEntries(CATALOG.map((p, i) => [p.sku, i]));
+const pname = sku => PROD[sku] ? PROD[sku].name : sku;
+const ptype = sku => PROD[sku].t;
+const pfull = sku => pname(sku) + ' · ' + TYPE[ptype(sku)].one;
+const MT = {
+  PRODUCCION: {l: 'Producción', c: ''},
+  RECEPCION: {l: 'Recepción', c: ''},
+  ACOMODO: {l: 'Acomodo', c: 'mt-in'},
+  REUBICACION: {l: 'Reubicación', c: 'mt-in'},
+  SALIDA: {l: 'Salida', c: 'mt-out'},
+  NO_ENCONTRADO: {l: 'No encontrado', c: 'mt-bad'},
+  CONTEO: {l: 'Conteo', c: 'mt-chk'},
+  AJUSTE: {l: 'Ajuste', c: 'mt-adj'}
+};
+const TABS = [['map', 'Mapa'], ['put', 'Acomodo'], ['find', 'Buscar'], ['out', 'Surtido'], ['move', 'Reubicar'], ['count', 'Conteos'], ['log', 'Bitácora'], ['kpi', 'Indicadores']];
+const TAB_IDS = TABS.map(t => t[0]);
+
+const keyOf = (cam, r, n) => cam + '-R' + pad(r) + '-N' + n;
+const camOf = k => k.split('-')[0];
+const rackOf = k => +k.split('-')[1].slice(1);
+const lvOf = k => +k.split('-')[2].slice(1);
+const pairOf = k => Math.ceil(rackOf(k) / 2);
+const CAMKEYS = {};
+CHAMBERS.forEach(c => {
+  CAMKEYS[c.id] = [];
+  for (let r = 1; r <= c.racks; r++) for (let n = 1; n <= LV; n++) CAMKEYS[c.id].push(keyOf(c.id, r, n));
+});
+
+function parseKey(v) {
+  const s = String(v || '').toUpperCase().replace(/\s+/g, '');
+  const m = /^(C1|C2|C3A|C3B|C4|C5)-?R(\d{1,2})-?N(\d)$/.exec(s);
+  if (!m) return null;
+  const cam = m[1], r = +m[2], n = +m[3], c = CH[cam];
+  const key = cam + '-R' + pad(r) + '-N' + n;
+  if (r < 1 || r > c.racks || n < 1 || n > LV) return {cam, r, n, key, invalid: true};
+  return {cam, r, n, key, side: r % 2 ? 'A' : 'B', pair: Math.ceil(r / 2)};
+}
+function normMaster(v) {
+  const s = String(v || '').toUpperCase().replace(/\s+/g, '');
+  const m = /^MST-?(\d{2})-?(\d{6})$/.exec(s);
+  return m ? 'MST-' + m[1] + '-' + m[2] : null;
+}
+
+/* =========================================================
+   Generación de datos simulados (semilla fija)
+   ========================================================= */
+function mulberry32(a) { return function () { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+function shuffle(arr, rnd) { for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); const t = arr[i]; arr[i] = arr[j]; arr[j] = t; } return arr; }
+const dayOfYear = d => Math.floor((d - new Date(d.getFullYear(), 0, 0)) / DAY);
+
+function seed() {
+  const rnd = mulberry32(2610072);
+  const pick = a => a[Math.floor(rnd() * a.length)];
+  const now = Date.now(), today = sod(now);
+  const st = {
+    v: VER, user: USERS[0], online: true, lastSync: now - 3 * MIN,
+    pallets: {}, pos: {}, pending: [], moves: [], tasks: [], searches: [],
+    counts: {ver: 48, ok: 46}, reserved: [], seq: {move: 0, task: 0, order: 0}, demo: {},
+    ui: {tab: 'map', cam: 'C4', view: '2d', sel: null, hl: null, mapFilter: '', flip: false,
+      put: null, out: null, outForm: null, mv: null, q: '', logLot: '', logType: '', logQ: '', logLimit: 100}
+  };
+  CHAMBERS.forEach(c => CAMKEYS[c.id].forEach(k => { st.pos[k] = {m: null, chk: null}; }));
+
+  // 1. Borradores de tarimas almacenadas por cámara
+  const drafts = [];
+  CHAMBERS.forEach(c => {
+    const keys = shuffle(CAMKEYS[c.id].slice(), rnd);
+    const count = Math.round(keys.length * c.occ);
+    const prods = CATALOG.filter(p => p.t === c.type);
+    const dom = Array.from({length: c.racks / 2}, () => pick(prods));
+    if (c.id === 'C4') { dom[0] = dom[1] = dom[2] = PROD['RES-1101']; dom[9] = dom[10] = PROD['RES-1101']; }
+    if (c.id === 'C1') { dom[2] = dom[3] = PROD['RES-1102']; }
+    keys.slice(0, count).forEach(k => {
+      const prod = rnd() < 0.74 ? dom[pairOf(k) - 1] : pick(prods);
+      const age = prod.t === 'C'
+        ? Math.min(330, 6 + Math.floor(rnd() * 80) * 4 + (SKU_IDX[prod.sku] % 4))
+        : Math.floor(rnd() * (prod.shelf - 8));
+      drafts.push({k, sku: prod.sku, age, kind: 'stored'});
+    });
+  });
+  const dl = d => PROD[d.sku].shelf - d.age;
+
+  // 2. Casos para la demo: por vencer, vencidas, fantasmas, verificación
+  const special = new Set(['RES-1101', 'RES-1102']);
+  const frozen = shuffle(drafts.filter(d => PROD[d.sku].t === 'C' && !special.has(d.sku)), rnd);
+  const fresh = shuffle(drafts.filter(d => PROD[d.sku].t === 'F'), rnd);
+  frozen.slice(0, 12).forEach(d => { d.age = 365 - (4 + Math.floor(rnd() * 26)); });
+  frozen.slice(12, 14).forEach((d, i) => { d.age = 367 + i * 4; });
+  fresh.slice(0, 7).forEach(d => { d.age = PROD[d.sku].shelf - (1 + Math.floor(rnd() * 5)); });
+  fresh.slice(7, 8).forEach(d => { d.age = PROD[d.sku].shelf + 2; });
+
+  const c4arr = drafts.filter(d => d.k.startsWith('C4-') && d.sku === 'RES-1101')
+    .sort((a, b) => (pairOf(a.k) * 10 + lvOf(a.k)) - (pairOf(b.k) * 10 + lvOf(b.k)));
+  const g1 = c4arr[0];
+  g1.age = 356; g1.ghost = true; g1.real = null;            // sacada sin registrar
+  if (c4arr[1]) c4arr[1].age = 347;
+  const g2 = drafts.filter(d => d.k.startsWith('C1-') && d.sku === 'RES-1102')
+    .sort((a, b) => pairOf(a.k) - pairOf(b.k))[0] || drafts.find(d => d.k.startsWith('C1-'));
+  g2.age = 344; g2.ghost = true; g2.real = '?';             // movida sin registrar
+  const v1 = drafts.find(d => d.k.startsWith('C3A-') && !d.ghost && dl(d) > 40);
+  if (v1) v1.verif = true;
+  const demo = drafts.find(d => d.k.startsWith('C4-') && !d.ghost && d.sku !== 'RES-1101' && d.age >= 40 && d.age <= 200);
+  demo.reub = true;
+  drafts.forEach(d => { if (!d.ghost && rnd() < 0.06) d.reub = true; });
+
+  // 3. Tarimas ya despachadas (comparten lote) y pendientes en Odoo
+  const disp = [];
+  shuffle(drafts.filter(d => d.age >= 3 && !d.ghost), rnd).slice(0, 64).forEach(d => disp.push({sku: d.sku, age: d.age, kind: 'disp'}));
+  disp.push({sku: demo.sku, age: demo.age, kind: 'disp'}, {sku: demo.sku, age: demo.age, kind: 'disp'}, {sku: g1.sku, age: g1.age, kind: 'disp'});
+  disp.slice(0, 5).forEach(d => { d.today = true; });
+  const pend = [
+    {sku: 'RES-1101', age: 0, kind: 'pend', origin: 'Embalaje · Línea 1', mins: 48},
+    {sku: 'RES-1103', age: 0, kind: 'pend', origin: 'Embalaje · Línea 1', mins: 36},
+    {sku: 'RES-2101', age: 0, kind: 'pend', origin: 'Embalaje · Línea 2', mins: 27},
+    {sku: 'RES-1109', age: 290, kind: 'pend', origin: 'Traspaso · Planta Nogales', mins: 64, recv: true},
+    {sku: 'RES-2105', age: 0, kind: 'pend', origin: 'Embalaje · Línea 2', mins: 18},
+    {sku: 'RES-1106', age: 0, kind: 'pend', origin: 'Embalaje · Línea 1', mins: 9},
+    {sku: 'RES-2103', age: 1, kind: 'pend', origin: 'Embalaje · Línea 2 (turno anterior)', mins: 0}
+  ];
+  const all = drafts.concat(disp, pend);
+
+  // 4. Lotes: uno por producto y día de producción (L + AAMM + consecutivo)
+  const lotOf = new Map(), mseq = {};
+  Array.from(new Set(all.map(d => d.sku + '|' + d.age)))
+    .map(s => { const i = s.indexOf('|'); return {sku: s.slice(0, i), age: +s.slice(i + 1)}; })
+    .sort((a, b) => b.age - a.age || SKU_IDX[a.sku] - SKU_IDX[b.sku])
+    .forEach(u => {
+      const d = new Date(today + 12 * HOUR - u.age * DAY);
+      const ym = String(d.getFullYear()).slice(2) + pad(d.getMonth() + 1);
+      mseq[ym] = (mseq[ym] || 0) + 1 + (rnd() < 0.4 ? 1 : 0) + (rnd() < 0.15 ? 2 : 0);
+      lotOf.set(u.sku + '|' + u.age, 'L' + ym + '-' + pad(mseq[ym], 3));
+    });
+
+  // 5. Etiquetas master en orden cronológico (MST-AA-consecutivo)
+  const yseq = {};
+  all.slice().sort((a, b) => b.age - a.age || (b.mins || 0) - (a.mins || 0)).forEach(d => {
+    const dt = new Date(today + 12 * HOUR - d.age * DAY);
+    const yy = String(dt.getFullYear()).slice(2);
+    yseq[yy] = Math.max((yseq[yy] || 0) + 1 + Math.floor(rnd() * 3), dayOfYear(dt) * 14);
+    d.m = 'MST-' + yy + '-' + pad(yseq[yy], 6);
+  });
+
+  // 6. Tarimas
+  all.forEach(d => {
+    const prod = PROD[d.sku];
+    const dayStart = sod(today + 12 * HOUR - d.age * DAY);
+    let prodTs;
+    if (d.kind === 'pend' && d.age === 0) prodTs = Math.max(today + 2 * MIN, now - (d.mins + 25) * MIN);
+    else if (d.age === 0) prodTs = Math.max(today + 2 * MIN, now - (40 + rnd() * 200) * MIN);
+    else prodTs = dayStart + (6 + rnd() * 10) * HOUR;
+    const boxes = Math.floor(1040 / prod.kgBox) - Math.floor(rnd() * 4);
+    const p = {
+      m: d.m, sku: d.sku, lot: lotOf.get(d.sku + '|' + d.age), prod: prodTs,
+      exp: dayStart + prod.shelf * DAY + 12 * HOUR, boxes,
+      kg: Math.round(boxes * prod.kgBox * (0.975 + rnd() * 0.05) * 10) / 10,
+      loc: d.kind === 'stored' ? d.k : null,
+      st: d.kind === 'stored' ? 'almacenada' : d.kind === 'disp' ? 'despachada' : 'por_acomodar',
+      origin: d.origin || ('Embalaje · Línea ' + (rnd() < 0.5 ? 1 : 2)), ghost: null
+    };
+    if (d.kind === 'pend') p.qts = d.recv ? now - d.mins * MIN : (d.age === 0 ? Math.max(prodTs + MIN, now - d.mins * MIN) : prodTs + 25 * MIN);
+    st.pallets[p.m] = p; d.p = p;
+    if (d.kind === 'stored') st.pos[d.k].m = p.m;
+    if (d.kind === 'pend') st.pending.push(p.m);
+  });
+  const c1free = CAMKEYS.C1.filter(k => !st.pos[k].m && pairOf(k) >= 12);
+  const real = c1free.length ? c1free[Math.floor(rnd() * c1free.length)] : CAMKEYS.C1.find(k => !st.pos[k].m);
+  g2.p.ghost = {real}; st.reserved.push(real);
+  g1.p.ghost = {real: null};
+
+  // 7. Bitácora histórica
+  const mv = [];
+  const push = (ts, user, type, p, from, to, note) => mv.push({ts: Math.min(ts, now - MIN), user, type, m: p.m, lot: p.lot, sku: p.sku, from, to, note: note || '', sync: true});
+  const ops = ['Montacarguista 1', 'Montacarguista 1', 'Almacenista'];
+  all.forEach(d => {
+    const p = d.p;
+    if (d.kind === 'pend') {
+      if (d.recv) push(p.qts, 'Odoo · Recepción', 'RECEPCION', p, 'Planta Nogales', 'Por acomodar', 'Traspaso entre plantas');
+      else push(p.qts, 'Odoo · Embalaje', 'PRODUCCION', p, p.origin, 'Por acomodar');
+      return;
+    }
+    const tProd = p.prod + 15 * MIN;
+    push(tProd, 'Odoo · Embalaje', 'PRODUCCION', p, p.origin, 'Por acomodar');
+    const tAc = Math.max(tProd + MIN, Math.min(p.prod + (30 + rnd() * 90) * MIN, now - 2 * MIN));
+    const cam = d.kind === 'stored' ? camOf(d.k) : pick(CHAMBERS.filter(c => c.type === PROD[p.sku].t)).id;
+    if (d.kind === 'stored') {
+      if (d.reub) {
+        const other = pick(CAMKEYS[cam].filter(k => k !== d.k));
+        push(tAc, pick(ops), 'ACOMODO', p, 'Por acomodar', other);
+        push(tAc + rnd() * (now - tAc) * 0.8 + MIN, pick(ops), 'REUBICACION', p, other, d.k, 'Reacomodo por FEFO');
+      } else push(tAc, pick(ops), 'ACOMODO', p, 'Por acomodar', d.k);
+    } else {
+      const from = pick(CAMKEYS[cam]);
+      push(tAc, pick(ops), 'ACOMODO', p, 'Por acomodar', from);
+      const tS = d.today ? Math.max(tAc + 5 * MIN, now - (15 + rnd() * 220) * MIN) : tAc + rnd() * Math.max(MIN, Math.min(now - DAY, tAc + d.age * DAY * 0.9) - tAc);
+      push(tS, pick(['Almacenista', 'Montacarguista 1']), 'SALIDA', p, from, pick(DOCKS), 'Surtido de pedido');
+    }
+  });
+  if (v1) {
+    st.pos[v1.k].chk = 'T-0001';
+    st.tasks.push({id: 'T-0001', key: v1.k, m: v1.p.m, by: 'Montacarguista 1', ts: now - 95 * MIN, src: 'búsqueda', st: 'open'});
+    push(now - 95 * MIN, 'Montacarguista 1', 'NO_ENCONTRADO', v1.p, v1.k, 'En verificación', 'Reportado desde búsqueda');
+    st.seq.task = 1;
+  }
+  mv.sort((a, b) => a.ts - b.ts);
+  mv.forEach((m, i) => { m.id = 'MOV-' + pad(i + 1, 6); });
+  st.moves = mv; st.seq.move = mv.length;
+
+  // 8. Historial de búsquedas de ejemplo y datos para el guion
+  for (let i = 0; i < 17; i++) st.searches.push({ts: now - (18 - i) * 37 * MIN, secs: Math.round((6 + rnd() * 14) * 10) / 10, ok: true, q: 'ejemplo'});
+  st.searches.splice(9, 0, {ts: now - 9 * 37 * MIN, secs: null, ok: false, q: 'ejemplo'});
+  st.demo = {lot: demo.p.lot, g1: g1.k, g2: g2.k};
+  return st;
+}
+
+/* =========================================================
+   Estado y persistencia (localStorage opcional)
+   ========================================================= */
+let S = null;
+let saveT = 0;
+function save() {
+  clearTimeout(saveT);
+  saveT = setTimeout(() => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { /* sin almacenamiento: la demo sigue en memoria */ } }, 250);
+}
+function load() {
+  try {
+    const raw = localStorage.getItem(KEY);
+    if (!raw) return null;
+    const s = JSON.parse(raw);
+    if (s && s.v === VER && s.pallets && s.pos && s.ui) return s;
+  } catch (e) { /* ignorar */ }
+  return null;
+}
+
+/* =========================================================
+   Consultas de dominio
+   ========================================================= */
+const storedPallets = () => Object.values(S.pallets).filter(p => p.st === 'almacenada');
+const daysLeft = p => Math.round((sod(p.exp) - sod(Date.now())) / DAY);
+function posState(k) {
+  const pos = S.pos[k];
+  if (!pos) return 'free';
+  if (pos.chk) return 'chk';
+  if (!pos.m) return 'free';
+  const p = S.pallets[pos.m], d = daysLeft(p);
+  if (d < 0 || p.blocked) return 'blk';
+  if (d <= TYPE[ptype(p.sku)].due) return 'due';
+  return 'occ';
+}
+const STATE_L = {free: 'Libre', occ: 'Ocupado', due: 'Por vencer', blk: 'Vencido / bloqueado', chk: 'En verificación'};
+function camStats(id) {
+  const keys = CAMKEYS[id];
+  const r = {cap: keys.length, used: 0, free: 0, occ: 0, due: 0, blk: 0, chk: 0};
+  keys.forEach(k => { const s = posState(k); r[s]++; if (S.pos[k].m) r.used++; });
+  r.ratio = r.used / r.cap;
+  return r;
+}
+const dueText = p => { const d = daysLeft(p); return d < 0 ? 'Vencida hace ' + (-d) + ' d' : d === 0 ? 'Vence hoy' : 'Vence en ' + d + ' d'; };
+const stateChip = k => { const s = posState(k); return '<span class="chip"><i class="sw s-' + s + '"></i>' + STATE_L[s] + '</span>'; };
+const lastMove = m => { for (let i = S.moves.length - 1; i >= 0; i--) if (S.moves[i].m === m) return S.moves[i]; return null; };
+const queueLen = () => S.moves.reduce((n, m) => n + (m.sync ? 0 : 1), 0);
+const openTasks = () => S.tasks.filter(t => t.st === 'open');
+
+function addMove(o) {
+  const p = o.m ? S.pallets[o.m] : null;
+  const mv = {id: 'MOV-' + pad(++S.seq.move, 6), ts: Date.now(), user: o.user || S.user, type: o.type, m: o.m || '', lot: p ? p.lot : '', sku: p ? p.sku : '', from: o.from || '', to: o.to || '', note: o.note || '', sync: false};
+  S.moves.push(mv);
+  scheduleSync();
+  return mv.id;
+}
+
+/* ---------- Motor de asignación ---------- */
+function nearSame(sku, pk) {
+  const c = CH[pk.cam]; let n = 0;
+  for (let p = pk.pair - 1; p <= pk.pair + 1; p++) {
+    if (p < 1 || p > c.racks / 2) continue;
+    [2 * p - 1, 2 * p].forEach(r => {
+      for (let l = 1; l <= LV; l++) {
+        const k = keyOf(pk.cam, r, l);
+        if (k === pk.key) continue;
+        const m = S.pos[k].m;
+        if (m && S.pallets[m].sku === sku) n++;
+      }
+    });
+  }
+  return n;
+}
+function fefoContext(p) {
+  const t = ptype(p.sku);
+  const stock = storedPallets().filter(q => ptype(q.sku) === t && q.m !== p.m);
+  const r = stock.length ? stock.filter(q => q.exp < p.exp).length / stock.length : 0.5;
+  return {r, target: 1 - r};
+}
+function evalPos(p, pk, ctx, st, hasSku) {
+  const NP = CH[pk.cam].racks / 2;
+  const acc = 1 - (0.55 * (pk.n - 1) / (LV - 1) + 0.45 * (pk.pair - 1) / Math.max(1, NP - 1));
+  const fefo = 1 - Math.abs(ctx.target - acc);
+  const nb = nearSame(p.sku, pk);
+  const score = Math.round(45 * fefo + 25 * Math.min(1, nb / 4) + 10 * (hasSku ? 1 : 0) + 20 * (1 - st.used / st.cap));
+  return {key: pk.key, pk, acc, fefo, nb, hasSku, st, score};
+}
+function camHasSku(cam, sku) { return CAMKEYS[cam].some(k => S.pos[k].m && S.pallets[S.pos[k].m].sku === sku); }
+function suggest(p, exclude) {
+  exclude = exclude || [];
+  const t = ptype(p.sku), ctx = fefoContext(p), list = [];
+  CHAMBERS.forEach(c => {
+    if (c.type !== t) return;
+    const st = camStats(c.id);
+    if ((st.used + 1) / st.cap > MAXOCC) return;
+    const has = camHasSku(c.id, p.sku);
+    CAMKEYS[c.id].forEach(k => {
+      const pos = S.pos[k];
+      if (pos.m || pos.chk || S.reserved.includes(k) || exclude.includes(k)) return;
+      list.push(evalPos(p, parseKey(k), ctx, st, has));
+    });
+  });
+  list.sort((a, b) => b.score - a.score || a.key.localeCompare(b.key));
+  return {ctx, list};
+}
+function evalKey(p, key) {
+  const pk = parseKey(key);
+  if (!pk || pk.invalid) return null;
+  return evalPos(p, pk, fefoContext(p), camStats(pk.cam), camHasSku(pk.cam, p.sku));
+}
+function whereText(pk) {
+  const NP = CH[pk.cam].racks / 2;
+  return 'Cámara ' + pk.cam + ' · lado ' + pk.side + ' (racks ' + (pk.side === 'A' ? 'impares' : 'pares') + ') · ' + pk.pair + '.º par de racks desde la puerta, de ' + NP + ' · nivel ' + pk.n + ' de ' + LV;
+}
+function reasons(p, ev, ctx) {
+  const c = CH[ev.pk.cam], t = TYPE[c.type], pr = PROD[p.sku];
+  const zone = ev.acc >= 0.62 ? 'cerca de la puerta y en nivel bajo' : ev.acc >= 0.38 ? 'en zona intermedia del pasillo' : 'al fondo y en nivel alto';
+  const later = Math.round(ctx.r * 100);
+  const fefoTxt = ctx.r >= 0.5
+    ? 'Vence el ' + fmtD(p.exp) + ', después que el ' + later + ' % del inventario ' + t.one + '. Por eso va ' + zone + ' (R' + pad(ev.pk.r) + ' · N' + ev.pk.n + ') y deja las posiciones de acceso rápido para lo que vence antes.'
+    : 'Vence el ' + fmtD(p.exp) + ', antes que el ' + (100 - later) + ' % del inventario ' + t.one + '. Por eso va ' + zone + ' (R' + pad(ev.pk.r) + ' · N' + ev.pk.n + ') para salir primero.';
+  return [
+    {ok: true, h: 'Cámara compatible', t: c.id + ' es de ' + t.name.toLowerCase() + ' (' + t.range + ') y la tarima es de producto ' + t.one + '.'},
+    {ok: true, h: 'Posición libre', t: 'Sin tarima registrada, sin bloqueo y sin conteo pendiente.'},
+    {ok: true, h: 'FEFO', t: fefoTxt},
+    {ok: ev.nb > 0, h: 'Agrupa el mismo producto', t: ev.nb > 0 ? 'Queda junto a ' + ev.nb + ' tarima' + (ev.nb > 1 ? 's' : '') + ' de ' + pr.name.toLowerCase() + ' en los racks vecinos.' : ev.hasSku ? 'Hay ' + pr.name.toLowerCase() + ' en ' + c.id + ', pero no en racks vecinos libres.' : 'Será la primera tarima de ' + pr.name.toLowerCase() + ' en ' + c.id + '.'},
+    {ok: true, h: 'Capacidad', t: fmtKg(p.kg) + ' de ' + fmtInt(MAXKG) + ' kg por nivel. ' + c.id + ' quedará al ' + pct((ev.st.used + 1) / ev.st.cap) + ' (límite ' + pct(MAXOCC) + ').'}
+  ];
+}
+
+/* ---------- FEFO para surtido ---------- */
+function fefoCandidates(sku) {
+  const ok = [], excl = [];
+  storedPallets().filter(p => p.sku === sku).forEach(p => {
+    const pos = S.pos[p.loc], d = daysLeft(p);
+    if (pos.chk) excl.push({m: p.m, key: p.loc, why: 'en verificación (conteo pendiente)'});
+    else if (d < 0 || p.blocked) excl.push({m: p.m, key: p.loc, why: 'vencida: bloqueada por calidad'});
+    else ok.push(p);
+  });
+  ok.sort((a, b) => a.exp - b.exp || lvOf(a.loc) - lvOf(b.loc) || a.loc.localeCompare(b.loc));
+  return {ok, excl};
+}
+
+/* =========================================================
+   Sincronización con Odoo (simulada) y modo sin internet
+   ========================================================= */
+let syncTimer = 0, syncing = false, netProg = null;
+function scheduleSync() {
+  if (!S.online || syncing) return;
+  clearTimeout(syncTimer);
+  syncTimer = setTimeout(() => {
+    if (!S.online || syncing) return;
+    let n = 0;
+    S.moves.forEach(m => { if (!m.sync) { m.sync = true; n++; } });
+    if (n) { S.lastSync = Date.now(); save(); renderShell(); refreshLive(); }
+  }, 1100);
+}
+function setOnline(on) {
+  if (on === S.online) { renderShell(); return; }
+  S.online = on;
+  if (!on) {
+    clearTimeout(syncTimer);
+    toast('Sin internet. UbicaFrío sigue operando en la red local; los movimientos quedan en cola para Odoo.', 'warn');
+    render();
+    return;
+  }
+  const queue = S.moves.filter(m => !m.sync);
+  render();
+  if (!queue.length) { S.lastSync = Date.now(); renderShell(); toast('Internet restaurado. No había movimientos pendientes.', 'ok'); return; }
+  syncing = true;
+  let i = 0;
+  const total = queue.length;
+  netProg = {done: 0, total};
+  renderShell();
+  const step = () => {
+    if (!S.online) { syncing = false; netProg = null; renderShell(); return; }
+    queue[i].sync = true; i++;
+    netProg = {done: i, total};
+    renderShell(); refreshLive();
+    if (i < total) setTimeout(step, RM.matches ? 20 : Math.max(70, Math.min(260, 1800 / total)));
+    else {
+      syncing = false; netProg = null; S.lastSync = Date.now(); save();
+      renderShell(); refreshLive();
+      toast(total + ' movimiento' + (total > 1 ? 's' : '') + ' sincronizado' + (total > 1 ? 's' : '') + ' con Odoo. Cola en cero.', 'ok');
+    }
+  };
+  setTimeout(step, RM.matches ? 0 : 400);
+}
+function refreshLive() {
+  const k = $('#kpi-queue');
+  if (k) k.textContent = queueLen();
+  if (S.ui.tab === 'log') updateLogTable();
+  if (S.ui.tab === 'put' || S.ui.tab === 'out' || S.ui.tab === 'move') { $$('[data-sync-of]').forEach(el => { const mv = S.moves.find(m => m.id === el.dataset.syncOf); if (mv) el.innerHTML = syncHTML(mv); }); }
+}
+const syncHTML = mv => mv.sync ? '<span class="sync-ok">Odoo ✓</span>' : '<span class="sync-q">' + (S.online ? 'Sincronizando…' : 'En cola') + '</span>';
+
+/* =========================================================
+   Toasts, tooltip y guion
+   ========================================================= */
+function toast(text, kind, opts) {
+  kind = kind || 'ok'; opts = opts || {};
+  const box = $('#toasts');
+  const el = document.createElement('div');
+  el.className = 'toast t-' + kind;
+  el.setAttribute('role', kind === 'bad' || kind === 'warn' ? 'alert' : 'status');
+  el.innerHTML = icon({ok: 'check', warn: 'alert', bad: 'lock', info: 'info'}[kind] || 'info') + '<div class="t-body"><div class="t-txt"></div></div>';
+  el.querySelector('.t-txt').textContent = text;
+  if (opts.actions) {
+    const row = document.createElement('div');
+    row.className = 'btn-row';
+    opts.actions.forEach(a => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'btn ' + (a.cls || ''); b.textContent = a.label;
+      b.addEventListener('click', () => { el.remove(); if (a.fn) a.fn(); });
+      row.appendChild(b);
+    });
+    el.querySelector('.t-body').appendChild(row);
+  }
+  box.appendChild(el);
+  while (box.children.length > 3) box.firstChild.remove();
+  if (!opts.sticky) setTimeout(() => el.remove(), opts.ms || 4600);
+  return el;
+}
+const tip = $('#tip');
+function showTip(html, x, y) {
+  tip.innerHTML = html; tip.hidden = false;
+  const w = tip.offsetWidth, h = tip.offsetHeight;
+  tip.style.left = Math.max(8, Math.min(window.innerWidth - w - 8, x + 12)) + 'px';
+  tip.style.top = Math.max(8, Math.min(window.innerHeight - h - 8, y - h - 10)) + 'px';
+}
+const hideTip = () => { tip.hidden = true; };
+
+const GUIDE = [
+  {t: 'Mapa 2D y vista 3D', d: 'Cámara C4: estado de cada posición por color y forma. Cambia a Vista 3D, gírala y toca una tarima.', go() { S.ui.cam = 'C4'; S.ui.view = '3d'; S.ui.sel = null; S.ui.hl = null; setTab('map'); }},
+  {t: 'Entrada con poka-yoke', d: 'Simula el escaneo de una tarima de embalaje, revisa por qué el motor sugiere esa posición y escanea otra para ver la advertencia.', go() { S.ui.put = null; setTab('put'); ACT['put-sim-master'](); }},
+  {t: 'Ubicación fantasma', d: 'Busca “arrachera”: la primera según FEFO ya no está físicamente. Usa “Ver en mapa” y después “No encontrado”.', go() { S.ui.q = 'arrachera'; findStart = 0; setTab('find'); }},
+  {t: 'Surtido FEFO con doble escaneo', d: 'Orden de 2 tarimas de rib eye congelado. Prueba “master equivocado” y el caso de posición vacía.', go() { makeOrder('RES-1102', 2, 'Cortina 2'); setTab('out'); }},
+  {t: 'Conteo cíclico y exactitud', d: 'Cierra las tareas: sí estaba, estaba en otra ubicación o no existe (autoriza Supervisor).', go() { setTab('count'); }},
+  {t: 'Caída de internet', d: 'Activa la caída, registra un acomodo o una salida y restaura: la cola se sincroniza con Odoo.', go() { if (S.online) setOnline(false); setTab('put'); }},
+  {t: 'Trazabilidad por lote', d: 'Rastrea un lote desde producción hasta su salida por cortina.', go() { S.ui.logLot = S.demo.lot; S.ui.logType = ''; S.ui.logQ = ''; setTab('log'); }},
+  {t: 'Indicadores', d: 'Ocupación, exactitud, búsquedas, caducidad, movimientos del día y cola de Odoo.', go() { setTab('kpi'); }}
+];
+function renderGuide() {
+  $('#guide').innerHTML =
+    '<div class="guide-h"><div><p class="eyebrow">Guion de demostración · 5 minutos</p><h3>Recorrido sugerido para el comité</h3></div><button type="button" class="btn" data-act="guide">Cerrar</button></div>' +
+    '<ol class="guide-steps">' + GUIDE.map((g, i) => '<li><div><b>' + esc(g.t) + '</b><p class="muted small">' + esc(g.d) + '</p></div><button type="button" class="btn" data-act="guide-go" data-i="' + i + '">Ir</button></li>').join('') + '</ol>' +
+    '<p class="keys"><span><kbd>1</kbd>–<kbd>8</kbd> pestañas</span><span><kbd>/</kbd> buscar</span><span><kbd>S</kbd> simular escaneo</span><span><kbd>V</kbd> 2D / 3D</span><span><kbd>I</kbd> internet</span><span><kbd>G</kbd> guion</span><span><kbd>Esc</kbd> cerrar</span></p>';
+}
+function toggleGuide(force) {
+  const g = $('#guide');
+  const open = force === undefined ? g.hidden : force;
+  if (open) renderGuide();
+  g.hidden = !open;
+  $('#guide-btn').setAttribute('aria-expanded', String(open));
+  if (open) g.scrollIntoView({block: 'nearest', behavior: RM.matches ? 'auto' : 'smooth'});
+}
+
+/* =========================================================
+   Render general
+   ========================================================= */
+let wantScroll = false, findStart = 0;
+function render() {
+  renderShell();
+  TAB_IDS.forEach(id => { $('#tab-' + id).hidden = id !== S.ui.tab; });
+  RENDER[S.ui.tab]();
+  document.body.classList.toggle('has-sheet', S.ui.tab === 'map' && !!S.ui.sel);
+  save();
+}
+function renderShell() {
+  $('#net-toggle').checked = !S.online;
+  $('#user-sel').value = S.user;
+  const q = queueLen();
+  let odoo;
+  if (!S.online) odoo = '<span class="n-warn">' + icon('wifiOff') + 'Odoo: sin internet</span><span class="n-q">' + q + ' en cola</span>';
+  else if (netProg) odoo = '<span class="n-ok">' + icon('sync') + 'Odoo: sincronizando ' + netProg.done + '/' + netProg.total + '</span><span class="n-prog" aria-hidden="true"><i style="width:' + Math.round(netProg.done / netProg.total * 100) + '%"></i></span>';
+  else if (q) odoo = '<span class="n-ok">' + icon('sync') + 'Odoo: sincronizando…</span>';
+  else odoo = '<span class="n-ok">Odoo: sincronizado</span><span class="n-time">' + fmtT(S.lastSync) + '</span>';
+  $('#net').innerHTML = '<span class="n-ok"><span class="n-dot"></span>Red local ✓</span><span aria-hidden="true">·</span>' + odoo + '<span class="n-user">' + icon('user') + esc(S.user) + '</span>';
+  const pend = S.pending.length, tasks = openTasks().length;
+  $('#tabs').innerHTML = TABS.map(([id, label], i) => {
+    let badge = '';
+    if (id === 'put' && pend) badge = '<span class="tab-badge">' + pend + '</span>';
+    if (id === 'count' && tasks) badge = '<span class="tab-badge warn">' + tasks + '</span>';
+    if (id === 'log' && q) badge = '<span class="tab-badge warn">' + q + '</span>';
+    return '<button type="button" class="tab-btn" role="tab" id="tb-' + id + '" aria-controls="tab-' + id + '" aria-selected="' + (S.ui.tab === id) + '" data-act="tab" data-tab="' + id + '"><kbd>' + (i + 1) + '</kbd>' + label + badge + '</button>';
+  }).join('');
+  const off = $('#offline');
+  off.hidden = S.online;
+  if (!S.online) off.innerHTML = icon('wifiOff') + '<p><b>Sin internet.</b> UbicaFrío sigue operando con su servidor en la red local del almacén: mapa, búsqueda, acomodo y surtido funcionan igual. Los movimientos se guardan en cola y se envían a Odoo al volver la conexión.</p><button type="button" class="btn" data-act="net-restore">Restaurar internet</button>';
+  const sel = $('#tabs [aria-selected="true"]');
+  if (sel && sel.scrollIntoView) { const t = $('#tabs'); const l = sel.offsetLeft, r = l + sel.offsetWidth; if (l < t.scrollLeft || r > t.scrollLeft + t.clientWidth) t.scrollLeft = l - 16; }
+}
+function setTab(t) {
+  if (!TAB_IDS.includes(t)) return;
+  S.ui.tab = t;
+  hideTip();
+  render();
+  const main = $('#main');
+  const top = main.getBoundingClientRect().top + window.scrollY - $('.ops').offsetHeight;
+  if (window.scrollY > top) window.scrollTo({top, behavior: 'auto'});
+}
+function secH(eyebrow, title, sub) {
+  return '<div class="sec-h"><div><p class="eyebrow">' + eyebrow + '</p><h2>' + title + '</h2></div>' + (sub ? '<p class="sec-sub muted">' + sub + '</p>' : '') + '</div>';
+}
+function msgHTML(m) {
+  if (!m) return '';
+  const ic = {ok: 'check', warn: 'alert', bad: 'lock', info: 'info'}[m.kind] || 'info';
+  const acts = (m.actions || []).map(a => '<button type="button" class="btn ' + (a.cls || '') + '" data-act="' + a.act + '"' + Object.entries(a.data || {}).map(([k, v]) => ' data-' + k + '="' + esc(v) + '"').join('') + '>' + esc(a.label) + '</button>').join('');
+  return '<div class="msg msg-' + m.kind + '" role="' + (m.kind === 'bad' || m.kind === 'warn' ? 'alert' : 'status') + '">' + icon(ic) + '<div class="msg-x"><p class="msg-t">' + esc(m.title) + '</p>' + (m.text ? '<p>' + esc(m.text) + '</p>' : '') + (acts ? '<div class="btn-row">' + acts + '</div>' : '') + '</div></div>';
+}
+function barcodeSVG(text) {
+  let x = 0, h = 2166136261;
+  const bars = [[0, 2], [3, 1]]; x = 6;
+  for (const ch of text) {
+    h ^= ch.charCodeAt(0); h = Math.imul(h, 16777619) >>> 0;
+    for (let i = 0; i < 3; i++) { const w = 1 + ((h >>> (i * 5)) % 3); const gap = 1 + ((h >>> (i * 5 + 3)) % 2); bars.push([x, w]); x += w + gap; }
+  }
+  bars.push([x + 1, 1], [x + 3, 2]); x += 6;
+  return '<svg class="ml-bars" viewBox="0 0 ' + x + ' 40" preserveAspectRatio="none" aria-hidden="true">' + bars.map(b => '<rect x="' + b[0] + '" y="0" width="' + b[1] + '" height="40"></rect>').join('') + '</svg>';
+}
+function labelHTML(p) {
+  return '<div class="mlabel" aria-label="Etiqueta master ' + p.m + '"><div class="ml-top"><span>Etiqueta master · tarima</span><span>ilustrativa</span></div>' +
+    '<div class="ml-code">' + p.m + '</div>' + barcodeSVG(p.m) +
+    '<div class="ml-hr">(10)' + p.lot + ' (11)' + yymmdd(p.prod) + ' (17)' + yymmdd(p.exp) + ' (3102)' + pad(Math.round(p.kg * 100), 6) + '</div></div>';
+}
+function palletKV(p, extra) {
+  const lm = lastMove(p.m);
+  return '<dl class="kv">' +
+    '<dt>Producto</dt><dd>' + esc(pname(p.sku)) + ' <span class="ttag t-' + ptype(p.sku) + '">' + TYPE[ptype(p.sku)].one + '</span></dd>' +
+    '<dt>Ref. Odoo</dt><dd class="mono">' + p.sku + '</dd>' +
+    '<dt>Lote</dt><dd class="mono">' + p.lot + '</dd>' +
+    '<dt>Producción</dt><dd class="mono">' + fmtD(p.prod) + ' ' + fmtT(p.prod) + '</dd>' +
+    '<dt>Caducidad</dt><dd class="mono">' + fmtD(p.exp) + '</dd>' +
+    '<dt>Vida restante</dt><dd>' + dueText(p) + '</dd>' +
+    '<dt>Cajas</dt><dd class="mono">' + p.boxes + '</dd>' +
+    '<dt>Kg netos</dt><dd class="mono">' + fmtKg(p.kg) + '</dd>' +
+    '<dt>Origen</dt><dd>' + esc(p.origin) + '</dd>' +
+    (extra !== false && lm ? '<dt>Último mov.</dt><dd>' + MT[lm.type].l + ' · ' + esc(lm.user) + ' · <span class="mono">' + fmtDT(lm.ts) + '</span></dd>' : '') +
+    '</dl>';
+}
+
+/* =========================================================
+   1. Mapa de cámara (2D + 3D) y ficha
+   ========================================================= */
+const TEMP = {};
+CHAMBERS.forEach(c => { TEMP[c.id] = c.base; });
+const fmtTemp = id => { const v = TEMP[id]; return (v < 0 ? '−' : '') + Math.abs(v).toFixed(1) + ' °C'; };
+function matchFilter(k) {
+  const f = S.ui.mapFilter; if (!f) return true;
+  const s = posState(k);
+  if (f === 'due') return s === 'due' || s === 'blk';
+  if (f === 'chk') return s === 'chk';
+  const m = S.pos[k].m;
+  return !!m && S.pallets[m].sku === f;
+}
+function camChip(c) {
+  const st = camStats(c.id);
+  const att = st.due + st.blk;
+  return '<button type="button" class="cam" data-act="cam" data-cam="' + c.id + '" aria-pressed="' + (c.id === S.ui.cam) + '">' +
+    '<span class="cam-top"><span class="cam-id">' + c.id + '</span><span class="cam-temp" data-temp="' + c.id + '">' + fmtTemp(c.id) + '</span></span>' +
+    '<span class="cam-type">' + TYPE[c.type].name + ' · ' + c.racks + ' racks</span>' +
+    '<span class="cam-bar" aria-hidden="true"><i style="width:' + (st.ratio * 100).toFixed(1) + '%"></i></span>' +
+    '<span class="cam-occ">' + pct(st.ratio) + ' · ' + st.used + '/' + st.cap + '</span>' +
+    (att ? '<span class="cam-due"><i class="sw s-due"></i>' + att + ' por vencer o vencidas</span>' : '') + '</button>';
+}
+function cellHTML(k) {
+  const s = posState(k), pos = S.pos[k], p = pos.m ? S.pallets[pos.m] : null;
+  const cls = ['cell', 's-' + s];
+  if (S.ui.sel === k) cls.push('is-sel');
+  if (S.ui.hl === k) cls.push('is-tgt');
+  if (S.ui.mapFilter && !matchFilter(k)) cls.push('is-dim');
+  let inner = '', label = k + ', ' + STATE_L[s];
+  if (p) {
+    const d = daysLeft(p);
+    inner = '<span class="c-code">' + PROD[p.sku].code + '</span><span class="c-d">' + (s === 'chk' ? '?' : d < 0 ? 'VENC' : d + 'd') + '</span>';
+    label += ', ' + pname(p.sku) + ', lote ' + p.lot + ', ' + dueText(p).toLowerCase();
+  }
+  return '<button type="button" class="' + cls.join(' ') + '" data-act="sel" data-key="' + k + '" aria-label="' + esc(label) + '" title="' + k + '">' + inner + '</button>';
+}
+function gridHTML(c) {
+  const NP = c.racks / 2;
+  let h = '<div class="rackmap-scroll" id="rackmap-scroll"><div class="rackmap" style="--cols:' + NP + '">';
+  h += '<div class="rm-side">Lado A · racks impares</div>';
+  for (let n = LV; n >= 1; n--) { h += '<div class="rm-lv">N' + n + '</div>'; for (let p = 1; p <= NP; p++) h += cellHTML(keyOf(c.id, 2 * p - 1, n)); }
+  h += '<div></div>'; for (let p = 1; p <= NP; p++) h += '<div class="rm-rk">R' + pad(2 * p - 1) + '</div>';
+  h += '<div class="rm-door">PUERTA</div><div class="rm-aisle"><span>← Puerta · cortina</span><span>Pasillo central</span><span>Fondo →</span></div>';
+  h += '<div></div>'; for (let p = 1; p <= NP; p++) h += '<div class="rm-rk">R' + pad(2 * p) + '</div>';
+  for (let n = LV; n >= 1; n--) { h += '<div class="rm-lv">N' + n + '</div>'; for (let p = 1; p <= NP; p++) h += cellHTML(keyOf(c.id, 2 * p, n)); }
+  h += '<div class="rm-side b">Lado B · racks pares</div>';
+  return h + '</div></div>';
+}
+function legendHTML(c, st) {
+  const items = [['free', 'Libre', st.free], ['occ', 'Ocupado', st.occ], ['due', 'Por vencer (≤ ' + TYPE[c.type].due + ' d)', st.due], ['blk', 'Vencido / bloqueado', st.blk], ['chk', 'En verificación', st.chk]];
+  return '<div class="legend" aria-label="Leyenda de estados">' + items.map(i => '<span class="lg"><i class="sw s-' + i[0] + '"></i>' + i[1] + ' <b>' + i[2] + '</b></span>').join('') + '<span class="lg"><i class="sw s-tgt"></i>Objetivo de búsqueda o acomodo</span></div>';
+}
+function camSummaryHTML() {
+  const c = CH[S.ui.cam], st = camStats(c.id);
+  const list = CAMKEYS[c.id].map(k => S.pos[k]).filter(p => p.m && !p.chk).map(p => S.pallets[p.m]).sort((a, b) => a.exp - b.exp).slice(0, 6);
+  return '<div class="ficha-h"><div><p class="eyebrow">Resumen de ' + c.id + '</p><h3>' + TYPE[c.type].name + ' · ' + TYPE[c.type].range + '</h3></div></div>' +
+    '<div class="sum-grid"><div><span class="small muted">Ocupación</span><b>' + pct(st.ratio) + '</b><span class="small mono">' + st.used + ' de ' + st.cap + '</span></div>' +
+    '<div><span class="small muted">Libres</span><b>' + st.free + '</b><span class="small">posiciones</span></div>' +
+    '<div><span class="small muted">Por vencer</span><b>' + st.due + '</b><span class="small">≤ ' + TYPE[c.type].due + ' días</span></div>' +
+    '<div><span class="small muted">Vencidas</span><b>' + st.blk + '</b><span class="small">bloqueadas</span></div></div>' +
+    '<div class="ficha-sum"><h3>Próximas a salir (FEFO)</h3><p class="small muted">Lo que vence antes en esta cámara. Toca para ubicarla.</p></div>' +
+    '<ol class="fefo-list">' + list.map(p => '<li><button type="button" data-act="locate" data-key="' + p.loc + '"><span class="placard sm">' + p.loc + '</span><span class="fl-p">' + esc(pname(p.sku)) + '</span><span class="small mono">' + (daysLeft(p) < 0 ? 'VENC' : daysLeft(p) + ' d') + '</span></button></li>').join('') + '</ol>' +
+    '<p class="small muted">Toca una posición del mapa para ver su ficha.</p>';
+}
+function fichaHTML() {
+  const k = S.ui.sel;
+  if (!k || !S.pos[k] || camOf(k) !== S.ui.cam) return camSummaryHTML();
+  const pos = S.pos[k], s = posState(k), p = pos.m ? S.pallets[pos.m] : null, pk = parseKey(k);
+  let h = '<div class="ficha-h"><span class="placard' + (S.ui.hl === k ? ' tgt' : '') + '">' + k + '</span>' + stateChip(k) + '<button type="button" class="btn x" data-act="unsel" aria-label="Cerrar ficha">' + icon('x') + '</button></div>';
+  h += '<p class="small muted">' + whereText(pk) + '</p>';
+  const other = S.ui.view === '3d' ? '<button type="button" class="btn" data-act="see-2d" data-key="' + k + '">' + icon('grid') + 'Ver en plano</button>' : '<button type="button" class="btn" data-act="see-3d" data-key="' + k + '">' + icon('cube') + 'Ver en 3D</button>';
+  if (!p) {
+    h += '<div class="msg msg-info">' + icon('info') + '<div class="msg-x"><p class="msg-t">Posición libre</p><p>Acepta producto ' + TYPE[CH[pk.cam].type].one + ' hasta ' + fmtInt(MAXKG) + ' kg.</p></div></div>';
+    h += '<div class="btn-row">' + other + '</div>';
+    return h;
+  }
+  h += '<div class="ficha-sum"><b>' + esc(pname(p.sku)) + ' · lote <span class="mono">' + p.lot + '</span></b><span class="small">' + dueText(p) + ' · ' + p.boxes + ' cajas · ' + fmtKg(p.kg) + '</span></div>';
+  if (pos.chk) {
+    const t = S.tasks.find(x => x.id === pos.chk);
+    h += '<div class="msg msg-warn">' + icon('alert') + '<div class="msg-x"><p class="msg-t">En verificación · tarea ' + pos.chk + '</p><p>' + (t ? 'Reportada por ' + esc(t.by) + ' ' + ago(t.ts) + '. ' : '') + 'No se usa para acomodo ni surtido hasta cerrar el conteo.</p><div class="btn-row"><button type="button" class="btn btn-pri" data-act="to-count">Ir a conteos</button></div></div></div>';
+    h += '<div class="btn-row">' + other + '</div>';
+  } else {
+    h += '<div class="btn-row">' +
+      '<button type="button" class="btn" data-act="mv-start" data-key="' + k + '">' + icon('move') + 'Reubicar</button>' +
+      '<button type="button" class="btn" data-act="out-start" data-sku="' + p.sku + '">' + icon('box') + 'Surtir este producto (FEFO)</button>' +
+      '<button type="button" class="btn btn-bad" data-act="missing" data-key="' + k + '">' + icon('alert') + 'No encontrado</button>' +
+      '<button type="button" class="btn" data-act="trace" data-lot="' + p.lot + '">' + icon('search') + 'Rastrear lote</button>' + other + '</div>';
+  }
+  h += labelHTML(p) + palletKV(p);
+  return h;
+}
+function renderMap() {
+  const el = $('#tab-map'), c = CH[S.ui.cam], st = camStats(c.id);
+  const prevSc = $('#rackmap-scroll');
+  const prevScroll = prevSc ? prevSc.scrollLeft : null;
+  const skus = Array.from(new Set(CAMKEYS[c.id].map(k => S.pos[k].m && S.pallets[S.pos[k].m].sku).filter(Boolean))).sort((a, b) => pname(a).localeCompare(pname(b)));
+  if (S.ui.mapFilter && !['due', 'chk'].includes(S.ui.mapFilter) && !skus.includes(S.ui.mapFilter)) S.ui.mapFilter = '';
+  if (S.ui.sel && camOf(S.ui.sel) !== c.id) S.ui.sel = null;
+  el.innerHTML =
+    secH('Mapa de cámara', c.id + ' · ' + TYPE[c.type].name + '<span class="h-temp" data-temp="' + c.id + '">' + fmtTemp(c.id) + '</span>', c.racks + ' racks · ' + LV + ' niveles · ' + st.cap + ' posiciones (una tarima por rack-nivel) · pasillo central con ' + (c.racks / 2) + ' racks por lado. Código de ubicación: cámara-rack-nivel, por ejemplo ' + keyOf(c.id, 7, 3) + '.') +
+    '<div class="cam-grid" role="group" aria-label="Cámaras">' + CHAMBERS.map(camChip).join('') + '</div>' +
+    '<p class="note">' + icon('info') + '<span>Tipo y tamaño por cámara: configuración ilustrativa, a confirmar en el levantamiento físico.</span></p>' +
+    '<div class="map-tools"><div class="seg" role="group" aria-label="Tipo de vista">' +
+      '<button type="button" class="seg-b" data-act="view" data-v="2d" aria-pressed="' + (S.ui.view === '2d') + '">' + icon('grid') + 'Plano 2D</button>' +
+      '<button type="button" class="seg-b" data-act="view" data-v="3d" aria-pressed="' + (S.ui.view === '3d') + '">' + icon('cube') + 'Vista 3D</button></div>' +
+      '<label class="fld-inline" for="map-filter"><span>Resaltar</span><select id="map-filter" class="inp"><option value="">Nada</option><option value="due">Por vencer y vencidas</option><option value="chk">En verificación</option><optgroup label="Producto en ' + c.id + '">' + skus.map(s => '<option value="' + s + '">' + esc(pname(s)) + '</option>').join('') + '</optgroup></select></label>' +
+      (S.ui.view === '3d' ? '<button type="button" class="btn" data-act="flip">' + icon('rotate') + 'Girar vista</button>' : '') +
+    '</div>' + legendHTML(c, st) +
+    '<div class="map-layout"><div class="map-main">' +
+      (S.ui.view === '3d'
+        ? '<div class="iso-wrap" id="iso-wrap"><canvas id="iso" role="img" aria-label="Vista 3D isométrica de la cámara ' + c.id + '. Para navegar con teclado usa el plano 2D."></canvas></div><p class="iso-cap">Vista ' + (S.ui.flip ? 'desde el fondo' : 'desde la puerta') + ' · toca una tarima para abrir su ficha · representación ilustrativa, sin escala.</p>'
+        : gridHTML(c)) +
+    '</div><aside class="ficha' + (S.ui.sel ? ' is-sheet' : '') + '" id="ficha" aria-label="Ficha de posición">' + fichaHTML() + '</aside></div>';
+  $('#map-filter').value = S.ui.mapFilter;
+  if (S.ui.view === '3d') draw3D(wantScroll);
+  else {
+    const sc = $('#rackmap-scroll');
+    if (sc) {
+      const cell = wantScroll && S.ui.hl ? sc.querySelector('[data-key="' + S.ui.hl + '"]') : null;
+      if (cell) sc.scrollLeft = cell.offsetLeft - sc.clientWidth / 2 + cell.offsetWidth / 2;
+      else if (prevScroll != null) sc.scrollLeft = prevScroll;
+    }
+  }
+  if (wantScroll) {
+    const target = S.ui.view === '3d' ? $('#iso') : $('#rackmap-scroll [data-key="' + S.ui.hl + '"]');
+    if (target) {
+      const r = target.getBoundingClientRect();
+      const sheet = $('#ficha.is-sheet');
+      const sheetH = sheet && getComputedStyle(sheet).position === 'fixed' ? sheet.offsetHeight : 0;
+      const opsH = $('.ops').offsetHeight;
+      const avail = window.innerHeight - sheetH - opsH;
+      const focusY = S.ui.view === '3d' ? r.top + Math.min(r.height, avail) / 2 : r.top + r.height / 2;
+      window.scrollBy({top: focusY - (opsH + avail / 2), behavior: RM.matches ? 'auto' : 'smooth'});
+    }
+  }
+  wantScroll = false;
+}
+function locate(key, opts) {
+  const pk = parseKey(key);
+  if (!pk || pk.invalid) return;
+  S.ui.cam = pk.cam; S.ui.sel = key; S.ui.hl = key; S.ui.mapFilter = '';
+  if (opts && opts.view) S.ui.view = opts.view;
+  wantScroll = true;
+  S.ui.tab = 'map';
+  render();
+}
+
+/* ---------- Vista 3D isométrica (Canvas 2D, sin librerías) ---------- */
+let iso = null, isoRAF = 0;
+function draw3D(animate) {
+  cancelAnimationFrame(isoRAF);
+  const cv = $('#iso');
+  if (!cv) return;
+  const W = Math.floor(cv.parentElement.clientWidth);
+  if (W < 60) return;
+  const c = CH[S.ui.cam], NP = c.racks / 2;
+  const RD = 1, AW = 2.7, LH = 0.8, YT = RD * 2 + AW;
+  const th = -0.49, ph = 1.05;
+  const cx = Math.cos(th), sx = Math.sin(th), sp = Math.sin(ph), cp = Math.cos(ph);
+  const pr = (x, y, z) => [x * cx - y * sx, (x * sx + y * cx) * sp - z * cp];
+  const X0 = -1.1, X1 = NP + 0.6, ZT = LV * LH + 1.7;
+  let mnx = Infinity, mxx = -Infinity, mny = Infinity, mxy = -Infinity;
+  [X0, X1].forEach(x => [-0.4, YT + 0.4].forEach(y => [0, ZT].forEach(z => { const q = pr(x, y, z); mnx = Math.min(mnx, q[0]); mxx = Math.max(mxx, q[0]); mny = Math.min(mny, q[1]); mxy = Math.max(mxy, q[1]); })));
+  const gut = 10;
+  const maxH = Math.max(250, Math.min(580, window.innerHeight * 0.62));
+  const s = Math.min((W - gut * 2) / (mxx - mnx), (maxH - gut * 2) / (mxy - mny));
+  const H = Math.ceil((mxy - mny) * s + gut * 2);
+  const ox = (W - (mxx - mnx) * s) / 2 - mnx * s, oy = gut - mny * s;
+  const P3 = (x, y, z) => { const q = pr(x, y, z); return [ox + q[0] * s, oy + q[1] * s]; };
+  const dpr = Math.min(2, window.devicePixelRatio || 1);
+  cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+  cv.style.width = W + 'px'; cv.style.height = H + 'px';
+  iso = {cv, W, H, s, P3, NP, c, RD, AW, LH, YT, X0, X1, dpr, hits: []};
+  const hl = S.ui.hl && camOf(S.ui.hl) === c.id;
+  if (animate && hl && !RM.matches) {
+    const t0 = performance.now();
+    const loop = t => { const e = t - t0; paint3D(e < 3600 ? (e % 1200) / 1200 : null); if (e < 3600) isoRAF = requestAnimationFrame(loop); };
+    isoRAF = requestAnimationFrame(loop);
+  } else paint3D(null);
+}
+function paint3D(phase) {
+  const g = iso;
+  if (!g || !g.cv.isConnected) return;
+  const ctx = g.cv.getContext('2d');
+  const {P3, NP, c, RD, AW, LH, YT} = g;
+  const css = getComputedStyle(document.documentElement);
+  const T = n => css.getPropertyValue(n).trim();
+  const col = {floor: T('--floor'), line: T('--line'), lane: T('--lane'), rack: T('--rack'), ink: T('--ink'), ink2: T('--ink-2'), shade: T('--shade'), glint: T('--glint'), tgt: T('--tgt'), onTgt: T('--on-tgt'), accent: T('--accent'), pallet: T('--pallet'), occ: T('--st-occ'), due: T('--st-due'), blk: T('--st-blk'), chk: T('--st-chk'), surface: T('--surface')};
+  ctx.setTransform(g.dpr, 0, 0, g.dpr, 0, 0);
+  ctx.clearRect(0, 0, g.W, g.H);
+  g.hits = [];
+  const path = pts => { ctx.beginPath(); ctx.moveTo(pts[0][0], pts[0][1]); for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i][0], pts[i][1]); ctx.closePath(); };
+  const seg = (a, b) => { ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); ctx.stroke(); };
+  const flip = S.ui.flip;
+  const bayX = p => flip ? NP - p : p - 1;
+  const sideY = side => ((side === 'A') !== flip) ? 0 : RD + AW;
+  // Piso, carriles y puerta
+  path([P3(g.X0, -0.4, 0), P3(g.X1, -0.4, 0), P3(g.X1, YT + 0.4, 0), P3(g.X0, YT + 0.4, 0)]);
+  ctx.fillStyle = col.floor; ctx.fill(); ctx.lineWidth = 1; ctx.strokeStyle = col.line; ctx.stroke();
+  ctx.strokeStyle = col.lane; ctx.lineWidth = Math.max(1.5, g.s * 0.06);
+  [RD + 0.14, RD + AW - 0.14].forEach(y => seg(P3(g.X0 + 0.25, y, 0), P3(g.X1 - 0.15, y, 0)));
+  const xd = flip ? NP + 0.4 : -0.8;
+  const door = [P3(xd, RD + 0.5, 0), P3(xd, RD + AW - 0.5, 0), P3(xd, RD + AW - 0.5, 2.3), P3(xd, RD + 0.5, 2.3)];
+  path(door); ctx.globalAlpha = 0.16; ctx.fillStyle = col.accent; ctx.fill(); ctx.globalAlpha = 1;
+  ctx.strokeStyle = col.ink2; ctx.lineWidth = 1.5; ctx.stroke();
+  const fs = Math.max(9, Math.min(12, g.s * 0.34));
+  ctx.font = '600 ' + fs + 'px ' + FONT_MONO; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillStyle = col.ink2;
+  const dl = P3(xd + (flip ? 0.55 : -0.55), RD + AW / 2, 0);
+  ctx.fillText('PUERTA', dl[0], dl[1]);
+  // Etiquetas de rack en el piso del pasillo
+  const every = g.s >= 34 ? 1 : g.s >= 22 ? 2 : 4;
+  for (let p = 1; p <= NP; p++) {
+    if ((p - 1) % every) continue;
+    ['A', 'B'].forEach(side => {
+      const r = side === 'A' ? 2 * p - 1 : 2 * p;
+      const yl = sideY(side) === 0 ? RD + 0.45 : RD + AW - 0.45;
+      const q = P3(bayX(p) + 0.5, yl, 0);
+      ctx.fillText('R' + pad(r), q[0], q[1]);
+    });
+  }
+  // Bahías ordenadas de atrás hacia adelante (algoritmo del pintor)
+  const bays = [];
+  for (let p = 1; p <= NP; p++) ['A', 'B'].forEach(side => { const x0 = bayX(p), y0 = sideY(side); bays.push({p, side, x0, y0, d: P3(x0 + 0.5, y0 + 0.5, 0)[1]}); });
+  bays.sort((a, b) => a.d - b.d);
+  const tgt = S.ui.hl && camOf(S.ui.hl) === c.id ? S.ui.hl : null;
+  let tgtTop = null;
+  const postW = Math.max(1, g.s * 0.05), zt = LV * LH;
+  bays.forEach(b => {
+    const x0 = b.x0, x1 = x0 + 1, y0 = b.y0, y1 = y0 + RD;
+    ctx.strokeStyle = col.rack; ctx.lineWidth = postW;
+    seg(P3(x1, y0, 0), P3(x1, y0, zt)); seg(P3(x0, y0, 0), P3(x0, y0, zt)); seg(P3(x1, y1, 0), P3(x1, y1, zt));
+    for (let n = 2; n <= LV; n++) { const z = (n - 1) * LH; seg(P3(x0, y0, z), P3(x1, y0, z)); seg(P3(x1, y0, z), P3(x1, y1, z)); }
+    for (let n = 1; n <= LV; n++) {
+      const r = b.side === 'A' ? 2 * b.p - 1 : 2 * b.p;
+      const k = keyOf(c.id, r, n), st = posState(k);
+      const bx0 = x0 + 0.1, bx1 = x1 - 0.1, by0 = y0 + 0.08, by1 = y1 - 0.08, bz0 = (n - 1) * LH + 0.03, bz1 = (n - 1) * LH + LH * 0.8;
+      const hull = [P3(bx0, by0, bz0), P3(bx0, by1, bz0), P3(bx1, by1, bz0), P3(bx1, by1, bz1), P3(bx1, by0, bz1), P3(bx0, by0, bz1)];
+      const dim = S.ui.mapFilter && !matchFilter(k);
+      g.hits.push({k, hull, occ: st !== 'free'});
+      if (st === 'free') {
+        path([P3(bx0, by0, bz0), P3(bx1, by0, bz0), P3(bx1, by1, bz0), P3(bx0, by1, bz0)]);
+        ctx.strokeStyle = col.line; ctx.lineWidth = 1; ctx.globalAlpha = dim ? 0.3 : 0.9; ctx.stroke(); ctx.globalAlpha = 1;
+        if (k === tgt) { ctx.setLineDash([4, 3]); path(hull); ctx.strokeStyle = col.tgt; ctx.lineWidth = 2; ctx.stroke(); ctx.setLineDash([]); tgtTop = P3((bx0 + bx1) / 2, (by0 + by1) / 2, bz1); }
+        else if (k === S.ui.sel) { path(hull); ctx.strokeStyle = col.accent; ctx.lineWidth = 2; ctx.stroke(); }
+        continue;
+      }
+      ctx.globalAlpha = dim ? 0.2 : 1;
+      drawBox(ctx, P3, bx0, bx1, by0, by1, bz0, bz0 + 0.1, col.pallet, col);
+      drawBox(ctx, P3, bx0 + 0.02, bx1 - 0.02, by0 + 0.02, by1 - 0.02, bz0 + 0.1, bz1, {occ: col.occ, due: col.due, blk: col.blk, chk: col.chk}[st], col);
+      ctx.globalAlpha = 1;
+      if (k === tgt) { path(hull); ctx.strokeStyle = col.tgt; ctx.lineWidth = 2.5; ctx.stroke(); tgtTop = P3((bx0 + bx1) / 2, (by0 + by1) / 2, bz1); }
+      else if (k === S.ui.sel) { path(hull); ctx.strokeStyle = col.accent; ctx.lineWidth = 2; ctx.stroke(); }
+    }
+    ctx.strokeStyle = col.rack; ctx.lineWidth = postW;
+    seg(P3(x0, y1, 0), P3(x0, y1, zt));
+    for (let n = 2; n <= LV; n++) { const z = (n - 1) * LH; seg(P3(x0, y1, z), P3(x1, y1, z)); seg(P3(x0, y0, z), P3(x0, y1, z)); }
+  });
+  // Baliza sobre la posición objetivo
+  if (tgtTop) {
+    const top = [tgtTop[0], tgtTop[1] - Math.max(30, g.s * 1.5)];
+    ctx.strokeStyle = col.tgt; ctx.lineWidth = 2; seg(tgtTop, top);
+    if (phase != null) {
+      const rr = 6 + phase * 18;
+      ctx.globalAlpha = 1 - phase; ctx.beginPath(); ctx.ellipse(tgtTop[0], tgtTop[1], rr, rr * 0.55, 0, 0, Math.PI * 2); ctx.stroke(); ctx.globalAlpha = 1;
+    }
+    ctx.font = '600 12px ' + FONT_MONO;
+    const tw = ctx.measureText(tgt).width + 14, th2 = 22;
+    const tx = Math.max(4, Math.min(g.W - tw - 4, top[0] - tw / 2)), ty = Math.max(4, top[1] - th2);
+    ctx.fillStyle = col.tgt; roundRect(ctx, tx, ty, tw, th2, 3); ctx.fill();
+    ctx.fillStyle = col.onTgt; ctx.textAlign = 'left'; ctx.textBaseline = 'middle'; ctx.fillText(tgt, tx + 7, ty + th2 / 2 + 0.5);
+  }
+}
+function drawBox(ctx, P3, x0, x1, y0, y1, z0, z1, fill, col) {
+  const A = P3(x0, y0, z1), B = P3(x1, y0, z1), C = P3(x1, y1, z1), D = P3(x0, y1, z1), E = P3(x0, y0, z0), F = P3(x0, y1, z0), G = P3(x1, y1, z0);
+  const ga = ctx.globalAlpha;
+  const face = (pts, over, a) => {
+    ctx.beginPath(); ctx.moveTo(pts[0][0], pts[0][1]); for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i][0], pts[i][1]); ctx.closePath();
+    ctx.fillStyle = fill; ctx.fill();
+    ctx.globalAlpha = ga * a; ctx.fillStyle = over; ctx.fill(); ctx.globalAlpha = ga;
+    ctx.globalAlpha = ga * 0.35; ctx.strokeStyle = col.shade; ctx.lineWidth = 0.8; ctx.stroke(); ctx.globalAlpha = ga;
+  };
+  face([E, F, D, A], col.shade, 0.12);
+  face([F, G, C, D], col.shade, 0.3);
+  face([A, B, C, D], col.glint, 0.18);
+}
+function roundRect(ctx, x, y, w, h, r) {
+  ctx.beginPath(); ctx.moveTo(x + r, y); ctx.lineTo(x + w - r, y); ctx.quadraticCurveTo(x + w, y, x + w, y + r); ctx.lineTo(x + w, y + h - r); ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h); ctx.lineTo(x + r, y + h); ctx.quadraticCurveTo(x, y + h, x, y + h - r); ctx.lineTo(x, y + r); ctx.quadraticCurveTo(x, y, x + r, y); ctx.closePath();
+}
+function inPoly(x, y, pts) {
+  let inside = false;
+  for (let i = 0, j = pts.length - 1; i < pts.length; j = i++) {
+    const xi = pts[i][0], yi = pts[i][1], xj = pts[j][0], yj = pts[j][1];
+    if (((yi > y) !== (yj > y)) && (x < (xj - xi) * (y - yi) / (yj - yi) + xi)) inside = !inside;
+  }
+  return inside;
+}
+function isoHit(ev) {
+  if (!iso || !iso.cv.isConnected) return null;
+  const r = iso.cv.getBoundingClientRect(), x = ev.clientX - r.left, y = ev.clientY - r.top;
+  for (let i = iso.hits.length - 1; i >= 0; i--) if (iso.hits[i].occ && inPoly(x, y, iso.hits[i].hull)) return iso.hits[i].k;
+  for (let i = iso.hits.length - 1; i >= 0; i--) if (inPoly(x, y, iso.hits[i].hull)) return iso.hits[i].k;
+  return null;
+}
+
+/* =========================================================
+   2. Entrada / acomodo
+   ========================================================= */
+function pendingHTML() {
+  const u = S.ui.put || {};
+  const items = S.pending.map(m => {
+    const p = S.pallets[m];
+    return '<li class="pend-i' + (u.m === m ? ' is-on' : '') + '"><div class="pend-main"><span class="mono b">' + m + '</span><span>' + esc(pname(p.sku)) + ' <span class="ttag t-' + ptype(p.sku) + '">' + TYPE[ptype(p.sku)].one + '</span></span><span class="mono small muted">' + p.lot + ' · ' + p.boxes + ' cajas · ' + fmtKg(p.kg) + '</span><span class="small muted">' + esc(p.origin) + ' · ' + fmtT(p.qts || p.prod) + '</span></div><button type="button" class="btn" data-act="put-take" data-m="' + m + '">Tomar</button></li>';
+  }).join('');
+  return '<div class="panel-h"><h3>Por acomodar</h3><span class="chip">' + (S.online ? 'Odoo (simulado) · en línea' : 'Copia local · sin internet') + '</span></div>' +
+    '<p class="small muted">Tarimas registradas en Odoo por embalaje o recepción que aún no entran a cámara. ' + (S.online ? '' : 'Sin internet se usa la última copia local; los datos también vienen en la etiqueta master (GS1-128).') + '</p>' +
+    '<ul class="pend">' + (items || '<li class="empty">No hay tarimas pendientes. Produce una nueva para seguir la demo.</li>') + '</ul>' +
+    '<button type="button" class="btn btn-sim" data-act="put-gen">' + icon('box') + 'Producir tarima en embalaje (simulado)</button>' +
+    '<details class="more"><summary>Catálogo de productos en Odoo (simulado) · ' + CATALOG.length + '</summary><div class="tbl-wrap"><table><thead><tr><th>Ref.</th><th>Producto</th><th>Tipo</th><th class="r">Vida útil</th><th class="r">Kg/caja</th></tr></thead><tbody>' +
+    CATALOG.map(p => '<tr><td class="mono">' + p.sku + '</td><td>' + esc(p.name) + '</td><td>' + TYPE[p.t].one + '</td><td class="r mono">' + p.shelf + ' d</td><td class="r mono">' + p.kgBox + '</td></tr>').join('') + '</tbody></table></div></details>';
+}
+function renderPut() {
+  const el = $('#tab-put'), u = S.ui.put || {};
+  const p = u.m ? S.pallets[u.m] : null;
+  let flow = '';
+  if (u.done) {
+    const d = u.done, mv = S.moves.find(x => x.id === d.id);
+    flow = '<div class="msg msg-ok">' + icon('check') + '<div class="msg-x"><p class="msg-t">Tarima acomodada</p><p><span class="mono">' + d.m + '</span> quedó registrada en <b class="mono">' + d.key + '</b> por ' + esc(mv ? mv.user : S.user) + '. Movimiento <span class="mono">' + d.id + '</span> · <span data-sync-of="' + d.id + '">' + (mv ? syncHTML(mv) : '') + '</span></p>' + (d.note ? '<p class="small">' + esc(d.note) + '</p>' : '') +
+      '<div class="btn-row"><button type="button" class="btn" data-act="locate" data-key="' + d.key + '">' + icon('pin') + 'Ver en mapa</button><button type="button" class="btn btn-pri" data-act="put-next" data-sim-primary="1">' + icon('scan') + 'Siguiente tarima</button></div></div></div>';
+  }
+  let step2 = '', step3 = '';
+  if (p && !u.done) {
+    const sg = suggest(p);
+    if (!u.sug || !sg.list.some(e => e.key === u.sug)) u.sug = sg.list.length ? sg.list[0].key : null;
+    const ev = sg.list.find(e => e.key === u.sug);
+    if (!ev) {
+      step2 = '<div class="step"><span class="step-n">2</span><div class="step-b">' + msgHTML({kind: 'bad', title: 'Sin posiciones compatibles', text: 'Todas las cámaras de ' + TYPE[ptype(p.sku)].name.toLowerCase() + ' están al límite de ocupación (95 %).'}) + '</div></div>';
+    } else {
+      const alts = sg.list.filter(e => e.key !== ev.key).slice(0, 3);
+      step2 = '<div class="step"><span class="step-n">2</span><div class="step-b">' +
+        '<div class="panel-h"><h3>Posición sugerida</h3><span class="score">Puntaje ' + ev.score + '/100 <span class="score-bar" aria-hidden="true"><i style="width:' + ev.score + '%"></i></span></span></div>' +
+        '<div class="sug-main"><span class="placard xl tgt">' + ev.key + '</span><button type="button" class="btn" data-act="locate" data-key="' + ev.key + '">' + icon('pin') + 'Ver en mapa</button></div>' +
+        '<p class="small muted">' + whereText(ev.pk) + '</p>' +
+        '<ul class="why">' + reasons(p, ev, sg.ctx).map(r => '<li class="' + (r.ok ? 'y' : 'n') + '">' + icon(r.ok ? 'check' : 'info') + '<div><b>' + r.h + '.</b> ' + esc(r.t) + '</div></li>').join('') + '</ul>' +
+        (alts.length ? '<details class="more"><summary>Ver alternativas (' + alts.length + ')</summary><ul class="alts">' + alts.map(a => '<li><span class="placard sm">' + a.key + '</span><span class="small muted">puntaje ' + a.score + ' · ' + (a.nb ? 'agrupa con ' + a.nb : 'sin vecinos del producto') + '</span><button type="button" class="btn" data-act="put-use" data-key="' + a.key + '">Usar esta</button></li>').join('') + '</ul></details>' : '') +
+        '</div></div>';
+      step3 = '<div class="step"><span class="step-n">3</span><div class="step-b"><h3>Acomoda y escanea la etiqueta de la ubicación</h3>' +
+        '<p class="small muted">El escaneo confirma el acomodo. Si escaneas otra posición, el sistema avisa antes de registrar (poka-yoke).</p>' +
+        '<form data-form="put-loc" autocomplete="off"><label class="sr" for="put-loc">Etiqueta de ubicación</label><div class="scan" id="scan-put-loc">' + icon('scan') + '<input id="put-loc" class="scan-in" spellcheck="false" autocapitalize="characters" placeholder="' + ev.key + '"><button type="submit" class="btn btn-pri">Confirmar</button></div></form>' +
+        '<div class="btn-row"><button type="button" class="btn btn-sim" data-act="put-sim-sug" data-sim-primary="1">' + icon('scan') + 'Escanear la sugerida</button><button type="button" class="btn btn-sim" data-act="put-sim-other">' + icon('scan') + 'Escanear otra libre</button><button type="button" class="btn btn-sim" data-act="put-sim-occ">' + icon('scan') + 'Escanear una ocupada</button></div>' +
+        (u.msg && u.msg.at === 'loc' ? msgHTML(u.msg) : '') + '</div></div>';
+    }
+  }
+  el.innerHTML = secH('Entrada · acomodo', 'Acomodar tarima en cámara', 'La tarima llega de embalaje con su etiqueta master. UbicaFrío trae sus datos de Odoo, sugiere la mejor posición y valida el acomodo con un escaneo.') +
+    '<div class="cols"><section class="panel">' + pendingHTML() + '</section><section class="panel flow">' +
+    (u.done ? flow :
+      '<div class="step' + (p ? ' is-done' : '') + '"><span class="step-n">1</span><div class="step-b"><h3>Escanea la etiqueta master</h3>' +
+      '<form data-form="put-master" autocomplete="off"><label class="sr" for="put-master">Etiqueta master</label><div class="scan" id="scan-put-master">' + icon('scan') + '<input id="put-master" class="scan-in" spellcheck="false" autocapitalize="characters" placeholder="MST-26-000123" value="' + esc(u.m || u.raw || '') + '"><button type="submit" class="btn btn-pri">Consultar</button></div></form>' +
+      '<div class="btn-row"><button type="button" class="btn btn-sim" data-act="put-sim-master"' + (p ? '' : ' data-sim-primary="1"') + '>' + icon('scan') + 'Simular escaneo</button>' + (p ? '<button type="button" class="btn" data-act="put-reset">Cancelar</button>' : '') + '</div>' +
+      (u.msg && u.msg.at === 'master' ? msgHTML(u.msg) : '') +
+      (p ? labelHTML(p) + palletKV(p, false) : '') + '</div></div>' + step2 + step3) +
+    '</section></div>';
+}
+function simScan(inputId, value, then) {
+  const inp = document.getElementById(inputId);
+  const box = inp ? inp.closest('.scan') : null;
+  if (inp) inp.value = value;
+  if (box && !RM.matches) { box.classList.remove('is-scan'); void box.offsetWidth; box.classList.add('is-scan'); }
+  setTimeout(then, RM.matches ? 0 : 420);
+}
+function putScanMaster(raw) {
+  const m = normMaster(raw);
+  const u = S.ui.put = {m: null, raw: String(raw || '').toUpperCase()};
+  if (!m) { u.msg = {at: 'master', kind: 'bad', title: 'Código no reconocido', text: 'Una etiqueta master tiene el formato MST-26-000123. Vuelve a escanear.'}; return render(); }
+  const p = S.pallets[m];
+  if (!p) { u.msg = {at: 'master', kind: 'bad', title: 'No existe en Odoo', text: m + ' no aparece en producción ni en recepción. Revisa la etiqueta o consulta con embalaje.'}; return render(); }
+  if (p.st === 'almacenada') { u.msg = {at: 'master', kind: 'warn', title: 'Esta tarima ya está ubicada', text: m + ' está registrada en ' + p.loc + '.', actions: [{act: 'locate', label: 'Ver en mapa', data: {key: p.loc}}, {act: 'mv-start', label: 'Reubicarla', data: {key: p.loc}}]}; return render(); }
+  if (p.st !== 'por_acomodar') { u.msg = {at: 'master', kind: 'bad', title: 'Tarima fuera de inventario', text: m + ' figura como ' + (p.st === 'despachada' ? 'despachada' : 'dada de baja') + '. No debe entrar a cámara sin revisión.'}; return render(); }
+  u.m = m; u.raw = null;
+  u.msg = S.online
+    ? {at: 'master', kind: 'info', title: 'Datos obtenidos de Odoo (simulado)', text: 'Producto, lote, fechas, cajas y kilos leídos del registro de ' + p.origin.toLowerCase() + '.'}
+    : {at: 'master', kind: 'warn', title: 'Datos de la copia local', text: 'Sin internet: se usó la copia local sincronizada a las ' + fmtT(S.lastSync) + ' y la etiqueta master. Se valida con Odoo al reconectar.'};
+  render();
+}
+function putScanLoc(raw) {
+  const u = S.ui.put; if (!u || !u.m) return;
+  const p = S.pallets[u.m], pk = parseKey(raw);
+  const setMsg = m => { m.at = 'loc'; u.msg = m; render(); };
+  if (!pk) return setMsg({kind: 'bad', title: 'Código de ubicación no válido', text: 'Formato: cámara-rack-nivel, por ejemplo C4-R07-N3.'});
+  if (pk.invalid) return setMsg({kind: 'bad', title: pk.key + ' no existe', text: pk.cam + ' tiene ' + CH[pk.cam].racks + ' racks de ' + LV + ' niveles.'});
+  const c = CH[pk.cam], pos = S.pos[pk.key];
+  if (c.type !== ptype(p.sku)) return setMsg({kind: 'bad', title: 'Cámara incompatible · registro bloqueado', text: c.id + ' es de ' + TYPE[c.type].name.toLowerCase() + ' y la tarima es de producto ' + TYPE[ptype(p.sku)].one + '. No se permite romper la cadena de frío.'});
+  if (pos.chk) return setMsg({kind: 'bad', title: 'Posición en verificación · registro bloqueado', text: pk.key + ' tiene el conteo ' + pos.chk + ' pendiente. Usa otra posición.'});
+  if (pos.m) { const o = S.pallets[pos.m]; return setMsg({kind: 'bad', title: 'Posición ocupada · registro bloqueado', text: 'En ' + pk.key + ' el sistema tiene ' + pos.m + ' (' + pname(o.sku) + ', lote ' + o.lot + '). Si físicamente está vacía, es una ubicación fantasma: repórtala.', actions: [{act: 'missing', label: 'Está vacía: reportar No encontrado', data: {key: pk.key}}]}); }
+  if (pk.key !== u.sug) {
+    const ev = evalKey(p, pk.key);
+    return setMsg({kind: 'warn', title: 'No es la ubicación sugerida', text: 'Escaneaste ' + pk.key + ' y la sugerida es ' + u.sug + '. Puntaje de la escaneada: ' + (ev ? ev.score : '–') + '/100. Confirma dónde quedó realmente la tarima.', actions: [{act: 'put-accept', label: 'Registrar en ' + pk.key + ' (ubicación real)', data: {key: pk.key}, cls: 'btn-pri'}, {act: 'put-retry', label: 'Voy a la sugerida ' + u.sug}]});
+  }
+  registerPut(pk.key, '');
+}
+function registerPut(key, note) {
+  const u = S.ui.put, p = S.pallets[u.m];
+  if (!p || S.pos[key].m || S.pos[key].chk) return;
+  p.loc = key; p.st = 'almacenada'; S.pos[key].m = p.m;
+  S.pending = S.pending.filter(x => x !== p.m);
+  const ri = S.reserved.indexOf(key); if (ri >= 0) S.reserved.splice(ri, 1);
+  const id = addMove({type: 'ACOMODO', m: p.m, from: 'Por acomodar', to: key, note});
+  S.ui.put = {done: {m: p.m, key, id, note}};
+  S.ui.hl = key;
+  toast('Acomodada en ' + key + ' · ' + id + (S.online ? '' : ' · en cola para Odoo'), 'ok');
+  render();
+}
+function newPending() {
+  const prod = CATALOG[Math.floor(Math.random() * CATALOG.length)];
+  const now = Date.now(), yy = String(new Date(now).getFullYear()).slice(2);
+  let max = 0;
+  Object.keys(S.pallets).forEach(m => { if (m.slice(4, 6) === yy) max = Math.max(max, +m.slice(7)); });
+  const m = 'MST-' + yy + '-' + pad(max + 1 + Math.floor(Math.random() * 3), 6);
+  const ym = yy + pad(new Date(now).getMonth() + 1);
+  const same = Object.values(S.pallets).find(p => p.sku === prod.sku && sod(p.prod) === sod(now));
+  let lot = same ? same.lot : null;
+  if (!lot) { let mx = 0; Object.values(S.pallets).forEach(p => { if (p.lot.slice(1, 5) === ym) mx = Math.max(mx, +p.lot.slice(6)); }); lot = 'L' + ym + '-' + pad(mx + 1, 3); }
+  const boxes = Math.floor(1040 / prod.kgBox) - Math.floor(Math.random() * 3);
+  const line = 1 + Math.floor(Math.random() * 2);
+  const p = {m, sku: prod.sku, lot, prod: now - 20 * MIN, exp: sod(now) + prod.shelf * DAY + 12 * HOUR, boxes, kg: Math.round(boxes * prod.kgBox * (0.975 + Math.random() * 0.05) * 10) / 10, loc: null, st: 'por_acomodar', origin: 'Embalaje · Línea ' + line, ghost: null, qts: now};
+  S.pallets[m] = p; S.pending.push(m);
+  addMove({type: 'PRODUCCION', m, user: 'Odoo · Embalaje', from: p.origin, to: 'Por acomodar', note: S.online ? '' : 'Leída de la etiqueta GS1-128; se confirma en Odoo al reconectar'});
+  return m;
+}
+
+/* =========================================================
+   3. Buscar
+   ========================================================= */
+function runSearch(q) {
+  const nq = norm(q).trim();
+  const items = storedPallets();
+  let list;
+  if (nq === 'por vencer') list = items.filter(p => { const s = posState(p.loc); return s === 'due' || s === 'blk'; });
+  else {
+    const mm = normMaster(q);
+    const terms = mm ? [norm(mm)] : nq.split(/\s+/).filter(Boolean);
+    list = items.filter(p => {
+      const hay = norm(pname(p.sku) + ' ' + TYPE[ptype(p.sku)].one + ' ' + p.sku + ' ' + PROD[p.sku].code + ' ' + p.lot + ' ' + p.m + ' ' + p.loc);
+      return terms.every(t => hay.includes(t));
+    });
+  }
+  return list.sort((a, b) => a.exp - b.exp || a.loc.localeCompare(b.loc));
+}
+function renderFind() {
+  const el = $('#tab-find');
+  const quick = ['arrachera', 'rib eye', 'molida', S.demo.lot, 'por vencer'];
+  if (S.ui.q.trim() && !findStart) findStart = performance.now();
+  el.innerHTML = secH('Buscar', '¿Dónde está?', 'Resultados en orden FEFO: primero lo que vence antes. Busca por producto, lote, etiqueta master o ubicación; funciona igual sin internet.') +
+    '<section class="panel"><form data-form="find" autocomplete="off" role="search"><label class="fld-lab" for="q">Producto, lote, etiqueta master o ubicación</label>' +
+    '<div class="scan" id="scan-q">' + icon('search') + '<input id="q" class="scan-in" type="search" spellcheck="false" placeholder="arrachera · L2610-072 · MST-26-… · C4-R07" value="' + esc(S.ui.q) + '"><button type="submit" class="btn btn-pri">Buscar</button></div></form>' +
+    '<div class="chips-row"><span class="small muted">Prueba:</span>' + quick.map(q => '<button type="button" class="qchip" data-act="find-q" data-q="' + esc(q) + '">' + esc(q) + '</button>').join('') + '</div>' +
+    '<div class="find-meta" id="find-meta" aria-live="polite"></div></section><section id="find-res"></section>';
+  updateFind();
+}
+function resHTML(p, i, firsts) {
+  const first = !firsts.has(p.sku); firsts.add(p.sku);
+  const chk = !!S.pos[p.loc].chk;
+  return '<li class="res"><span class="res-rank">' + (i + 1) + '</span>' +
+    '<div class="res-main"><div class="res-prod"><b>' + esc(pname(p.sku)) + '</b><span class="ttag t-' + ptype(p.sku) + '">' + TYPE[ptype(p.sku)].one + '</span>' + (first && !chk ? '<span class="chip chip-fefo">Sale primero (FEFO)</span>' : '') + '</div>' +
+    '<span class="mono small muted">' + p.lot + ' · ' + p.m + ' · ' + p.boxes + ' cajas · ' + fmtKg(p.kg) + '</span></div>' +
+    '<div class="res-loc"><span class="placard sm">' + p.loc + '</span>' + stateChip(p.loc) + '<span class="small">' + dueText(p) + '</span></div>' +
+    '<div class="res-act btn-row"><button type="button" class="btn btn-pri" data-act="find-locate" data-key="' + p.loc + '">' + icon('pin') + 'Ver en mapa</button><button type="button" class="btn" data-act="missing" data-key="' + p.loc + '"' + (chk ? ' disabled' : '') + '>No encontrado</button></div></li>';
+}
+let lastFind = null;
+function updateFind() {
+  const meta = $('#find-meta'), res = $('#find-res');
+  if (!meta || !res) return;
+  const q = S.ui.q.trim();
+  const se = S.searches, okS = se.filter(s => s.ok && s.secs != null);
+  const stats = '<span>Promedio hasta ubicar: <b class="mono">' + (okS.length ? (okS.reduce((a, s) => a + s.secs, 0) / okS.length).toFixed(1) : '–') + ' s</b> en ' + okS.length + ' búsquedas</span>';
+  if (q.length < 2) { meta.innerHTML = '<span>Escribe al menos 2 caracteres o escanea una etiqueta.</span>' + stats; res.innerHTML = ''; lastFind = null; return; }
+  const t0 = performance.now();
+  const r = runSearch(q);
+  const ms = performance.now() - t0;
+  lastFind = {q, n: r.length};
+  meta.innerHTML = '<span><b class="mono">' + r.length + '</b> resultado' + (r.length === 1 ? '' : 's') + '</span><span>Consulta local: <b class="mono">' + ms.toFixed(1) + ' ms</b></span><span>Cronómetro hasta ubicar: <b class="mono" id="find-clock">' + (findStart ? ((performance.now() - findStart) / 1000).toFixed(1) : '0.0') + ' s</b></span>' + stats;
+  if (!r.length) {
+    const hist = Object.values(S.pallets).filter(p => p.st !== 'almacenada' && norm(pname(p.sku) + ' ' + p.lot + ' ' + p.m).includes(norm(q))).length;
+    res.innerHTML = msgHTML({kind: 'warn', title: 'Sin tarimas en cámara para “' + q + '”', text: (hist ? 'Hay ' + hist + ' tarima' + (hist > 1 ? 's' : '') + ' con ese dato fuera de cámara (despachadas, por acomodar o dadas de baja); consúltalas en la bitácora. ' : '') + 'Presiona Buscar para registrarla como búsqueda fallida.'});
+    return;
+  }
+  const firsts = new Set();
+  res.innerHTML = '<ol class="res-list">' + r.slice(0, 40).map((p, i) => resHTML(p, i, firsts)).join('') + '</ol>' + (r.length > 40 ? '<p class="muted small">Y ' + (r.length - 40) + ' más. Afina la búsqueda con el lote o la cámara.</p>' : '');
+}
+
+/* =========================================================
+   4. Salida / surtido
+   ========================================================= */
+function makeOrder(sku, qty, dock) {
+  const f = fefoCandidates(sku);
+  S.seq.order = (S.seq.order || 0) + 1;
+  S.ui.out = {id: 'OS-' + pad(S.seq.order, 4), sku, qty, dock, lines: f.ok.slice(0, qty).map(p => ({m: p.m, key: p.loc, st: 'pend'})), step: 'loc', msg: null, excl: f.excl, short: Math.max(0, qty - f.ok.length)};
+  S.ui.outForm = {sku, qty, dock};
+}
+function renderOut() {
+  const el = $('#tab-out');
+  const avail = {};
+  storedPallets().forEach(p => { if (!S.pos[p.loc].chk && daysLeft(p) >= 0) avail[p.sku] = (avail[p.sku] || 0) + 1; });
+  const f = S.ui.outForm || {sku: 'RES-1101', qty: 2, dock: 'Cortina 1'};
+  const o = S.ui.out;
+  let order = '';
+  if (o) {
+    const cur = o.lines.find(l => l.st === 'pend');
+    const done = o.lines.filter(l => l.st === 'ok');
+    order = '<section class="panel"><div class="panel-h"><div><p class="eyebrow">Orden de surtido ' + o.id + '</p><h3>' + esc(pfull(o.sku)) + ' · ' + o.qty + ' tarima' + (o.qty > 1 ? 's' : '') + ' → ' + o.dock + '</h3></div><button type="button" class="btn" data-act="out-cancel">' + (cur ? 'Cancelar orden' : 'Cerrar') + '</button></div>' +
+      '<p class="small muted">Lotes sugeridos por FEFO: primero el que vence antes; a igual fecha, el de nivel más bajo.</p>' +
+      '<ol class="picklist">' + o.lines.map((l, i) => { const p = S.pallets[l.m]; const c = l === cur; return '<li class="pk' + (c ? ' is-cur' : '') + (l.st === 'ok' ? ' is-ok' : '') + (l.st === 'skip' ? ' is-skip' : '') + '"><span class="pk-n">' + (i + 1) + '</span><div class="pk-main"><span><span class="mono b">' + l.key + '</span> · ' + esc(pname(p.sku)) + '</span><span class="mono small muted">' + p.lot + ' · ' + l.m + ' · vence ' + fmtD(p.exp) + '</span></div><span class="chip">' + (l.st === 'ok' ? icon('check') + 'Surtida' : l.st === 'skip' ? 'No encontrada' : c ? 'En curso' : 'Pendiente') + '</span></li>'; }).join('') + '</ol>' +
+      (o.excl.length ? '<p class="small muted">Excluidas por el sistema: ' + o.excl.map(e => '<span class="mono">' + e.key + '</span> (' + e.why + ')').join(', ') + '.</p>' : '') +
+      (o.short ? msgHTML({kind: 'warn', title: 'Inventario insuficiente', text: 'Solo hay ' + (o.qty - o.short) + ' tarima(s) disponibles de este producto.'}) : '');
+    if (cur) {
+      const p = S.pallets[cur.m];
+      order += '<div class="target"><div class="dsteps"><span class="dstep ' + (o.step === 'loc' ? 'on' : 'ok') + '">' + (o.step === 'mst' ? icon('check') : '') + '1 · Ubicación</span><span class="dstep ' + (o.step === 'mst' ? 'on' : '') + '">2 · Etiqueta master</span></div>' +
+        '<p class="eyebrow">Ve a</p><div class="sug-main"><span class="placard xl tgt">' + cur.key + '</span><button type="button" class="btn" data-act="locate" data-key="' + cur.key + '">' + icon('pin') + 'Ver en mapa</button></div>' +
+        '<p>' + esc(pfull(p.sku)) + ' · lote <span class="mono">' + p.lot + '</span> · <span class="mono">' + cur.m + '</span> · ' + p.boxes + ' cajas · ' + fmtKg(p.kg) + '</p>' +
+        '<form data-form="out-scan" autocomplete="off"><label class="fld-lab" for="out-scan">' + (o.step === 'loc' ? 'Paso 1: escanea la etiqueta de la ubicación' : 'Paso 2: escanea la etiqueta master de la tarima') + '</label><div class="scan" id="scan-out">' + icon('scan') + '<input id="out-scan" class="scan-in" spellcheck="false" autocapitalize="characters" placeholder="' + (o.step === 'loc' ? cur.key : 'MST-26-000123') + '"><button type="submit" class="btn btn-pri">Validar</button></div></form>' +
+        '<div class="btn-row"><button type="button" class="btn btn-sim" data-act="out-sim-ok" data-sim-primary="1">' + icon('scan') + (o.step === 'loc' ? 'Escanear ubicación correcta' : 'Escanear master de la tarima') + '</button><button type="button" class="btn btn-sim" data-act="out-sim-bad">' + icon('scan') + (o.step === 'loc' ? 'Escanear otra ubicación' : 'Escanear master equivocado') + '</button></div>' +
+        msgHTML(o.msg) + '</div>';
+    } else if (o.lines.length) {
+      const kg = done.reduce((a, l) => a + S.pallets[l.m].kg, 0);
+      order += msgHTML(o.msg && o.msg.kind !== 'ok' ? o.msg : null) + '<div class="msg msg-ok">' + icon('check') + '<div class="msg-x"><p class="msg-t">Orden completa</p><p>' + done.length + ' tarima' + (done.length === 1 ? '' : 's') + ' · ' + fmtKg(kg) + ' enviadas a ' + o.dock + '. Las posiciones quedaron libres y los movimientos en la bitácora.</p><div class="btn-row"><button type="button" class="btn" data-act="tab" data-tab="log">Ver bitácora</button></div></div></div>';
+    } else order += msgHTML({kind: 'bad', title: 'Sin tarimas disponibles', text: 'No hay inventario surtible de este producto (puede estar vencido o en verificación).'});
+    order += '</section>';
+  }
+  const opts = CATALOG.filter(p => avail[p.sku]).map(p => '<option value="' + p.sku + '">' + esc(pfull(p.sku)) + ' (' + avail[p.sku] + ')</option>').join('');
+  el.innerHTML = secH('Salida · surtido', 'Surtir con FEFO y doble escaneo', 'El sistema elige qué lote sale primero. Para confirmar cada tarima se escanea la ubicación y después la etiqueta master: si no coinciden, la salida se bloquea.') +
+    '<section class="panel"><form data-form="out-new" class="out-form" autocomplete="off">' +
+    '<div class="fld"><label class="fld-lab" for="out-sku">Producto (tarimas disponibles)</label><select id="out-sku" class="inp">' + opts + '</select></div>' +
+    '<div class="fld"><label class="fld-lab" for="out-qty">Tarimas</label><div class="qty"><button type="button" class="btn" data-act="qty" data-d="-1" aria-label="Menos">−</button><input id="out-qty" class="inp" type="number" min="1" max="12" inputmode="numeric" value="' + f.qty + '"><button type="button" class="btn" data-act="qty" data-d="1" aria-label="Más">+</button></div></div>' +
+    '<div class="fld"><label class="fld-lab" for="out-dock">Destino</label><select id="out-dock" class="inp">' + DOCKS.map(d => '<option>' + d + '</option>').join('') + '</select></div>' +
+    '<div class="btn-row"><button type="submit" class="btn btn-pri"' + (o ? '' : ' data-sim-primary="1"') + '>' + icon('box') + 'Generar orden FEFO</button></div></form></section>' + order;
+  const sel = $('#out-sku');
+  if (sel) sel.value = avail[f.sku] ? f.sku : (sel.options[0] ? sel.options[0].value : '');
+  const dk = $('#out-dock'); if (dk) dk.value = f.dock;
+}
+function outScan(raw) {
+  const o = S.ui.out; if (!o) return;
+  const line = o.lines.find(l => l.st === 'pend'); if (!line) return;
+  const v = String(raw || '').trim();
+  if (o.step === 'loc') {
+    const pk = parseKey(v);
+    if (!pk) { o.msg = normMaster(v) ? {kind: 'bad', title: 'Primero la ubicación', text: 'Escanea la etiqueta del rack (por ejemplo ' + line.key + ') y después la etiqueta master de la tarima.'} : {kind: 'bad', title: 'Código no válido', text: 'Formato de ubicación: C4-R07-N3.'}; return render(); }
+    if (pk.key !== line.key) { o.msg = {kind: 'bad', title: 'Ubicación equivocada', text: 'Escaneaste ' + pk.key + '; esta salida es de ' + line.key + '. Ve a la ubicación indicada.'}; return render(); }
+    o.step = 'mst'; o.msg = {kind: 'ok', title: 'Ubicación correcta', text: 'Ahora escanea la etiqueta master de la tarima.'};
+    return render();
+  }
+  const m = normMaster(v);
+  if (!m) { o.msg = {kind: 'bad', title: 'Código no válido', text: 'Escanea la etiqueta master (formato MST-26-000123).'}; return render(); }
+  if (m !== line.m) {
+    const other = S.pallets[m], exp = S.pallets[line.m];
+    let text = 'La tarima ' + m + ' no corresponde a ' + line.key + '. Ahí el sistema tiene ' + line.m + ' · ' + pname(exp.sku) + ' · lote ' + exp.lot + '.';
+    if (other && other.sku === exp.sku && other.exp > exp.exp) text += ' Además es un lote más nuevo (' + other.lot + ', vence ' + fmtD(other.exp) + '): FEFO exige sacar primero ' + exp.lot + ' (vence ' + fmtD(exp.exp) + ').';
+    else if (other && other.sku !== exp.sku) text += ' Además es otro producto (' + pname(other.sku) + ').';
+    else if (!other) text += ' Esa etiqueta no existe en el inventario.';
+    o.msg = {kind: 'bad', title: 'Salida bloqueada', text: text + ' No retires esta tarima.', actions: [{act: 'out-retry', label: 'Volver a escanear'}, {act: 'out-missing', label: 'La tarima correcta no está: reportar'}]};
+    return render();
+  }
+  doSalida(line);
+}
+function doSalida(line) {
+  const o = S.ui.out, p = S.pallets[line.m];
+  S.pos[line.key].m = null; p.loc = null; p.st = 'despachada'; p.ghost = null;
+  const id = addMove({type: 'SALIDA', m: p.m, from: line.key, to: o.dock, note: 'Surtido FEFO · orden ' + o.id});
+  line.st = 'ok'; line.move = id; o.step = 'loc';
+  if (S.ui.hl === line.key) S.ui.hl = null;
+  const next = o.lines.find(l => l.st === 'pend');
+  o.msg = next ? {kind: 'ok', title: 'Salida registrada · ' + id, text: 'Posición ' + line.key + ' liberada. Siguiente: ' + next.key + '.'} : null;
+  toast('Salida de ' + line.m + ' desde ' + line.key + ' a ' + o.dock + ' · ' + id, 'ok');
+  render();
+}
+
+/* =========================================================
+   5. Reubicar
+   ========================================================= */
+function startMove(key) {
+  const pos = S.pos[key];
+  if (!pos || !pos.m || pos.chk) return;
+  S.ui.mv = {from: key, m: pos.m, mOk: false, msg: {at: 'from', kind: 'info', title: 'Origen tomado del mapa', text: 'Escanea la etiqueta master de la tarima en ' + key + ' para confirmar que es la correcta.'}};
+  setTab('move');
+}
+function renderMove() {
+  const el = $('#tab-move'), v = S.ui.mv || {}, p = v.m ? S.pallets[v.m] : null;
+  const sub = 'Doble escaneo: la etiqueta master confirma qué tarima se mueve y la etiqueta de la posición destino confirma dónde quedó.';
+  if (v.done) {
+    const mv = S.moves.find(x => x.id === v.done.id);
+    el.innerHTML = secH('Reubicar', 'Mover una tarima de A a B', sub) + '<section class="panel">' + msgHTML(null) +
+      '<div class="msg msg-ok">' + icon('check') + '<div class="msg-x"><p class="msg-t">Reubicación registrada</p><p><span class="mono">' + v.done.m + '</span>: <b class="mono">' + v.done.from + '</b> → <b class="mono">' + v.done.to + '</b>. Movimiento <span class="mono">' + v.done.id + '</span> · <span data-sync-of="' + v.done.id + '">' + (mv ? syncHTML(mv) : '') + '</span></p><div class="btn-row"><button type="button" class="btn" data-act="locate" data-key="' + v.done.to + '">' + icon('pin') + 'Ver en mapa</button><button type="button" class="btn btn-pri" data-act="mv-reset" data-sim-primary="1">Nueva reubicación</button></div></div></div></section>';
+    return;
+  }
+  const selOk = S.ui.sel && S.pos[S.ui.sel] && S.pos[S.ui.sel].m && !S.pos[S.ui.sel].chk && S.ui.sel !== v.from;
+  let sugBlock = '';
+  if (p && v.mOk && v.sug) {
+    const ev = evalKey(p, v.sug);
+    sugBlock = '<div class="sug-main"><span class="placard tgt">' + v.sug + '</span><span class="small muted">Puntaje ' + (ev ? ev.score : '–') + '/100 · ' + (ev && ev.nb ? 'agrupa con ' + ev.nb + ' del mismo producto' : 'posición libre compatible') + '</span></div>';
+  }
+  const off2 = !p, off3 = !(p && v.mOk);
+  el.innerHTML = secH('Reubicar', 'Mover una tarima de A a B', sub) + '<section class="panel flow">' +
+    '<div class="step' + (p ? ' is-done' : '') + '"><span class="step-n">1</span><div class="step-b"><h3>Origen</h3>' +
+      '<form data-form="mv-from" autocomplete="off"><label class="fld-lab" for="mv-from">Ubicación de origen o etiqueta master</label><div class="scan" id="scan-mv-from">' + icon('scan') + '<input id="mv-from" class="scan-in" spellcheck="false" autocapitalize="characters" placeholder="C4-R07-N3" value="' + esc(v.from || '') + '"><button type="submit" class="btn btn-pri">Tomar</button></div></form>' +
+      '<div class="btn-row">' + (selOk ? '<button type="button" class="btn" data-act="mv-sel">Usar la seleccionada en el mapa (' + S.ui.sel + ')</button>' : '') + '<button type="button" class="btn btn-sim" data-act="mv-sim-from"' + (!p ? ' data-sim-primary="1"' : '') + '>' + icon('scan') + 'Simular escaneo de origen</button>' + (p ? '<button type="button" class="btn" data-act="mv-reset">Empezar de nuevo</button>' : '') + '</div>' +
+      (v.msg && v.msg.at === 'from' ? msgHTML(v.msg) : '') +
+      (p ? '<div class="mini"><span><span class="placard sm">' + v.from + '</span> ' + stateChip(v.from) + '</span><span>' + esc(pfull(p.sku)) + ' · lote <span class="mono">' + p.lot + '</span> · ' + dueText(p) + '</span><span class="mono small muted">' + p.m + ' · ' + p.boxes + ' cajas · ' + fmtKg(p.kg) + '</span></div>' : '') +
+    '</div></div>' +
+    '<div class="step' + (v.mOk ? ' is-done' : '') + (off2 ? ' is-off' : '') + '"><span class="step-n">2</span><div class="step-b"><h3>Confirma la tarima (escaneo 1 de 2)</h3>' +
+      '<form data-form="mv-master" autocomplete="off"><label class="fld-lab" for="mv-master">Etiqueta master de la tarima</label><div class="scan" id="scan-mv-master">' + icon('scan') + '<input id="mv-master" class="scan-in" spellcheck="false" autocapitalize="characters" placeholder="MST-26-000123"' + (off2 ? ' disabled' : '') + (v.mOk ? ' value="' + v.m + '"' : '') + '><button type="submit" class="btn btn-pri"' + (off2 ? ' disabled' : '') + '>Validar</button></div></form>' +
+      '<div class="btn-row"><button type="button" class="btn btn-sim" data-act="mv-sim-master-ok"' + (off2 ? ' disabled' : '') + (p && !v.mOk ? ' data-sim-primary="1"' : '') + '>' + icon('scan') + 'Escanear master correcto</button><button type="button" class="btn btn-sim" data-act="mv-sim-master-bad"' + (off2 ? ' disabled' : '') + '>' + icon('scan') + 'Escanear otro master</button></div>' +
+      (v.msg && v.msg.at === 'master' ? msgHTML(v.msg) : '') +
+    '</div></div>' +
+    '<div class="step' + (off3 ? ' is-off' : '') + '"><span class="step-n">3</span><div class="step-b"><h3>Destino (escaneo 2 de 2)</h3>' +
+      '<div class="btn-row"><button type="button" class="btn" data-act="mv-suggest"' + (off3 ? ' disabled' : '') + '>' + icon('cube') + 'Sugerir destino</button></div>' + sugBlock +
+      '<form data-form="mv-to" autocomplete="off"><label class="fld-lab" for="mv-to">Etiqueta de la posición destino</label><div class="scan" id="scan-mv-to">' + icon('scan') + '<input id="mv-to" class="scan-in" spellcheck="false" autocapitalize="characters" placeholder="' + (v.sug || 'C4-R12-N2') + '"' + (off3 ? ' disabled' : '') + '><button type="submit" class="btn btn-pri"' + (off3 ? ' disabled' : '') + '>Confirmar</button></div></form>' +
+      '<div class="btn-row"><button type="button" class="btn btn-sim" data-act="mv-sim-to"' + (off3 ? ' disabled' : '') + (!off3 ? ' data-sim-primary="1"' : '') + '>' + icon('scan') + 'Escanear destino ' + (v.sug ? 'sugerido' : 'libre') + '</button><button type="button" class="btn btn-sim" data-act="mv-sim-to-occ"' + (off3 ? ' disabled' : '') + '>' + icon('scan') + 'Escanear una ocupada</button></div>' +
+      (v.msg && v.msg.at === 'to' ? msgHTML(v.msg) : '') +
+    '</div></div></section>';
+}
+function mvFrom(raw) {
+  const pk = parseKey(raw), mm = normMaster(raw);
+  const fail = (title, text) => { S.ui.mv = {msg: {at: 'from', kind: 'bad', title, text}}; render(); };
+  if (pk && !pk.invalid) {
+    const pos = S.pos[pk.key];
+    if (!pos.m) return fail('Posición libre', 'En ' + pk.key + ' no hay tarima registrada para mover.');
+    if (pos.chk) return fail('Posición en verificación', pk.key + ' tiene el conteo ' + pos.chk + ' pendiente; no se puede mover hasta cerrarlo.');
+    S.ui.mv = {from: pk.key, m: pos.m, mOk: false, msg: {at: 'from', kind: 'info', title: 'Origen ' + pk.key, text: 'Ahora escanea la etiqueta master para confirmar la tarima.'}};
+    return render();
+  }
+  if (mm) {
+    const p = S.pallets[mm];
+    if (!p || p.st !== 'almacenada') return fail('Tarima no ubicada', mm + (p ? ' no está en cámara (' + p.st.replace('_', ' ') + ').' : ' no existe en el inventario.'));
+    if (S.pos[p.loc].chk) return fail('Posición en verificación', p.loc + ' tiene un conteo pendiente.');
+    S.ui.mv = {from: p.loc, m: mm, mOk: true, msg: {at: 'from', kind: 'info', title: 'Tarima ' + mm + ' en ' + p.loc, text: 'La etiqueta master ya confirma la tarima. Escanea el destino.'}};
+    return render();
+  }
+  if (pk && pk.invalid) return fail(pk.key + ' no existe', pk.cam + ' tiene ' + CH[pk.cam].racks + ' racks de ' + LV + ' niveles.');
+  fail('Código no válido', 'Escanea una ubicación (C4-R07-N3) o una etiqueta master (MST-26-000123).');
+}
+function mvMaster(raw) {
+  const v = S.ui.mv; if (!v || !v.m) return;
+  const m = normMaster(raw);
+  if (m === v.m) { v.mOk = true; v.msg = {at: 'master', kind: 'ok', title: 'Tarima confirmada', text: m + ' coincide con ' + v.from + '. Ahora el destino.'}; return render(); }
+  v.mOk = false;
+  v.msg = {at: 'master', kind: 'bad', title: 'No coincide · movimiento bloqueado', text: (m ? 'Escaneaste ' + m : 'El código no es una etiqueta master') + '; en ' + v.from + ' el sistema tiene ' + v.m + '. No muevas esta tarima.', actions: [{act: 'mv-missing', label: 'La tarima correcta no está: reportar'}]};
+  render();
+}
+function mvTo(raw) {
+  const v = S.ui.mv; if (!v || !v.mOk) return;
+  const p = S.pallets[v.m], pk = parseKey(raw);
+  const bad = (title, text) => { v.msg = {at: 'to', kind: 'bad', title, text}; render(); };
+  if (!pk) return bad('Código no válido', 'Formato de ubicación: C4-R07-N3.');
+  if (pk.invalid) return bad(pk.key + ' no existe', pk.cam + ' tiene ' + CH[pk.cam].racks + ' racks de ' + LV + ' niveles.');
+  if (pk.key === v.from) return bad('Es la misma posición', 'Escanea la posición a donde llevaste la tarima.');
+  if (CH[pk.cam].type !== ptype(p.sku)) return bad('Cámara incompatible · bloqueado', pk.cam + ' es de ' + TYPE[CH[pk.cam].type].name.toLowerCase() + '; la tarima es de producto ' + TYPE[ptype(p.sku)].one + '.');
+  if (S.pos[pk.key].chk) return bad('Destino en verificación · bloqueado', pk.key + ' tiene un conteo pendiente.');
+  if (S.pos[pk.key].m) return bad('Destino ocupado · bloqueado', 'En ' + pk.key + ' el sistema tiene ' + S.pos[pk.key].m + '. Elige una posición libre.');
+  S.pos[v.from].m = null; S.pos[pk.key].m = p.m; p.loc = pk.key;
+  const ri = S.reserved.indexOf(pk.key); if (ri >= 0) S.reserved.splice(ri, 1);
+  const id = addMove({type: 'REUBICACION', m: p.m, from: v.from, to: pk.key, note: v.sug && v.sug === pk.key ? 'Destino sugerido por el motor' : 'Destino elegido por el operador'});
+  S.ui.mv = {done: {m: p.m, from: v.from, to: pk.key, id}};
+  S.ui.hl = pk.key; if (S.ui.sel === v.from) S.ui.sel = pk.key;
+  toast('Reubicada: ' + v.from + ' → ' + pk.key + ' · ' + id, 'ok');
+  render();
+}
+
+/* =========================================================
+   6. No encontrado y conteos cíclicos
+   ========================================================= */
+function reportMissing(key, src) {
+  const pos = S.pos[key];
+  if (!pos || !pos.m || pos.chk) return null;
+  const id = 'T-' + pad(++S.seq.task, 4);
+  pos.chk = id;
+  S.tasks.unshift({id, key, m: pos.m, by: S.user, ts: Date.now(), src, st: 'open'});
+  addMove({type: 'NO_ENCONTRADO', m: pos.m, from: key, to: 'En verificación', note: 'Reportado desde ' + src});
+  S.searches.push({ts: Date.now(), secs: null, ok: false, q: 'No encontrado ' + key});
+  toast(key + ' pasó a “En verificación”. Se creó la tarea de conteo ' + id + '.', 'warn');
+  return id;
+}
+function taskTruth(t) {
+  const p = S.pallets[t.m];
+  if (!p || !p.ghost) return {kind: 'present', text: 'La tarima sí está en ' + t.key + ': la etiqueta master estaba cubierta de escarcha y no se leyó a simple vista.'};
+  if (p.ghost.real) return {kind: 'moved', key: p.ghost.real, text: 'El contador encontró ' + t.m + ' en ' + p.ghost.real + ', una posición que el sistema tenía libre: la movieron sin registrar.'};
+  return {kind: 'missing', text: 'La tarima no está en la cámara y no hay registro de su salida: la sacaron sin escanear.'};
+}
+function renderCount() {
+  const el = $('#tab-count');
+  const open = openTasks(), closed = S.tasks.filter(t => t.st !== 'open');
+  const acc = S.counts.ok / S.counts.ver;
+  el.innerHTML = secH('No encontrado · conteos cíclicos', 'Corregir lo que el sistema cree', 'Cuando una tarima no está donde dice el sistema, la posición pasa a “En verificación” y se crea una tarea de conteo. Al cerrarla se corrige el inventario y se actualiza la exactitud de ubicación.') +
+    '<div class="kpis"><div class="kpi"><span class="kpi-l">Exactitud de ubicación</span><span class="kpi-v">' + (acc * 100).toFixed(1) + '<small>%</small></span><span class="kpi-s">' + S.counts.ok + ' de ' + S.counts.ver + ' posiciones contadas coincidieron · meta ≥ 95 %</span><div class="meter" aria-hidden="true"><i style="width:' + (acc * 100).toFixed(1) + '%"></i><b style="left:95%"></b></div></div>' +
+    '<div class="kpi"><span class="kpi-l">Tareas abiertas</span><span class="kpi-v">' + open.length + '</span><span class="kpi-s">posiciones bloqueadas para acomodo y surtido</span></div>' +
+    '<div class="kpi"><span class="kpi-l">Cerradas en la demo</span><span class="kpi-v">' + closed.length + '</span><span class="kpi-s">' + closed.filter(t => t.res !== 'present').length + ' con corrección de inventario</span></div></div>' +
+    '<div class="btn-row"><button type="button" class="btn btn-sim" data-act="task-random">' + icon('clip') + 'Programar conteo aleatorio en ' + S.ui.cam + '</button></div>' +
+    (open.length ? '<div class="tasks">' + open.map(taskHTML).join('') + '</div>' : '<div class="msg msg-ok">' + icon('check') + '<div class="msg-x"><p class="msg-t">Sin tareas abiertas</p><p>Reporta “No encontrado” desde el mapa o la búsqueda para crear una.</p></div></div>') +
+    (closed.length ? '<section class="panel"><h3>Historial de conteos</h3><div class="tbl-wrap"><table><thead><tr><th>Tarea</th><th>Posición</th><th>Master</th><th>Resultado</th><th>Cerró</th><th>Hora</th></tr></thead><tbody>' +
+      closed.map(t => '<tr><td class="mono">' + t.id + '</td><td class="mono">' + t.key + '</td><td class="mono">' + t.m + '</td><td>' + ({present: 'Sí estaba (sin ajuste)', moved: 'En otra ubicación → ' + t.resTo, missing: 'No existe (baja)'}[t.res] || '') + '</td><td>' + esc(t.resBy) + '</td><td class="mono">' + fmtT(t.resTs) + '</td></tr>').join('') + '</tbody></table></div></section>' : '');
+}
+function taskHTML(t) {
+  const p = S.pallets[t.m];
+  return '<article class="task"><div class="task-h"><span class="placard sm">' + t.key + '</span><span class="chip"><i class="sw s-chk"></i>En verificación</span><span class="mono small muted">' + t.id + '</span></div>' +
+    '<p>Esperado: <b class="mono">' + t.m + '</b> · ' + esc(pfull(p.sku)) + ' · lote <span class="mono">' + p.lot + '</span></p>' +
+    '<p class="small muted">Reportó ' + esc(t.by) + ' ' + ago(t.ts) + ' · origen: ' + esc(t.src) + '</p>' +
+    (t.finding ? msgHTML({kind: 'info', title: 'Resultado del conteo físico', text: t.finding}) : '<div class="btn-row"><button type="button" class="btn btn-sim" data-act="task-sim" data-id="' + t.id + '"' + ' data-sim-primary="' + (openTasks()[0] === t ? '1' : '') + '">' + icon('clip') + 'Simular conteo físico</button><button type="button" class="btn" data-act="locate" data-key="' + t.key + '">' + icon('pin') + 'Ver en mapa</button></div>') +
+    '<div class="task-res"><p class="small b">Cerrar la tarea</p><div class="btn-row"><button type="button" class="btn" data-act="task-present" data-id="' + t.id + '">' + icon('check') + 'Sí está en la posición</button><button type="button" class="btn btn-bad" data-act="task-missing" data-id="' + t.id + '">No existe: dar de baja</button></div>' +
+    '<form data-form="task-moved" data-id="' + t.id + '" autocomplete="off"><label class="fld-lab" for="task-loc-' + t.id + '">Está en otra ubicación</label><div class="scan sm">' + icon('scan') + '<input id="task-loc-' + t.id + '" class="scan-in" spellcheck="false" autocapitalize="characters" placeholder="' + camOf(t.key) + '-R00-N0" value="' + esc(t.prefill || '') + '"><button type="submit" class="btn btn-pri">Corregir</button></div></form>' +
+    (t.msg ? msgHTML(t.msg) : '') + '</div></article>';
+}
+function closeTask(t, res, extra) {
+  t.st = 'done'; t.res = res; t.resBy = S.user; t.resTs = Date.now(); t.msg = null;
+  if (extra) t.resTo = extra;
+  S.counts.ver++;
+  if (res === 'present') S.counts.ok++;
+}
+function taskMoved(id, raw) {
+  const t = S.tasks.find(x => x.id === id); if (!t || t.st !== 'open') return;
+  const p = S.pallets[t.m], pk = parseKey(raw);
+  const bad = (title, text) => { t.msg = {kind: 'bad', title, text}; t.prefill = String(raw || '').toUpperCase(); render(); };
+  if (!pk) return bad('Código no válido', 'Escanea la ubicación donde está la tarima (C4-R07-N3).');
+  if (pk.invalid) return bad(pk.key + ' no existe', pk.cam + ' tiene ' + CH[pk.cam].racks + ' racks.');
+  if (pk.key === t.key) return bad('Es la misma posición', 'Si la tarima sí está ahí, usa “Sí está en la posición”.');
+  if (CH[pk.cam].type !== ptype(p.sku)) return bad('Cámara incompatible', pk.cam + ' no es de producto ' + TYPE[ptype(p.sku)].one + '. Revisa la cadena de frío con calidad.');
+  if (S.pos[pk.key].m || S.pos[pk.key].chk) return bad('Esa posición también tiene registro', 'En ' + pk.key + ' el sistema tiene ' + (S.pos[pk.key].m || 'un conteo') + '. Repórtala o cuenta ambas posiciones.');
+  S.pos[t.key].m = null; S.pos[t.key].chk = null; S.pos[pk.key].m = p.m; p.loc = pk.key; p.ghost = null;
+  const ri = S.reserved.indexOf(pk.key); if (ri >= 0) S.reserved.splice(ri, 1);
+  closeTask(t, 'moved', pk.key);
+  addMove({type: 'AJUSTE', m: p.m, from: t.key, to: pk.key, note: 'Conteo ' + t.id + ': estaba en otra ubicación'});
+  S.ui.hl = pk.key;
+  toast('Inventario corregido: ' + t.m + ' ahora en ' + pk.key + '. Exactitud: ' + (S.counts.ok / S.counts.ver * 100).toFixed(1) + ' %.', 'ok');
+  render();
+}
+
+/* =========================================================
+   7. Bitácora y rastreo de lote
+   ========================================================= */
+function filteredMoves() {
+  const lot = S.ui.logLot.trim().toUpperCase(), type = S.ui.logType, q = norm(S.ui.logQ.trim());
+  const out = [];
+  for (let i = S.moves.length - 1; i >= 0; i--) {
+    const m = S.moves[i];
+    if (lot && !m.lot.toUpperCase().includes(lot)) continue;
+    if (type && m.type !== type) continue;
+    if (q && !norm(m.m + ' ' + m.lot + ' ' + pname(m.sku) + ' ' + m.from + ' ' + m.to + ' ' + m.user + ' ' + m.note + ' ' + m.id).includes(q)) continue;
+    out.push(m);
+  }
+  return out;
+}
+function locCell(v) {
+  const pk = parseKey(v);
+  if (pk && !pk.invalid) return '<button type="button" class="lnk mono" data-act="locate" data-key="' + pk.key + '">' + pk.key + '</button>';
+  return esc(v);
+}
+function renderLog() {
+  const el = $('#tab-log');
+  const chips = Array.from(new Set([S.demo.lot, S.pallets[Object.keys(S.pallets).find(m => S.pallets[m].ghost && S.pallets[m].st === 'almacenada') || ''] ? S.pallets[Object.keys(S.pallets).find(m => S.pallets[m].ghost && S.pallets[m].st === 'almacenada')].lot : null, S.pending.length ? S.pallets[S.pending[0]].lot : null].filter(Boolean)));
+  el.innerHTML = secH('Bitácora · trazabilidad', 'Quién movió qué, cuándo y de dónde a dónde', 'Cada escaneo deja un movimiento con usuario, hora, tarima, lote y ubicaciones. Filtra por lote para rastrearlo de punta a punta.') +
+    '<section class="panel"><div class="log-filters">' +
+    '<div class="fld"><label class="fld-lab" for="log-lot">Lote</label><input id="log-lot" class="inp mono" spellcheck="false" autocapitalize="characters" placeholder="L2610-072" value="' + esc(S.ui.logLot) + '"></div>' +
+    '<div class="fld"><label class="fld-lab" for="log-type">Tipo</label><select id="log-type" class="inp"><option value="">Todos</option>' + Object.entries(MT).map(([k, v]) => '<option value="' + k + '">' + v.l + '</option>').join('') + '</select></div>' +
+    '<div class="fld"><label class="fld-lab" for="log-q">Texto (master, ubicación, usuario)</label><input id="log-q" class="inp" spellcheck="false" placeholder="MST-26-…, C4-R07, Supervisor" value="' + esc(S.ui.logQ) + '"></div>' +
+    '<div class="btn-row"><button type="button" class="btn" data-act="log-clear">Limpiar</button></div></div>' +
+    '<div class="chips-row"><span class="small muted">Lotes de ejemplo:</span>' + chips.map(l => '<button type="button" class="qchip" data-act="log-lot" data-lot="' + l + '">' + l + '</button>').join('') + '</div></section>' +
+    '<div id="log-trace"></div><div id="log-table"></div>';
+  $('#log-type').value = S.ui.logType;
+  updateLog();
+}
+function updateLog() { updateTrace(); updateLogTable(); }
+function updateTrace() {
+  const box = $('#log-trace'); if (!box) return;
+  const lot = S.ui.logLot.trim().toUpperCase();
+  const pals = lot ? Object.values(S.pallets).filter(p => p.lot === lot) : [];
+  if (!pals.length) { box.innerHTML = ''; return; }
+  const p0 = pals[0];
+  const moves = S.moves.filter(m => m.lot === lot).sort((a, b) => a.ts - b.ts);
+  const cnt = s => pals.filter(p => p.st === s).length;
+  const stL = {almacenada: 'En cámara', despachada: 'Despachada', por_acomodar: 'Por acomodar', baja: 'Baja'};
+  box.innerHTML = '<section class="panel"><div class="panel-h"><div><p class="eyebrow">Rastreo de lote</p><h3 class="mono">' + lot + '</h3></div><span class="small muted">' + esc(pfull(p0.sku)) + ' · producido ' + fmtD(p0.prod) + ' · caduca ' + fmtD(p0.exp) + '</span></div>' +
+    '<p>' + pals.length + ' tarima' + (pals.length > 1 ? 's' : '') + ': <b>' + cnt('almacenada') + '</b> en cámara · <b>' + cnt('despachada') + '</b> despachadas · <b>' + cnt('por_acomodar') + '</b> por acomodar' + (cnt('baja') ? ' · <b>' + cnt('baja') + '</b> dadas de baja' : '') + '.</p>' +
+    '<div class="trace-grid"><div><h3 class="small eyebrow">Tarimas del lote</h3><ul class="trace-pals">' + pals.map(p => { const lm = lastMove(p.m); return '<li><span class="mono b">' + p.m + '</span>' + (p.st === 'almacenada' ? '<button type="button" class="btn" data-act="locate" data-key="' + p.loc + '">' + icon('pin') + p.loc + '</button>' + stateChip(p.loc) : '<span class="chip">' + stL[p.st] + (p.st === 'despachada' && lm ? ' · ' + esc(lm.to) + ' · ' + fmtD(lm.ts) : '') + '</span>') + '</li>'; }).join('') + '</ul></div>' +
+    '<div><h3 class="small eyebrow">Línea de tiempo</h3><ol class="timeline">' + moves.map(m => '<li class="' + (m.type === 'SALIDA' ? 'tl-out' : m.type === 'NO_ENCONTRADO' || m.type === 'AJUSTE' ? 'tl-bad' : '') + '"><span class="mono small muted">' + fmtD(m.ts) + ' ' + fmtT(m.ts) + ' · ' + esc(m.user) + '</span><span><span class="mt ' + MT[m.type].c + '">' + MT[m.type].l + '</span> <span class="mono">' + m.m + '</span> · ' + esc(m.from) + ' → ' + esc(m.to) + '</span></li>').join('') + '</ol></div></div></section>';
+}
+function updateLogTable() {
+  const box = $('#log-table'); if (!box) return;
+  const list = filteredMoves(), lim = S.ui.logLimit || 100;
+  box.innerHTML = '<section class="panel"><div class="panel-h"><h3>Movimientos</h3><span class="small muted mono">' + fmtInt(list.length) + ' de ' + fmtInt(S.moves.length) + '</span></div>' +
+    (list.length ? '<div class="tbl-wrap"><table><thead><tr><th>Fecha y hora</th><th>Usuario</th><th>Tipo</th><th>Master</th><th>Lote</th><th>Producto</th><th>De</th><th>A</th><th>Nota</th><th>Odoo</th></tr></thead><tbody>' +
+      list.slice(0, lim).map(m => '<tr><td class="mono">' + fmtDT(m.ts) + '</td><td>' + esc(m.user) + '</td><td><span class="mt ' + MT[m.type].c + '">' + MT[m.type].l + '</span></td><td class="mono">' + m.m + '</td><td><button type="button" class="lnk mono" data-act="log-lot" data-lot="' + m.lot + '">' + m.lot + '</button></td><td>' + esc(m.sku ? pname(m.sku) : '') + '</td><td>' + locCell(m.from) + '</td><td>' + locCell(m.to) + '</td><td class="small">' + esc(m.note) + '</td><td>' + syncHTML(m) + '</td></tr>').join('') +
+      '</tbody></table></div>' + (list.length > lim ? '<div class="btn-row"><button type="button" class="btn" data-act="log-more">Mostrar ' + Math.min(100, list.length - lim) + ' más</button></div>' : '')
+      : msgHTML({kind: 'info', title: 'Sin movimientos con esos filtros', text: 'Prueba con otro lote o limpia los filtros.'})) + '</section>';
+}
+
+/* =========================================================
+   8. Indicadores
+   ========================================================= */
+function renderKpi() {
+  const el = $('#tab-kpi');
+  const stats = CHAMBERS.map(c => Object.assign({c}, camStats(c.id)));
+  const acc = S.counts.ok / S.counts.ver;
+  const se = S.searches, fails = se.filter(s => !s.ok).length, okS = se.filter(s => s.ok && s.secs != null);
+  const avg = okS.length ? okS.reduce((a, s) => a + s.secs, 0) / okS.length : 0;
+  const today = sod(Date.now()), mt = S.moves.filter(m => m.ts >= today);
+  const byType = Object.keys(MT).map(t => [t, mt.filter(m => m.type === t).length]).filter(x => x[1] > 0).sort((a, b) => b[1] - a[1]);
+  const q = queueLen();
+  const dueT = stats.reduce((a, s) => a + s.due, 0), blkT = stats.reduce((a, s) => a + s.blk, 0);
+  const maxDue = Math.max(1, ...stats.map(s => s.due + s.blk));
+  const maxMt = Math.max(1, ...byType.map(x => x[1]));
+  const usedT = stats.reduce((a, s) => a + s.used, 0), capT = stats.reduce((a, s) => a + s.cap, 0);
+  const tview = (id, head, rows) => '<details class="tview" data-tv="' + id + '"' + (TV_OPEN.has(id) ? ' open' : '') + '><summary>Ver como tabla</summary><div class="tbl-wrap"><table><thead><tr>' + head.map((h, i) => '<th' + (i ? ' class="r"' : '') + '>' + h + '</th>').join('') + '</tr></thead><tbody>' + rows.map(r => '<tr>' + r.map((c, i) => '<td' + (i ? ' class="r mono"' : '') + '>' + c + '</td>').join('') + '</tr>').join('') + '</tbody></table></div></details>';
+  el.innerHTML = secH('Indicadores', 'Tablero de la operación', 'Datos simulados del prototipo para mostrar cómo se medirá el piloto. La línea base real se toma en la semana 1 del proyecto (20 búsquedas cronometradas).') +
+    '<div class="kpis">' +
+      '<div class="kpi"><span class="kpi-l">Exactitud de ubicación</span><span class="kpi-v">' + (acc * 100).toFixed(1) + '<small>%</small></span><span class="kpi-s">' + S.counts.ok + ' de ' + S.counts.ver + ' conteos · meta ≥ 95 %</span><div class="meter" aria-hidden="true"><i style="width:' + (acc * 100).toFixed(1) + '%"></i><b style="left:95%"></b></div></div>' +
+      '<div class="kpi"><span class="kpi-l">Búsquedas fallidas</span><span class="kpi-v">' + fails + '</span><span class="kpi-s">de ' + se.length + ' búsquedas (' + pct(fails / Math.max(1, se.length), 1) + '), incluye “No encontrado”</span></div>' +
+      '<div class="kpi"><span class="kpi-l">Tiempo promedio de búsqueda</span><span class="kpi-v">' + avg.toFixed(1) + '<small>s</small></span><span class="kpi-s">de la consulta a ubicar en mapa · ' + okS.length + ' búsquedas (simulado)</span></div>' +
+      '<div class="kpi"><span class="kpi-l">Tarimas por vencer</span><span class="kpi-v">' + dueT + '</span><span class="kpi-s">≤ 30 d congelado · ≤ 5 d fresco · ' + blkT + ' vencidas bloqueadas</span></div>' +
+      '<div class="kpi"><span class="kpi-l">Movimientos del día</span><span class="kpi-v">' + mt.length + '</span><span class="kpi-s">desde las 00:00 · todos con usuario y hora</span></div>' +
+      '<div class="kpi"><span class="kpi-l">Cola pendiente con Odoo</span><span class="kpi-v" id="kpi-queue">' + q + '</span><span class="kpi-s">' + (S.online ? 'en línea · última sincronización ' + fmtT(S.lastSync) : 'sin internet · se envía al reconectar') + '</span></div>' +
+    '</div>' +
+    '<div class="charts">' +
+      '<section class="panel chart"><div class="panel-h"><h3>Ocupación por cámara</h3><span class="small muted">' + pct(usedT / capT) + ' total · línea: alerta 90 %</span></div><div class="hb">' +
+        stats.map(s => '<div class="hb-row" tabindex="0" data-tip="<b>' + s.c.id + '</b> · ' + TYPE[s.c.type].name + '<br>' + s.used + ' de ' + s.cap + ' posiciones (' + pct(s.ratio, 1) + ')"><span class="hb-lab">' + s.c.id + '<small>' + TYPE[s.c.type].name + '</small></span><span class="hb-track meter-t"><i class="hb-fill" style="width:' + (s.ratio * 100).toFixed(1) + '%"></i><i class="hb-thr" style="left:90%"></i></span><span class="hb-val">' + pct(s.ratio) + '</span></div>').join('') +
+        '<div class="hb-axis"><span></span><span><span>0 %</span><span>50 %</span><span>100 %</span></span><span></span></div></div>' +
+        tview('occ', ['Cámara', 'Ocupadas', 'Capacidad', '%'], stats.map(s => [s.c.id + ' · ' + TYPE[s.c.type].name, s.used, s.cap, pct(s.ratio, 1)])) + '</section>' +
+      '<section class="panel chart"><div class="panel-h"><h3>Por vencer y vencidas por cámara</h3><div class="lgd"><span><i class="due"></i>Por vencer</span><span><i class="blk"></i>Vencidas (bloqueadas)</span></div></div><div class="hb">' +
+        stats.map(s => { const a = s.due / maxDue * 100, b = s.blk / maxDue * 100; return '<div class="hb-row" tabindex="0" data-tip="<b>' + s.c.id + '</b> · umbral ' + TYPE[s.c.type].due + ' d<br>' + s.due + ' por vencer · ' + s.blk + ' vencidas"><span class="hb-lab">' + s.c.id + '<small>≤ ' + TYPE[s.c.type].due + ' días</small></span><span class="hb-track">' + (s.due ? '<i class="hb-fill due" style="width:' + a.toFixed(1) + '%"></i>' : '') + (s.blk ? '<i class="hb-fill blk" style="left:calc(' + a.toFixed(1) + '% + ' + (s.due ? 2 : 0) + 'px);width:' + b.toFixed(1) + '%"></i>' : '') + '</span><span class="hb-val">' + (s.due + s.blk) + '</span></div>'; }).join('') +
+        '<div class="hb-axis"><span></span><span><span>0</span><span>' + maxDue + ' tarimas</span></span><span></span></div></div>' +
+        tview('due', ['Cámara', 'Por vencer', 'Vencidas'], stats.map(s => [s.c.id, s.due, s.blk])) + '</section>' +
+      '<section class="panel chart"><div class="panel-h"><h3>Tiempo hasta ubicar · últimas búsquedas</h3><span class="small muted">segundos por búsqueda exitosa</span></div><div id="chart-search"></div>' +
+        tview('srch', ['Búsqueda', 'Hora', 'Segundos'], okS.slice(-20).map((s, i) => [String(i + 1), fmtT(s.ts), s.secs.toFixed(1)])) + '</section>' +
+      '<section class="panel chart"><div class="panel-h"><h3>Movimientos de hoy por tipo</h3><span class="small muted">' + mt.length + ' en total</span></div>' +
+        (byType.length ? '<div class="hb">' + byType.map(x => '<div class="hb-row" tabindex="0" data-tip="<b>' + MT[x[0]].l + '</b><br>' + x[1] + ' movimiento' + (x[1] > 1 ? 's' : '') + ' hoy"><span class="hb-lab">' + MT[x[0]].l + '</span><span class="hb-track"><i class="hb-fill" style="width:' + (x[1] / maxMt * 100).toFixed(1) + '%"></i></span><span class="hb-val">' + x[1] + '</span></div>').join('') + '</div>' : '<p class="muted">Sin movimientos hoy.</p>') +
+        tview('mov', ['Tipo', 'Movimientos'], byType.map(x => [MT[x[0]].l, x[1]])) + '</section>' +
+    '</div>';
+  drawSearchChart();
+}
+const TV_OPEN = new Set();
+function drawSearchChart() {
+  const box = $('#chart-search'); if (!box) return;
+  const data = S.searches.filter(s => s.ok && s.secs != null).slice(-20);
+  if (data.length < 2) { box.innerHTML = '<p class="muted">Aún no hay suficientes búsquedas.</p>'; return; }
+  const W = Math.max(260, box.clientWidth), H = 190, m = {l: 34, r: 52, t: 12, b: 26};
+  const maxV = Math.max(10, Math.ceil(Math.max(...data.map(d => d.secs)) / 5) * 5);
+  const x = i => m.l + i * (W - m.l - m.r) / (data.length - 1);
+  const y = v => m.t + (1 - v / maxV) * (H - m.t - m.b);
+  const step = maxV > 20 ? 10 : 5;
+  let g = '';
+  for (let v = 0; v <= maxV; v += step) g += '<line class="ch-grid" x1="' + m.l + '" x2="' + (W - m.r) + '" y1="' + y(v) + '" y2="' + y(v) + '"></line><text class="ch-txt" x="' + (m.l - 6) + '" y="' + (y(v) + 4) + '" text-anchor="end">' + v + '</text>';
+  const avg = data.reduce((a, d) => a + d.secs, 0) / data.length;
+  const pts = data.map((d, i) => x(i).toFixed(1) + ',' + y(d.secs).toFixed(1));
+  const last = data[data.length - 1];
+  box.innerHTML = '<svg class="ch-svg" id="srch-svg" width="' + W + '" height="' + H + '" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Segundos hasta ubicar en las últimas ' + data.length + ' búsquedas; promedio ' + avg.toFixed(1) + ' segundos">' + g +
+    '<line class="ch-axis" x1="' + m.l + '" x2="' + (W - m.r) + '" y1="' + y(0) + '" y2="' + y(0) + '"></line>' +
+    '<line class="ch-ref" x1="' + m.l + '" x2="' + (W - m.r) + '" y1="' + y(avg) + '" y2="' + y(avg) + '"></line><text class="ch-txt" x="' + (W - m.r + 6) + '" y="' + (y(avg) + 4) + '">prom.</text>' +
+    '<path class="ch-area" d="M' + x(0) + ',' + y(0) + ' L' + pts.join(' L') + ' L' + x(data.length - 1) + ',' + y(0) + ' Z"></path>' +
+    '<polyline class="ch-line" points="' + pts.join(' ') + '"></polyline>' +
+    '<line class="ch-cross" id="srch-cross" x1="0" x2="0" y1="' + m.t + '" y2="' + y(0) + '" visibility="hidden"></line>' +
+    '<circle class="ch-dot" cx="' + x(data.length - 1) + '" cy="' + y(last.secs) + '" r="4.5"></circle>' +
+    '<text class="ch-lab" x="' + (x(data.length - 1) + 8) + '" y="' + (y(last.secs) - 8) + '">' + last.secs.toFixed(1) + ' s</text>' +
+    '<text class="ch-txt" x="' + m.l + '" y="' + (H - 6) + '">1</text><text class="ch-txt" x="' + (W - m.r) + '" y="' + (H - 6) + '" text-anchor="end">' + data.length + ' (más reciente)</text>' +
+    '<rect class="ch-hit" id="srch-hit" x="' + m.l + '" y="' + m.t + '" width="' + (W - m.l - m.r) + '" height="' + (H - m.t - m.b) + '"></rect></svg>';
+  const hit = $('#srch-hit'), cross = $('#srch-cross');
+  const move = ev => {
+    const r = hit.getBoundingClientRect();
+    const i = Math.max(0, Math.min(data.length - 1, Math.round((ev.clientX - r.left) / r.width * (data.length - 1))));
+    cross.setAttribute('x1', x(i)); cross.setAttribute('x2', x(i)); cross.setAttribute('visibility', 'visible');
+    showTip('<b>' + data[i].secs.toFixed(1) + ' s</b> · búsqueda ' + (i + 1) + ' de ' + data.length + '<br>' + fmtT(data[i].ts), ev.clientX, ev.clientY);
+  };
+  hit.addEventListener('pointermove', move);
+  hit.addEventListener('pointerleave', () => { cross.setAttribute('visibility', 'hidden'); hideTip(); });
+}
+
+const RENDER = {map: renderMap, put: renderPut, find: renderFind, out: renderOut, move: renderMove, count: renderCount, log: renderLog, kpi: renderKpi};
+
+/* =========================================================
+   Acciones (delegación de eventos)
+   ========================================================= */
+let themeMode = 'auto';
+const hostTheme = document.documentElement.getAttribute('data-theme');
+try { themeMode = localStorage.getItem(KEY + '-tema') || 'auto'; } catch (e) { themeMode = 'auto'; }
+function applyTheme() {
+  const r = document.documentElement;
+  if (themeMode === 'auto') { if (hostTheme) r.setAttribute('data-theme', hostTheme); else r.removeAttribute('data-theme'); }
+  else r.setAttribute('data-theme', themeMode);
+  $('#theme-btn').textContent = 'Tema: ' + ({auto: 'sistema', dark: 'oscuro', light: 'claro'})[themeMode];
+  redrawGraphics();
+}
+function redrawGraphics() {
+  if (!S) return;
+  if (S.ui.tab === 'map' && S.ui.view === '3d') draw3D(false);
+  if (S.ui.tab === 'kpi') drawSearchChart();
+}
+const pickRand = a => a[Math.floor(Math.random() * a.length)];
+
+const ACT = {
+  tab: d => setTab(d.tab),
+  guide: () => toggleGuide(),
+  'guide-go': d => { toggleGuide(false); GUIDE[+d.i].go(); },
+  theme: () => { themeMode = {auto: 'dark', dark: 'light', light: 'auto'}[themeMode]; try { localStorage.setItem(KEY + '-tema', themeMode); } catch (e) { /* ignorar */ } applyTheme(); },
+  'reset-ask': () => toast('¿Reiniciar la demo? Se regeneran los datos simulados y se borra lo registrado en esta sesión.', 'warn', {sticky: true, actions: [{label: 'Sí, reiniciar', cls: 'btn-pri', fn: doReset}, {label: 'Cancelar'}]}),
+  'net-restore': () => setOnline(true),
+  cam: d => { S.ui.cam = d.cam; S.ui.sel = null; render(); },
+  view: d => { S.ui.view = d.v; render(); },
+  flip: () => { S.ui.flip = !S.ui.flip; render(); },
+  sel: d => { S.ui.sel = S.ui.sel === d.key ? null : d.key; render(); },
+  unsel: () => { S.ui.sel = null; render(); },
+  locate: d => locate(d.key),
+  'see-3d': d => locate(d.key, {view: '3d'}),
+  'see-2d': d => locate(d.key, {view: '2d'}),
+  missing: d => {
+    const src = S.ui.tab === 'find' ? 'búsqueda' : S.ui.tab === 'put' ? 'acomodo' : 'ficha del mapa';
+    if (reportMissing(d.key, src)) { if (S.ui.put && S.ui.put.msg) S.ui.put.msg = null; render(); }
+  },
+  'to-count': () => setTab('count'),
+  'mv-start': d => startMove(d.key),
+  'out-start': d => { makeOrder(d.sku, 1, 'Cortina 1'); setTab('out'); },
+  trace: d => { S.ui.logLot = d.lot; S.ui.logType = ''; S.ui.logQ = ''; S.ui.logLimit = 100; setTab('log'); },
+  // Acomodo
+  'put-take': d => putScanMaster(d.m),
+  'put-sim-master': () => {
+    if (S.ui.tab !== 'put') setTab('put');
+    const cur = S.ui.put && S.ui.put.m;
+    const m = S.pending.find(x => x !== cur) || S.pending[0];
+    if (!m) { toast('No hay tarimas por acomodar. Produce una en embalaje (simulado).', 'info'); return; }
+    simScan('put-master', m, () => putScanMaster(m));
+  },
+  'put-gen': () => { const m = newPending(); toast('Embalaje registró ' + m + ' en Odoo (simulado).', 'info'); render(); },
+  'put-use': d => { if (S.ui.put) { S.ui.put.sug = d.key; S.ui.put.msg = null; render(); } },
+  'put-sim-sug': () => { const u = S.ui.put; if (u && u.sug) simScan('put-loc', u.sug, () => putScanLoc(u.sug)); },
+  'put-sim-other': () => {
+    const u = S.ui.put; if (!u || !u.m) return;
+    const list = suggest(S.pallets[u.m]).list.filter(e => e.key !== u.sug && camOf(e.key) === camOf(u.sug));
+    const e = list[Math.min(list.length - 1, 6 + Math.floor(Math.random() * 6))];
+    if (e) simScan('put-loc', e.key, () => putScanLoc(e.key));
+  },
+  'put-sim-occ': () => {
+    const u = S.ui.put; if (!u || !u.sug) return;
+    const cam = camOf(u.sug);
+    const occ = CAMKEYS[cam].filter(k => S.pos[k].m && !S.pos[k].chk && !S.pallets[S.pos[k].m].ghost);
+    const k = pickRand(occ);
+    if (k) simScan('put-loc', k, () => putScanLoc(k));
+  },
+  'put-accept': d => registerPut(d.key, 'Ubicación distinta a la sugerida (' + S.ui.put.sug + ')'),
+  'put-retry': () => { if (S.ui.put) S.ui.put.msg = null; render(); const i = $('#put-loc'); if (i) i.focus(); },
+  'put-next': () => { S.ui.put = null; ACT['put-sim-master'](); },
+  'put-reset': () => { S.ui.put = null; render(); },
+  // Buscar
+  'find-q': d => { S.ui.q = d.q; findStart = performance.now(); renderFind(); save(); },
+  'find-locate': d => {
+    const secs = findStart ? Math.round((performance.now() - findStart) / 100) / 10 : null;
+    S.searches.push({ts: Date.now(), secs: secs != null ? Math.max(0.3, secs) : null, ok: true, q: S.ui.q});
+    findStart = 0;
+    if (secs != null) toast('Ubicada en ' + Math.max(0.3, secs).toFixed(1) + ' s · ' + d.key, 'ok');
+    locate(d.key);
+  },
+  // Surtido
+  qty: d => { const i = $('#out-qty'); if (i) i.value = Math.max(1, Math.min(12, (parseInt(i.value, 10) || 1) + (+d.d))); },
+  'out-sim-ok': () => {
+    const o = S.ui.out; if (!o) return;
+    const line = o.lines.find(l => l.st === 'pend'); if (!line) return;
+    if (o.step === 'loc') return simScan('out-scan', line.key, () => outScan(line.key));
+    const p = S.pallets[line.m];
+    if (p.ghost) {
+      const box = $('#scan-out');
+      if (box && !RM.matches) { box.classList.remove('is-scan'); void box.offsetWidth; box.classList.add('is-scan'); }
+      setTimeout(() => {
+        o.msg = {kind: 'bad', title: 'No hay tarima en la posición', text: 'El lector no encontró ninguna etiqueta en ' + line.key + ': la posición está físicamente vacía aunque el sistema la tenía ocupada (ubicación fantasma).', actions: [{act: 'out-missing', label: 'Reportar No encontrado y sustituir por la siguiente FEFO', cls: 'btn-pri'}]};
+        render();
+      }, RM.matches ? 0 : 420);
+      return;
+    }
+    simScan('out-scan', line.m, () => outScan(line.m));
+  },
+  'out-sim-bad': () => {
+    const o = S.ui.out; if (!o) return;
+    const line = o.lines.find(l => l.st === 'pend'); if (!line) return;
+    if (o.step === 'loc') {
+      const pk = parseKey(line.key);
+      const alt = keyOf(pk.cam, pk.r + 2 <= CH[pk.cam].racks ? pk.r + 2 : pk.r - 2, pk.n);
+      return simScan('out-scan', alt, () => outScan(alt));
+    }
+    const exp = S.pallets[line.m], inOrder = new Set(o.lines.map(l => l.m));
+    const newer = storedPallets().filter(p => p.sku === exp.sku && !inOrder.has(p.m) && p.exp > exp.exp).sort((a, b) => b.exp - a.exp)[0];
+    const other = newer || pickRand(storedPallets().filter(p => p.m !== line.m));
+    simScan('out-scan', other.m, () => outScan(other.m));
+  },
+  'out-missing': () => {
+    const o = S.ui.out; if (!o) return;
+    const line = o.lines.find(l => l.st === 'pend'); if (!line) return;
+    reportMissing(line.key, 'surtido ' + o.id);
+    line.st = 'skip'; o.step = 'loc';
+    const inOrder = new Set(o.lines.map(l => l.m));
+    const repl = fefoCandidates(o.sku).ok.find(p => !inOrder.has(p.m));
+    if (repl) { o.lines.push({m: repl.m, key: repl.loc, st: 'pend', repl: true}); o.msg = {kind: 'info', title: 'Sustituida por la siguiente FEFO', text: 'Se agregó ' + repl.loc + ' (lote ' + repl.lot + ', vence ' + fmtD(repl.exp) + '). La posición reportada quedó en verificación.'}; }
+    else o.msg = {kind: 'warn', title: 'Sin sustituto disponible', text: 'No hay más tarimas surtibles de este producto.'};
+    render();
+  },
+  'out-retry': () => { if (S.ui.out) S.ui.out.msg = null; render(); const i = $('#out-scan'); if (i) i.focus(); },
+  'out-cancel': () => { S.ui.out = null; render(); },
+  // Reubicar
+  'mv-sel': () => { if (S.ui.sel) mvFrom(S.ui.sel); },
+  'mv-sim-from': () => {
+    const cand = CAMKEYS[S.ui.cam].filter(k => S.pos[k].m && !S.pos[k].chk && !S.pallets[S.pos[k].m].ghost);
+    const k = pickRand(cand);
+    if (k) simScan('mv-from', k, () => mvFrom(k));
+  },
+  'mv-sim-master-ok': () => {
+    const v = S.ui.mv; if (!v || !v.m) return;
+    if (S.pallets[v.m].ghost) { v.msg = {at: 'master', kind: 'bad', title: 'No hay tarima en la posición', text: 'El lector no encontró etiqueta en ' + v.from + ': la posición está vacía (ubicación fantasma).', actions: [{act: 'mv-missing', label: 'Reportar No encontrado', cls: 'btn-pri'}]}; return render(); }
+    simScan('mv-master', v.m, () => mvMaster(v.m));
+  },
+  'mv-sim-master-bad': () => {
+    const v = S.ui.mv; if (!v || !v.m) return;
+    const o = pickRand(storedPallets().filter(p => p.m !== v.m));
+    simScan('mv-master', o.m, () => mvMaster(o.m));
+  },
+  'mv-suggest': () => {
+    const v = S.ui.mv; if (!v || !v.mOk) return;
+    const sg = suggest(S.pallets[v.m], [v.from]);
+    v.sug = sg.list.length ? sg.list[0].key : null;
+    v.msg = v.sug ? {at: 'to', kind: 'info', title: 'Destino sugerido ' + v.sug, text: 'Mismas reglas que el acomodo: cámara compatible, posición libre, FEFO y agrupación.'} : {at: 'to', kind: 'warn', title: 'Sin destino compatible', text: 'No hay posiciones libres compatibles.'};
+    render();
+  },
+  'mv-sim-to': () => {
+    const v = S.ui.mv; if (!v || !v.mOk) return;
+    let k = v.sug;
+    if (!k) { const sg = suggest(S.pallets[v.m], [v.from]); k = sg.list.length ? sg.list[Math.min(sg.list.length - 1, 3)].key : null; }
+    if (k) simScan('mv-to', k, () => mvTo(k));
+  },
+  'mv-sim-to-occ': () => {
+    const v = S.ui.mv; if (!v || !v.mOk) return;
+    const k = pickRand(CAMKEYS[camOf(v.from)].filter(x => S.pos[x].m && x !== v.from));
+    if (k) simScan('mv-to', k, () => mvTo(k));
+  },
+  'mv-missing': () => { const v = S.ui.mv; if (!v || !v.from) return; reportMissing(v.from, 'reubicación'); S.ui.mv = null; render(); },
+  'mv-reset': () => { S.ui.mv = null; render(); },
+  // Conteos
+  'task-sim': d => { const t = S.tasks.find(x => x.id === d.id); if (!t) return; const tr = taskTruth(t); t.finding = tr.text; t.prefill = tr.kind === 'moved' ? tr.key : ''; render(); },
+  'task-present': d => {
+    const t = S.tasks.find(x => x.id === d.id); if (!t || t.st !== 'open') return;
+    S.pos[t.key].chk = null;
+    closeTask(t, 'present');
+    addMove({type: 'CONTEO', m: t.m, from: t.key, to: t.key, note: 'Conteo ' + t.id + ': confirma la ubicación'});
+    toast('Conteo ' + t.id + ' cerrado sin ajuste. Exactitud: ' + (S.counts.ok / S.counts.ver * 100).toFixed(1) + ' %.', 'ok');
+    render();
+  },
+  'task-missing': d => {
+    const t = S.tasks.find(x => x.id === d.id); if (!t || t.st !== 'open') return;
+    if (S.user !== 'Supervisor') { t.msg = {kind: 'warn', title: 'Requiere Supervisor', text: 'Dar de baja inventario es un ajuste que autoriza el Supervisor. Usuario actual: ' + S.user + '.', actions: [{act: 'as-super', label: 'Cambiar a Supervisor'}]}; return render(); }
+    const p = S.pallets[t.m];
+    S.pos[t.key].m = null; S.pos[t.key].chk = null; p.st = 'baja'; p.loc = null; p.ghost = null;
+    closeTask(t, 'missing');
+    addMove({type: 'AJUSTE', m: t.m, from: t.key, to: 'Baja de inventario', note: 'Conteo ' + t.id + ': tarima no localizada · autorizó Supervisor'});
+    toast('Inventario corregido: ' + t.m + ' dada de baja y ' + t.key + ' liberada.', 'ok');
+    render();
+  },
+  'as-super': () => { S.user = 'Supervisor'; S.tasks.forEach(t => { t.msg = null; }); toast('Usuario activo: Supervisor', 'info'); render(); },
+  'task-random': () => {
+    const cand = CAMKEYS[S.ui.cam].filter(k => S.pos[k].m && !S.pos[k].chk);
+    const k = pickRand(cand); if (!k) return;
+    const id = 'T-' + pad(++S.seq.task, 4);
+    S.pos[k].chk = id;
+    S.tasks.unshift({id, key: k, m: S.pos[k].m, by: S.user, ts: Date.now(), src: 'conteo programado', st: 'open'});
+    toast('Conteo ' + id + ' programado en ' + k + '.', 'info');
+    render();
+  },
+  // Bitácora
+  'log-lot': d => { S.ui.logLot = d.lot; S.ui.logLimit = 100; if (S.ui.tab !== 'log') setTab('log'); else { const i = $('#log-lot'); if (i) i.value = d.lot; updateLog(); save(); } },
+  'log-clear': () => { S.ui.logLot = ''; S.ui.logType = ''; S.ui.logQ = ''; S.ui.logLimit = 100; renderLog(); save(); },
+  'log-more': () => { S.ui.logLimit = (S.ui.logLimit || 100) + 100; updateLogTable(); }
+};
+function doReset() {
+  try { localStorage.removeItem(KEY); } catch (e) { /* ignorar */ }
+  clearTimeout(syncTimer); syncing = false; netProg = null; findStart = 0;
+  S = seed();
+  render();
+  window.scrollTo(0, 0);
+  toast('Demo reiniciada con los datos simulados de origen.', 'ok');
+}
+
+document.addEventListener('click', e => {
+  const cv = e.target.closest('#iso');
+  if (cv) { const k = isoHit(e); if (k) { S.ui.sel = S.ui.sel === k ? null : k; render(); } return; }
+  const b = e.target.closest('[data-act]');
+  if (!b || b.disabled) return;
+  const fn = ACT[b.dataset.act];
+  if (!fn) return;
+  e.preventDefault();
+  fn(b.dataset, b, e);
+});
+document.addEventListener('submit', e => {
+  const f = e.target.closest('form[data-form]');
+  if (!f) return;
+  e.preventDefault();
+  const inp = f.querySelector('input');
+  const v = inp ? inp.value.trim() : '';
+  const next = {'put-master': 'put-loc', 'out-scan': 'out-scan', 'mv-from': 'mv-master', 'mv-master': 'mv-to'}[f.dataset.form];
+  switch (f.dataset.form) {
+    case 'find': {
+      S.ui.q = v; updateFind();
+      if (lastFind && lastFind.n === 0 && v.length >= 2) { S.searches.push({ts: Date.now(), secs: null, ok: false, q: v}); toast('Sin resultados para “' + v + '”: se registró como búsqueda fallida.', 'warn'); findStart = 0; }
+      save();
+      break;
+    }
+    case 'put-master': putScanMaster(v); break;
+    case 'put-loc': putScanLoc(v); break;
+    case 'out-new': {
+      const sku = $('#out-sku').value, qty = Math.max(1, Math.min(12, parseInt($('#out-qty').value, 10) || 1)), dock = $('#out-dock').value;
+      if (!sku) { toast('No hay productos con inventario surtible.', 'warn'); return; }
+      makeOrder(sku, qty, dock); render();
+      break;
+    }
+    case 'out-scan': outScan(v); break;
+    case 'mv-from': mvFrom(v); break;
+    case 'mv-master': mvMaster(v); break;
+    case 'mv-to': mvTo(v); break;
+    case 'task-moved': taskMoved(f.dataset.id, v); break;
+  }
+  if (next) { const n = document.getElementById(next); if (n && !n.disabled) n.focus(); }
+});
+document.addEventListener('change', e => {
+  const t = e.target;
+  if (t.id === 'net-toggle') setOnline(!t.checked);
+  else if (t.id === 'user-sel') { S.user = t.value; renderShell(); if (S.ui.tab === 'count') renderCount(); save(); toast('Usuario activo: ' + t.value + '. Sus movimientos quedan con su nombre.', 'info'); }
+  else if (t.id === 'map-filter') { S.ui.mapFilter = t.value; renderMap(); save(); }
+  else if (t.id === 'log-type') { S.ui.logType = t.value; S.ui.logLimit = 100; updateLog(); save(); }
+  else if (t.id === 'out-sku' || t.id === 'out-dock' || t.id === 'out-qty') { S.ui.outForm = {sku: $('#out-sku').value, qty: parseInt($('#out-qty').value, 10) || 1, dock: $('#out-dock').value}; save(); }
+});
+document.addEventListener('input', e => {
+  const t = e.target;
+  if (t.id === 'q') {
+    S.ui.q = t.value;
+    if (t.value.trim() && !findStart) findStart = performance.now();
+    if (!t.value.trim()) findStart = 0;
+    updateFind(); save();
+  } else if (t.id === 'log-lot') { S.ui.logLot = t.value; S.ui.logLimit = 100; updateLog(); save(); }
+  else if (t.id === 'log-q') { S.ui.logQ = t.value; S.ui.logLimit = 100; updateLogTable(); save(); }
+});
+document.addEventListener('toggle', e => {
+  const d = e.target;
+  if (d.dataset && d.dataset.tv) { if (d.open) TV_OPEN.add(d.dataset.tv); else TV_OPEN.delete(d.dataset.tv); }
+}, true);
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    if (!$('#guide').hidden) { toggleGuide(false); return; }
+    if (S.ui.sel && S.ui.tab === 'map') { S.ui.sel = null; render(); }
+    return;
+  }
+  if (e.ctrlKey || e.metaKey || e.altKey) return;
+  if (e.target.closest && e.target.closest('input, select, textarea, [contenteditable="true"]')) return;
+  const k = e.key.toLowerCase();
+  if (/^[1-8]$/.test(k)) { e.preventDefault(); setTab(TABS[+k - 1][0]); }
+  else if (k === '/') { e.preventDefault(); setTab('find'); const q = $('#q'); if (q) q.focus(); }
+  else if (k === 'i') setOnline(!S.online);
+  else if (k === 'g') toggleGuide();
+  else if (k === 'v' && S.ui.tab === 'map') { S.ui.view = S.ui.view === '2d' ? '3d' : '2d'; render(); }
+  else if (k === 's') { const b = $('#tab-' + S.ui.tab + ' [data-sim-primary="1"]'); if (b && !b.disabled) { e.preventDefault(); b.click(); } }
+});
+// Tooltip para barras de indicadores y para la vista 3D
+document.addEventListener('pointerover', e => { const r = e.target.closest && e.target.closest('[data-tip]'); if (r) { const b = r.getBoundingClientRect(); showTip(r.dataset.tip, b.left + b.width / 2, b.top); } });
+document.addEventListener('pointerout', e => { const r = e.target.closest && e.target.closest('[data-tip]'); if (r && !r.contains(e.relatedTarget)) hideTip(); });
+document.addEventListener('focusin', e => { const r = e.target.closest && e.target.closest('[data-tip]'); if (r) { const b = r.getBoundingClientRect(); showTip(r.dataset.tip, b.left + b.width / 2, b.top); } });
+document.addEventListener('focusout', e => { if (e.target.closest && e.target.closest('[data-tip]')) hideTip(); });
+document.addEventListener('pointermove', e => {
+  if (!e.target.closest || !e.target.closest('#iso')) return;
+  const k = isoHit(e);
+  e.target.style.cursor = k ? 'pointer' : 'default';
+  if (!k) { hideTip(); return; }
+  const pos = S.pos[k], p = pos.m ? S.pallets[pos.m] : null;
+  showTip('<b>' + k + '</b> · ' + STATE_L[posState(k)] + (p ? '<br>' + esc(pname(p.sku)) + ' · ' + p.lot + '<br>' + dueText(p) : ''), e.clientX, e.clientY);
+});
+document.addEventListener('pointerleave', e => { if (e.target && e.target.id === 'iso') hideTip(); }, true);
+
+let rzT = 0;
+window.addEventListener('resize', () => { clearTimeout(rzT); rzT = setTimeout(redrawGraphics, 120); });
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', redrawGraphics);
+new MutationObserver(redrawGraphics).observe(document.documentElement, {attributes: true, attributeFilter: ['data-theme']});
+
+// Temperatura simulada de cada cámara y cronómetro de búsqueda
+setInterval(() => {
+  CHAMBERS.forEach(c => { TEMP[c.id] = Math.round((TEMP[c.id] + (Math.random() - 0.5) * 0.16 + (c.base - TEMP[c.id]) * 0.25) * 100) / 100; });
+  $$('[data-temp]').forEach(el => { el.textContent = fmtTemp(el.dataset.temp); });
+}, 5000);
+setInterval(() => {
+  if (!findStart || S.ui.tab !== 'find') return;
+  const el = $('#find-clock');
+  if (el) el.textContent = ((performance.now() - findStart) / 1000).toFixed(1) + ' s';
+}, 100);
+setInterval(() => { if (S.ui.tab === 'count') { /* refresca “hace N min” sin perder lo escrito */ $$('#tab-count input').length || renderCount(); } }, 60000);
+
+/* =========================================================
+   Arranque
+   ========================================================= */
+S = load() || seed();
+if (!TAB_IDS.includes(S.ui.tab)) S.ui.tab = 'map';
+S.ui.hl = S.ui.hl && S.pos[S.ui.hl] ? S.ui.hl : null;
+applyTheme();
+render();
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(redrawGraphics).catch(() => {});
+})();
+</script>
