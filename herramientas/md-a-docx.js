@@ -222,6 +222,33 @@ for (let i = 0; i < lineas.length; i++) {
 
   if (/^\s*(-{3,}|\*{3,}|_{3,})\s*$/.test(l)) continue;
 
+  const img = l.trim().match(/^!\[([^\]]*)\]\(([^)\s]+)\)$/);
+  if (img) {
+    const ruta = path.resolve(path.dirname(entrada), img[2]);
+    const datos = fs.readFileSync(ruta);
+    const anchoPx = datos.readUInt32BE(16);
+    const altoPx = datos.readUInt32BE(20);
+    const ancho = 600;
+    hijos.push(new Paragraph({
+      alignment: AlignmentType.CENTER,
+      keepNext: true,
+      spacing: { before: 120, after: 60 },
+      children: [new ImageRun({
+        type: 'png', data: datos,
+        transformation: { width: ancho, height: Math.round(ancho * altoPx / anchoPx) },
+        altText: { title: img[1], description: img[1], name: path.basename(ruta) },
+      })],
+    }));
+    if (img[1]) {
+      hijos.push(new Paragraph({
+        alignment: AlignmentType.CENTER,
+        spacing: { before: 0, after: 200 },
+        children: enLinea(img[1], { italics: true, size: 17, color: GRIS }),
+      }));
+    }
+    continue;
+  }
+
   if (/^\s*```/.test(l)) {
     const codigo = [];
     while (++i < lineas.length && !/^\s*```/.test(lineas[i])) codigo.push(lineas[i]);
