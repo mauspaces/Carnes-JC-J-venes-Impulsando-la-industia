@@ -1,4 +1,4 @@
-<title>UbicaFrío</title>
+<title>UbicaJC</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Big+Shoulders+Display:wght@600;700;800&family=Big+Shoulders+Stencil+Display:wght@800&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
@@ -26,7 +26,7 @@
   --accent:#1A5DA8;
   --accent-ink:#FFFFFF;
   --accent-soft:#D3E2F2;
-  --tgt:#D9520C;
+  --tgt:#C6490A;
   --on-tgt:#FFFFFF;
   --tgt-soft:#F6C7A9;
   --lane:#D9A514;
@@ -53,6 +53,8 @@
   --on-chk:#FFFFFF;
   --shade:#04101A;
   --glint:#FFFFFF;
+  --pop:#0E1C26;
+  --pop-line:#0E1C26;
   --shadow:0 1px 2px rgba(13,26,35,.08),0 8px 24px rgba(13,26,35,.14);
   --f-display:"Big Shoulders Display","Arial Narrow","Roboto Condensed",sans-serif;
   --f-stencil:"Big Shoulders Stencil Display","Big Shoulders Display","Arial Narrow",sans-serif;
@@ -71,8 +73,8 @@
     --lane:#B88A12;--rack:#4F86C2;--pallet:#7A6142;--floor:#17242E;
     --paper:#D8DFE3;--paper-ink:#0D1A23;
     --ok:#4CC27E;--ok-soft:#10301F;--warn:#E9B13B;--warn-soft:#382A0B;--bad:#F2766C;--bad-soft:#3B1613;
-    --st-free:#111C24;--st-occ:#3A6C93;--on-occ:#EAF2F7;--st-due:#D99A17;--on-due:#1A1200;--st-blk:#E25247;--on-blk:#1A0605;--st-chk:#9A7BE3;--st-chk-2:#8463D3;--on-chk:#120A24;
-    --shade:#000000;--glint:#FFFFFF;
+    --st-free:#111C24;--st-occ:#3A6C93;--on-occ:#EAF2F7;--st-due:#D99A17;--on-due:#1A1200;--st-blk:#E25247;--on-blk:#1A0605;--st-chk:#9A7BE3;--st-chk-2:#8A6AD8;--on-chk:#120A24;
+    --shade:#000000;--glint:#FFFFFF;--pop:#1B3042;--pop-line:#466681;
     --shadow:0 1px 2px rgba(0,0,0,.45),0 10px 28px rgba(0,0,0,.45);
     color-scheme:dark;
   }
@@ -86,8 +88,8 @@
   --lane:#B88A12;--rack:#4F86C2;--pallet:#7A6142;--floor:#17242E;
   --paper:#D8DFE3;--paper-ink:#0D1A23;
   --ok:#4CC27E;--ok-soft:#10301F;--warn:#E9B13B;--warn-soft:#382A0B;--bad:#F2766C;--bad-soft:#3B1613;
-  --st-free:#111C24;--st-occ:#3A6C93;--on-occ:#EAF2F7;--st-due:#D99A17;--on-due:#1A1200;--st-blk:#E25247;--on-blk:#1A0605;--st-chk:#9A7BE3;--st-chk-2:#8463D3;--on-chk:#120A24;
-  --shade:#000000;--glint:#FFFFFF;
+  --st-free:#111C24;--st-occ:#3A6C93;--on-occ:#EAF2F7;--st-due:#D99A17;--on-due:#1A1200;--st-blk:#E25247;--on-blk:#1A0605;--st-chk:#9A7BE3;--st-chk-2:#8A6AD8;--on-chk:#120A24;
+  --shade:#000000;--glint:#FFFFFF;--pop:#1B3042;--pop-line:#466681;
   --shadow:0 1px 2px rgba(0,0,0,.45),0 10px 28px rgba(0,0,0,.45);
   color-scheme:dark;
 }
@@ -165,6 +167,7 @@ svg.ic{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-wid
 .wrap{max-width:1320px;margin-inline:auto;padding-inline:var(--gut)}
 main.wrap{padding-block:20px 36px;display:grid;gap:16px;min-width:0}
 .tab{display:grid;gap:16px;min-width:0}
+.tab:focus{outline:none}
 .sec-h{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:8px 24px}
 .sec-h > div{display:grid;gap:4px}
 .sec-sub{max-width:62ch;font-size:.9375rem}
@@ -483,7 +486,7 @@ details.tview summary{cursor:pointer;min-height:44px;display:inline-flex;align-i
 .keys{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.8125rem;color:var(--ink-2)}
 .keys kbd{font:600 .75rem/1 var(--f-mono);padding:3px 6px;border:1px solid var(--line);border-radius:3px;background:var(--sunken);color:var(--ink)}
 .toasts{position:fixed;z-index:40;right:16px;left:auto;bottom:calc(16px + env(safe-area-inset-bottom,0px));display:grid;gap:8px;width:min(420px,calc(100vw - 32px));pointer-events:none}
-.toast{pointer-events:auto;display:grid;grid-template-columns:24px minmax(0,1fr);gap:10px;align-items:start;padding:12px 14px;background:var(--shell);color:var(--shell-ink);border-radius:var(--r);box-shadow:var(--shadow);font-size:.9375rem;animation:tin .2s ease-out}
+.toast{pointer-events:auto;display:grid;grid-template-columns:24px minmax(0,1fr);gap:10px;align-items:start;padding:12px 14px;background:var(--pop);color:var(--shell-ink);border:1px solid var(--pop-line);border-radius:var(--r);box-shadow:var(--shadow);font-size:.9375rem;animation:tin .2s ease-out}
 .toast > svg.ic{width:22px;height:22px}
 .toast.t-ok > svg.ic{color:var(--shell-ok)}
 .toast.t-warn > svg.ic,.toast.t-bad > svg.ic{color:var(--shell-warn)}
@@ -492,7 +495,7 @@ details.tview summary{cursor:pointer;min-height:44px;display:inline-flex;align-i
 .toast .btn{background:var(--shell-2);color:var(--shell-ink);border-color:var(--shell-ink-2)}
 .toast .btn-pri{background:var(--shell-accent);color:var(--shell);border-color:var(--shell-accent)}
 @keyframes tin{from{transform:translateY(8px);opacity:0}to{transform:none;opacity:1}}
-.tip{position:fixed;z-index:50;pointer-events:none;background:var(--shell);color:var(--shell-ink);font-size:.8125rem;line-height:1.35;padding:7px 9px;border-radius:3px;max-width:260px;box-shadow:var(--shadow)}
+.tip{position:fixed;z-index:50;pointer-events:none;background:var(--pop);border:1px solid var(--pop-line);color:var(--shell-ink);font-size:.8125rem;line-height:1.35;padding:7px 9px;border-radius:3px;max-width:260px;box-shadow:var(--shadow)}
 .tip b{font-weight:700}
 .foot{padding-block:18px 28px;font-size:.8125rem;color:var(--ink-2);border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:space-between}
 .sm-only{display:none}
@@ -535,7 +538,7 @@ details.tview summary{cursor:pointer;min-height:44px;display:inline-flex;align-i
           <path class="bm-rack" d="M9 7v28M21 7v28M33 7v28M9 17h24M9 31h24"></path>
         </svg>
         <div>
-          <div class="brand-name">UbicaFrío</div>
+          <h1 class="brand-name">UbicaJC</h1>
           <div class="brand-sub">Ubicación y trazabilidad de tarimas en cámaras frigoríficas</div>
         </div>
         <span class="sim-tag">Prototipo · datos simulados</span>
@@ -564,18 +567,18 @@ details.tview summary{cursor:pointer;min-height:44px;display:inline-flex;align-i
   <main class="wrap" id="main">
     <section id="guide" class="guide" hidden aria-label="Guion de demostración"></section>
     <div id="offline" class="offline" hidden></div>
-    <section id="tab-map" class="tab" role="tabpanel" aria-labelledby="tb-map"></section>
-    <section id="tab-put" class="tab" role="tabpanel" aria-labelledby="tb-put" hidden></section>
-    <section id="tab-find" class="tab" role="tabpanel" aria-labelledby="tb-find" hidden></section>
-    <section id="tab-out" class="tab" role="tabpanel" aria-labelledby="tb-out" hidden></section>
-    <section id="tab-move" class="tab" role="tabpanel" aria-labelledby="tb-move" hidden></section>
-    <section id="tab-count" class="tab" role="tabpanel" aria-labelledby="tb-count" hidden></section>
-    <section id="tab-log" class="tab" role="tabpanel" aria-labelledby="tb-log" hidden></section>
-    <section id="tab-kpi" class="tab" role="tabpanel" aria-labelledby="tb-kpi" hidden></section>
+    <section id="tab-map" class="tab" role="tabpanel" tabindex="-1" aria-labelledby="tb-map"></section>
+    <section id="tab-put" class="tab" role="tabpanel" tabindex="-1" aria-labelledby="tb-put" hidden></section>
+    <section id="tab-find" class="tab" role="tabpanel" tabindex="-1" aria-labelledby="tb-find" hidden></section>
+    <section id="tab-out" class="tab" role="tabpanel" tabindex="-1" aria-labelledby="tb-out" hidden></section>
+    <section id="tab-move" class="tab" role="tabpanel" tabindex="-1" aria-labelledby="tb-move" hidden></section>
+    <section id="tab-count" class="tab" role="tabpanel" tabindex="-1" aria-labelledby="tb-count" hidden></section>
+    <section id="tab-log" class="tab" role="tabpanel" tabindex="-1" aria-labelledby="tb-log" hidden></section>
+    <section id="tab-kpi" class="tab" role="tabpanel" tabindex="-1" aria-labelledby="tb-kpi" hidden></section>
   </main>
   <footer class="wrap foot">
     <span>Prototipo académico con datos simulados · Propuesta para el reto de Carnes JC · Jóvenes Impulsando la Industria 2026</span>
-    <span>No es un sistema oficial ni contiene datos reales de la empresa.</span>
+    <span>No es un sistema oficial ni contiene datos reales de la empresa. UbicaJC es un nombre propuesto; la marca JC pertenece a Carnes JC.</span>
   </footer>
 </div>
 <div id="toasts" class="toasts" aria-live="polite"></div>
@@ -598,7 +601,7 @@ const NF = new Intl.NumberFormat('es-MX');
 const NF1 = new Intl.NumberFormat('es-MX', {minimumFractionDigits: 1, maximumFractionDigits: 1});
 const fmtInt = n => NF.format(Math.round(n));
 const fmtKg = n => NF1.format(n) + '\u00a0kg';
-const pct = (x, d = 0) => (isFinite(x) ? (x * 100).toFixed(d) : '0') + ' %';
+const pct = (x, d = 0) => (isFinite(x) ? (x * 100).toFixed(d) : '0') + '\u00a0%';
 const sod = ts => { const d = new Date(ts); d.setHours(0, 0, 0, 0); return d.getTime(); };
 const fmtD = ts => { const d = new Date(ts); return pad(d.getDate()) + '/' + pad(d.getMonth() + 1) + '/' + d.getFullYear(); };
 const fmtT = ts => { const d = new Date(ts); return pad(d.getHours()) + ':' + pad(d.getMinutes()); };
@@ -639,14 +642,14 @@ const icon = (n, cls = '') => '<svg class="ic ' + cls + '" viewBox="0 0 24 24" a
 /* =========================================================
    Configuración (todo es simulado / ilustrativo)
    ========================================================= */
-const VER = 5;
-const KEY = 'ubicafrio-demo';
+const VER = 6;
+const KEY = 'ubicajc-demo';
 const USERS = ['Montacarguista 1', 'Almacenista', 'Supervisor'];
 const DOCKS = ['Cortina 1', 'Cortina 2', 'Cortina 3', 'Cortina 4'];
-const LV = 5, MAXKG = 1200, MAXOCC = 0.95;
+const LV = 5, MAXKG = 1200, MAXOCC = 0.95, ACC_GOAL = 0.97;   // ACC_GOAL: meta M2 del anteproyecto
 const TYPE = {
-  C: {name: 'Congelados', one: 'congelado', range: '−18 °C', due: 30},
-  F: {name: 'Frescos', one: 'fresco', range: '0 a 4 °C', due: 5}
+  C: {name: 'Congelados', one: 'congelado', range: '−18\u00a0°C', due: 30},
+  F: {name: 'Frescos', one: 'fresco', range: '0 a 4\u00a0°C', due: 5}
 };
 const CHAMBERS = [
   {id: 'C1', type: 'C', racks: 32, occ: .71, base: -18.4},
@@ -841,10 +844,20 @@ function seed() {
       origin: d.origin || ('Embalaje · Línea ' + (rnd() < 0.5 ? 1 : 2)), ghost: null
     };
     if (d.kind === 'pend') p.qts = d.recv ? now - d.mins * MIN : (d.age === 0 ? Math.max(prodTs + MIN, now - d.mins * MIN) : prodTs + 25 * MIN);
-    st.pallets[p.m] = p; d.p = p;
-    if (d.kind === 'stored') st.pos[d.k].m = p.m;
-    if (d.kind === 'pend') st.pending.push(p.m);
+    d.p = p;
   });
+  // 6b. El consecutivo de la master sigue la hora real de producción dentro de cada año
+  const byYY = {};
+  all.forEach(d => { (byYY[d.m.slice(4, 6)] = byYY[d.m.slice(4, 6)] || []).push(d); });
+  Object.values(byYY).forEach(list => {
+    const nums = list.map(d => d.m).sort();
+    list.sort((a, b) => a.p.prod - b.p.prod).forEach((d, i) => { d.m = d.p.m = nums[i]; });
+  });
+  all.forEach(d => {
+    st.pallets[d.p.m] = d.p;
+    if (d.kind === 'stored') st.pos[d.k].m = d.p.m;
+  });
+  all.filter(d => d.kind === 'pend').forEach(d => st.pending.push(d.p.m));
   const c1free = CAMKEYS.C1.filter(k => !st.pos[k].m && pairOf(k) >= 12);
   const real = c1free.length ? c1free[Math.floor(rnd() * c1free.length)] : CAMKEYS.C1.find(k => !st.pos[k].m);
   g2.p.ghost = {real}; st.reserved.push(real);
@@ -937,7 +950,7 @@ function camStats(id) {
   r.ratio = r.used / r.cap;
   return r;
 }
-const dueText = p => { const d = daysLeft(p); return d < 0 ? 'Vencida hace ' + (-d) + ' d' : d === 0 ? 'Vence hoy' : 'Vence en ' + d + ' d'; };
+const dueText = p => { const d = daysLeft(p); return d < 0 ? 'Vencida hace ' + (-d) + '\u00a0d' : d === 0 ? 'Vence hoy' : 'Vence en ' + d + '\u00a0d'; };
 const stateChip = k => { const s = posState(k); return '<span class="chip"><i class="sw s-' + s + '"></i>' + STATE_L[s] + '</span>'; };
 const lastMove = m => { for (let i = S.moves.length - 1; i >= 0; i--) if (S.moves[i].m === m) return S.moves[i]; return null; };
 const queueLen = () => S.moves.reduce((n, m) => n + (m.sync ? 0 : 1), 0);
@@ -1013,14 +1026,14 @@ function reasons(p, ev, ctx) {
   const zone = ev.acc >= 0.62 ? 'cerca de la puerta y en nivel bajo' : ev.acc >= 0.38 ? 'en zona intermedia del pasillo' : 'al fondo y en nivel alto';
   const later = Math.round(ctx.r * 100);
   const fefoTxt = ctx.r >= 0.5
-    ? 'Vence el ' + fmtD(p.exp) + ', después que el ' + later + ' % del inventario ' + t.one + '. Por eso va ' + zone + ' (R' + pad(ev.pk.r) + ' · N' + ev.pk.n + ') y deja las posiciones de acceso rápido para lo que vence antes.'
-    : 'Vence el ' + fmtD(p.exp) + ', antes que el ' + (100 - later) + ' % del inventario ' + t.one + '. Por eso va ' + zone + ' (R' + pad(ev.pk.r) + ' · N' + ev.pk.n + ') para salir primero.';
+    ? 'Vence el ' + fmtD(p.exp) + ', después que el ' + later + '\u00a0% del inventario ' + t.one + '. Por eso va ' + zone + ' (R' + pad(ev.pk.r) + ' · N' + ev.pk.n + ') y deja las posiciones de acceso rápido para lo que vence antes.'
+    : 'Vence el ' + fmtD(p.exp) + ', antes que el ' + (100 - later) + '\u00a0% del inventario ' + t.one + '. Por eso va ' + zone + ' (R' + pad(ev.pk.r) + ' · N' + ev.pk.n + ') para salir primero.';
   return [
     {ok: true, h: 'Cámara compatible', t: c.id + ' es de ' + t.name.toLowerCase() + ' (' + t.range + ') y la tarima es de producto ' + t.one + '.'},
     {ok: true, h: 'Posición libre', t: 'Sin tarima registrada, sin bloqueo y sin conteo pendiente.'},
     {ok: true, h: 'FEFO', t: fefoTxt},
     {ok: ev.nb > 0, h: 'Agrupa el mismo producto', t: ev.nb > 0 ? 'Queda junto a ' + ev.nb + ' tarima' + (ev.nb > 1 ? 's' : '') + ' de ' + pr.name.toLowerCase() + ' en los racks vecinos.' : ev.hasSku ? 'Hay ' + pr.name.toLowerCase() + ' en ' + c.id + ', pero no en racks vecinos libres.' : 'Será la primera tarima de ' + pr.name.toLowerCase() + ' en ' + c.id + '.'},
-    {ok: true, h: 'Capacidad', t: fmtKg(p.kg) + ' de ' + fmtInt(MAXKG) + ' kg por nivel. ' + c.id + ' quedará al ' + pct((ev.st.used + 1) / ev.st.cap) + ' (límite ' + pct(MAXOCC) + ').'}
+    {ok: true, h: 'Capacidad', t: fmtKg(p.kg) + ' de ' + fmtInt(MAXKG) + '\u00a0kg por nivel. ' + c.id + ' quedará al ' + pct((ev.st.used + 1) / ev.st.cap) + ' (límite ' + pct(MAXOCC) + ').'}
   ];
 }
 
@@ -1040,7 +1053,9 @@ function fefoCandidates(sku) {
 /* =========================================================
    Sincronización con Odoo (simulada) y modo sin internet
    ========================================================= */
-let syncTimer = 0, syncing = false, netProg = null;
+let syncTimer = 0, stepTimer = 0, syncGen = 0, syncing = false, netProg = null;
+// Corta cualquier sincronización en curso (caída de red, reinicio o nueva reconexión).
+function stopSync() { syncGen++; clearTimeout(syncTimer); clearTimeout(stepTimer); syncing = false; netProg = null; }
 function scheduleSync() {
   if (!S.online || syncing) return;
   clearTimeout(syncTimer);
@@ -1054,9 +1069,9 @@ function scheduleSync() {
 function setOnline(on) {
   if (on === S.online) { renderShell(); return; }
   S.online = on;
+  stopSync();
   if (!on) {
-    clearTimeout(syncTimer);
-    toast('Sin internet. UbicaFrío sigue operando en la red local; los movimientos quedan en cola para Odoo.', 'warn');
+    toast('Sin internet. UbicaJC sigue operando en la red local; los movimientos quedan en cola para Odoo.', 'warn');
     render();
     return;
   }
@@ -1065,22 +1080,25 @@ function setOnline(on) {
   if (!queue.length) { S.lastSync = Date.now(); renderShell(); toast('Internet restaurado. No había movimientos pendientes.', 'ok'); return; }
   syncing = true;
   let i = 0;
-  const total = queue.length;
+  const total = queue.length, gen = syncGen;
   netProg = {done: 0, total};
   renderShell();
   const step = () => {
+    if (gen !== syncGen) return;
     if (!S.online) { syncing = false; netProg = null; renderShell(); return; }
     queue[i].sync = true; i++;
     netProg = {done: i, total};
     renderShell(); refreshLive();
-    if (i < total) setTimeout(step, RM.matches ? 20 : Math.max(70, Math.min(260, 1800 / total)));
+    if (i < total) stepTimer = setTimeout(step, RM.matches ? 20 : Math.max(70, Math.min(260, 1800 / total)));
     else {
       syncing = false; netProg = null; S.lastSync = Date.now(); save();
       renderShell(); refreshLive();
-      toast(total + ' movimiento' + (total > 1 ? 's' : '') + ' sincronizado' + (total > 1 ? 's' : '') + ' con Odoo. Cola en cero.', 'ok');
+      const left = queueLen();   // movimientos registrados mientras se sincronizaba
+      toast(total + ' movimiento' + (total > 1 ? 's' : '') + ' sincronizado' + (total > 1 ? 's' : '') + ' con Odoo.' + (left ? ' Quedan ' + left + ' por enviar.' : ' Cola en cero.'), 'ok');
+      if (left) scheduleSync();
     }
   };
-  setTimeout(step, RM.matches ? 0 : 400);
+  stepTimer = setTimeout(step, RM.matches ? 0 : 400);
 }
 function refreshLive() {
   const k = $('#kpi-queue');
@@ -1144,27 +1162,62 @@ function renderGuide() {
     '<ol class="guide-steps">' + GUIDE.map((g, i) => '<li><div><b>' + esc(g.t) + '</b><p class="muted small">' + esc(g.d) + '</p></div><button type="button" class="btn" data-act="guide-go" data-i="' + i + '">Ir</button></li>').join('') + '</ol>' +
     '<p class="keys"><span><kbd>1</kbd>–<kbd>8</kbd> pestañas</span><span><kbd>/</kbd> buscar</span><span><kbd>S</kbd> simular escaneo</span><span><kbd>V</kbd> 2D / 3D</span><span><kbd>I</kbd> internet</span><span><kbd>G</kbd> guion</span><span><kbd>Esc</kbd> cerrar</span></p>';
 }
-function toggleGuide(force) {
+function toggleGuide(force, keepPlace) {
   const g = $('#guide');
   const open = force === undefined ? g.hidden : force;
+  const inside = g.contains(document.activeElement);
   if (open && S.ui.sel) { S.ui.sel = null; render(); }
   if (open) renderGuide();
   g.hidden = !open;
   $('#guide-btn').setAttribute('aria-expanded', String(open));
   if (open) g.scrollIntoView({block: 'start', behavior: RM.matches ? 'auto' : 'smooth'});
+  else if (inside && !keepPlace) $('#guide-btn').focus({preventScroll: true});
+}
+// Cierra la ficha y devuelve el foco a la celda que la abrió (plano 2D).
+function closeFicha() {
+  const k = S.ui.sel;
+  S.ui.sel = null; render();
+  const c = k && $('#rackmap-scroll [data-key="' + k + '"]');
+  if (c && (lostFocus() || document.activeElement === $('#tab-map'))) c.focus({preventScroll: true});
 }
 
 /* =========================================================
    Render general
    ========================================================= */
 let wantScroll = false, findStart = 0;
+/* Foco: cada render reescribe el panel; se devuelve el foco al control equivalente
+   para que el teclado (y la pistola que escribe como teclado) no regrese al inicio de la página. */
+const FOCUS_DATA = ['act', 'key', 'tab', 'id', 'm', 'i', 'v', 'cam', 'lot', 'sku', 'd', 'q'];
+function focusSig() {
+  const a = document.activeElement;
+  if (!a || a === document.body || a === document.documentElement) return null;
+  let sel = null;
+  if (a.id) sel = '#' + CSS.escape(a.id);
+  else if (a.dataset && a.dataset.act) sel = FOCUS_DATA.filter(k => a.dataset[k] != null).map(k => '[data-' + k + '="' + CSS.escape(a.dataset[k]) + '"]').join('');
+  else if (a.tagName === 'SUMMARY' && a.parentElement && a.parentElement.dataset.tv) sel = 'details[data-tv="' + a.parentElement.dataset.tv + '"] > summary';
+  return {sel, inMain: !!(a.closest && a.closest('#main'))};
+}
+const visible = el => !!el && el.isConnected && el.getClientRects().length > 0;
+const lostFocus = () => { const a = document.activeElement; return !a || a === document.body || a === document.documentElement || !visible(a); };
+function restoreFocus(f, fallback) {
+  if (!f || !lostFocus()) return;
+  let el = f.sel ? document.querySelector(f.sel) : null;
+  if (!visible(el) || el.disabled) el = null;
+  if (!el && fallback) el = typeof fallback === 'string' ? $(fallback) : fallback;
+  if (!visible(el) && f.inMain) el = $('#tab-' + S.ui.tab);
+  if (visible(el)) el.focus({preventScroll: true});
+}
+function keepFocus(fn) { const f = focusSig(); fn(); restoreFocus(f); }
+const setHTML = (el, h) => { if (el._h !== h) { el.innerHTML = h; el._h = h; } };
 function render() {
+  const f = focusSig();
   hideTip();
   renderShell();
   TAB_IDS.forEach(id => { $('#tab-' + id).hidden = id !== S.ui.tab; });
   document.body.classList.toggle('has-sheet', S.ui.tab === 'map' && !!S.ui.sel);
   RENDER[S.ui.tab]();
   document.body.classList.toggle('has-sheet', S.ui.tab === 'map' && !!S.ui.sel);
+  restoreFocus(f);
   save();
 }
 function renderShell() {
@@ -1176,18 +1229,20 @@ function renderShell() {
   else if (netProg) odoo = '<span class="n-ok">' + icon('sync') + 'Odoo: sincronizando ' + netProg.done + '/' + netProg.total + '</span><span class="n-prog" aria-hidden="true"><i style="width:' + Math.round(netProg.done / netProg.total * 100) + '%"></i></span>';
   else if (q) odoo = '<span class="n-ok">' + icon('sync') + 'Odoo: sincronizando…</span>';
   else odoo = '<span class="n-ok">Odoo: sincronizado</span><span class="n-time">' + fmtT(S.lastSync) + '</span>';
-  $('#net').innerHTML = '<span class="n-ok"><span class="n-dot"></span>Red local ✓</span><span aria-hidden="true">·</span>' + odoo + '<span class="n-user">' + icon('user') + esc(S.user) + '</span>';
+  setHTML($('#net'), '<span class="n-ok"><span class="n-dot"></span>Red local ✓</span><span aria-hidden="true">·</span>' + odoo + '<span class="n-user">' + icon('user') + esc(S.user) + '</span>');
   const pend = S.pending.length, tasks = openTasks().length;
-  $('#tabs').innerHTML = TABS.map(([id, label], i) => {
+  const ae = document.activeElement, ft = ae && ae.closest && ae.closest('#tabs') ? ae.id : null;
+  setHTML($('#tabs'), TABS.map(([id, label], i) => {
     let badge = '';
     if (id === 'put' && pend) badge = '<span class="tab-badge">' + pend + '</span>';
     if (id === 'count' && tasks) badge = '<span class="tab-badge warn">' + tasks + '</span>';
     if (id === 'log' && q) badge = '<span class="tab-badge warn">' + q + '</span>';
     return '<button type="button" class="tab-btn" role="tab" id="tb-' + id + '" aria-controls="tab-' + id + '" aria-selected="' + (S.ui.tab === id) + '" data-act="tab" data-tab="' + id + '"><kbd>' + (i + 1) + '</kbd>' + label + badge + '</button>';
-  }).join('');
+  }).join(''));
+  if (ft && lostFocus()) { const tb = document.getElementById(ft); if (tb) tb.focus({preventScroll: true}); }
   const off = $('#offline');
   off.hidden = S.online;
-  if (!S.online) off.innerHTML = icon('wifiOff') + '<p><b>Sin internet.</b> UbicaFrío sigue operando con su servidor en la red local del almacén: mapa, búsqueda, acomodo y surtido funcionan igual. Los movimientos se guardan en cola y se envían a Odoo al volver la conexión.</p><button type="button" class="btn" data-act="net-restore">Restaurar internet</button>';
+  if (!S.online) setHTML(off, icon('wifiOff') + '<p><b>Sin internet.</b> UbicaJC sigue operando con su servidor en la red local del almacén: mapa, búsqueda, acomodo y surtido funcionan igual. Los movimientos se guardan en cola y se envían a Odoo al volver la conexión.</p><button type="button" class="btn" data-act="net-restore">Restaurar internet</button>');
   document.documentElement.style.setProperty('--ops-h', $('.ops').offsetHeight + 'px');
   const sel = $('#tabs [aria-selected="true"]');
   if (sel && sel.scrollIntoView) { const t = $('#tabs'); const l = sel.offsetLeft, r = l + sel.offsetWidth; if (l < t.scrollLeft || r > t.scrollLeft + t.clientWidth) t.scrollLeft = l - 16; }
@@ -1255,7 +1310,7 @@ function palletKV(p, extra) {
    ========================================================= */
 const TEMP = {};
 CHAMBERS.forEach(c => { TEMP[c.id] = c.base; });
-const fmtTemp = id => { const v = TEMP[id]; return (v < 0 ? '−' : '') + Math.abs(v).toFixed(1) + ' °C'; };
+const fmtTemp = id => { const v = TEMP[id]; return (v < 0 ? '−' : '') + Math.abs(v).toFixed(1) + '\u00a0°C'; };
 function matchFilter(k) {
   const f = S.ui.mapFilter; if (!f) return true;
   const s = posState(k);
@@ -1301,19 +1356,19 @@ function gridHTML(c) {
   return h + '</div></div>';
 }
 function legendHTML(c, st) {
-  const items = [['free', 'Libre', st.free], ['occ', 'Ocupado', st.occ], ['due', 'Por vencer (≤ ' + TYPE[c.type].due + ' d)', st.due], ['blk', 'Vencido / bloqueado', st.blk], ['chk', 'En verificación', st.chk]];
+  const items = [['free', 'Libre', st.free], ['occ', 'Ocupado', st.occ], ['due', 'Por vencer (≤\u00a0' + TYPE[c.type].due + '\u00a0d)', st.due], ['blk', 'Vencido / bloqueado', st.blk], ['chk', 'En verificación', st.chk]];
   return '<div class="legend" aria-label="Leyenda de estados">' + items.map(i => '<span class="lg"><i class="sw s-' + i[0] + '"></i>' + i[1] + ' <b>' + i[2] + '</b></span>').join('') + '<span class="lg"><i class="sw s-tgt"></i>Objetivo de búsqueda o acomodo</span></div>';
 }
 function camSummaryHTML() {
   const c = CH[S.ui.cam], st = camStats(c.id);
-  const list = CAMKEYS[c.id].map(k => S.pos[k]).filter(p => p.m && !p.chk).map(p => S.pallets[p.m]).sort((a, b) => a.exp - b.exp).slice(0, 6);
+  const list = CAMKEYS[c.id].map(k => S.pos[k]).filter(p => p.m && !p.chk).map(p => S.pallets[p.m]).filter(p => daysLeft(p) >= 0 && !p.blocked).sort((a, b) => a.exp - b.exp).slice(0, 6);
   return '<div class="ficha-h"><div><p class="eyebrow">Resumen de ' + c.id + '</p><h3>' + TYPE[c.type].name + ' · ' + TYPE[c.type].range + '</h3></div></div>' +
     '<div class="sum-grid"><div><span class="small muted">Ocupación</span><b>' + pct(st.ratio) + '</b><span class="small mono">' + st.used + ' de ' + st.cap + '</span></div>' +
     '<div><span class="small muted">Libres</span><b>' + st.free + '</b><span class="small">posiciones</span></div>' +
     '<div><span class="small muted">Por vencer</span><b>' + st.due + '</b><span class="small">≤ ' + TYPE[c.type].due + ' días</span></div>' +
     '<div><span class="small muted">Vencidas</span><b>' + st.blk + '</b><span class="small">bloqueadas</span></div></div>' +
-    '<div class="ficha-sum"><h3>Próximas a salir (FEFO)</h3><p class="small muted">Lo que vence antes en esta cámara. Toca para ubicarla.</p></div>' +
-    '<ol class="fefo-list">' + list.map(p => '<li><button type="button" data-act="locate" data-key="' + p.loc + '"><span class="placard sm">' + p.loc + '</span><span class="fl-p">' + esc(pname(p.sku)) + '</span><span class="small mono">' + (daysLeft(p) < 0 ? 'VENC' : daysLeft(p) + ' d') + '</span></button></li>').join('') + '</ol>' +
+    '<div class="ficha-sum"><h3>Próximas a salir (FEFO)</h3><p class="small muted">Lo que vence antes en esta cámara, sin vencidas ni posiciones en verificación. Toca para ubicarla.</p></div>' +
+    '<ol class="fefo-list">' + list.map(p => '<li><button type="button" data-act="locate" data-key="' + p.loc + '"><span class="placard sm">' + p.loc + '</span><span class="fl-p">' + esc(pname(p.sku)) + '</span><span class="small mono">' + (daysLeft(p) < 0 ? 'VENC' : daysLeft(p) + '\u00a0d') + '</span></button></li>').join('') + '</ol>' +
     '<p class="small muted">Toca una posición del mapa para ver su ficha.</p>';
 }
 function fichaHTML() {
@@ -1324,7 +1379,7 @@ function fichaHTML() {
   h += '<p class="small muted">' + whereText(pk) + '</p>';
   const other = S.ui.view === '3d' ? '<button type="button" class="btn" data-act="see-2d" data-key="' + k + '">' + icon('grid') + 'Ver en plano</button>' : '<button type="button" class="btn" data-act="see-3d" data-key="' + k + '">' + icon('cube') + 'Ver en 3D</button>';
   if (!p) {
-    h += '<div class="msg msg-info">' + icon('info') + '<div class="msg-x"><p class="msg-t">Posición libre</p><p>Acepta producto ' + TYPE[CH[pk.cam].type].one + ' hasta ' + fmtInt(MAXKG) + ' kg.</p></div></div>';
+    h += '<div class="msg msg-info">' + icon('info') + '<div class="msg-x"><p class="msg-t">Posición libre</p><p>Acepta producto ' + TYPE[CH[pk.cam].type].one + ' hasta ' + fmtInt(MAXKG) + '\u00a0kg.</p></div></div>';
     h += '<div class="btn-row">' + other + '</div>';
     return h;
   }
@@ -1347,6 +1402,8 @@ function renderMap() {
   const el = $('#tab-map'), c = CH[S.ui.cam], st = camStats(c.id);
   const prevSc = $('#rackmap-scroll');
   const prevScroll = prevSc ? prevSc.scrollLeft : null;
+  const prevCg = $('#tab-map .cam-grid');
+  const prevCamScroll = prevCg ? prevCg.scrollLeft : 0;
   const skus = Array.from(new Set(CAMKEYS[c.id].map(k => S.pos[k].m && S.pallets[S.pos[k].m].sku).filter(Boolean))).sort((a, b) => pname(a).localeCompare(pname(b)));
   if (S.ui.mapFilter && !['due', 'chk'].includes(S.ui.mapFilter) && !skus.includes(S.ui.mapFilter)) S.ui.mapFilter = '';
   if (S.ui.sel && camOf(S.ui.sel) !== c.id) S.ui.sel = null;
@@ -1366,6 +1423,13 @@ function renderMap() {
         : gridHTML(c)) +
     '</div><aside class="ficha' + (S.ui.sel ? ' is-sheet' : '') + '" id="ficha" aria-label="Ficha de posición">' + fichaHTML() + '</aside></div>';
   $('#map-filter').value = S.ui.mapFilter;
+  // En teléfono el selector de cámaras se desplaza de lado: conserva la posición y muestra la cámara activa
+  const cg = $('#tab-map .cam-grid');
+  if (cg && cg.scrollWidth > cg.clientWidth + 1) {
+    cg.scrollLeft = prevCamScroll;
+    const pc = cg.querySelector('[aria-pressed="true"]');
+    if (pc) { const gr = cg.getBoundingClientRect(), r = pc.getBoundingClientRect(); if (r.left < gr.left || r.right > gr.right) cg.scrollLeft += r.left - gr.left - (gr.width - r.width) / 2; }
+  }
   if (S.ui.view === '3d') draw3D(wantScroll);
   else {
     const sc = $('#rackmap-scroll');
@@ -1397,6 +1461,7 @@ function locate(key, opts) {
   wantScroll = true;
   S.ui.tab = 'map';
   render();
+  if (S.ui.view === '2d' && (lostFocus() || document.activeElement === $('#tab-map'))) { const c = $('#rackmap-scroll [data-key="' + key + '"]'); if (c) c.focus({preventScroll: true}); }
 }
 
 /* ---------- Vista 3D isométrica (Canvas 2D, sin librerías) ---------- */
@@ -1439,7 +1504,7 @@ function paint3D(phase) {
   const {P3, NP, c, RD, AW, LH, YT} = g;
   const css = getComputedStyle(document.documentElement);
   const T = n => css.getPropertyValue(n).trim();
-  const col = {floor: T('--floor'), line: T('--line'), lane: T('--lane'), rack: T('--rack'), ink: T('--ink'), ink2: T('--ink-2'), shade: T('--shade'), glint: T('--glint'), tgt: T('--tgt'), onTgt: T('--on-tgt'), accent: T('--accent'), pallet: T('--pallet'), occ: T('--st-occ'), due: T('--st-due'), blk: T('--st-blk'), chk: T('--st-chk'), surface: T('--surface')};
+  const col = {floor: T('--floor'), line: T('--line'), lane: T('--lane'), rack: T('--rack'), ink: T('--ink'), ink2: T('--ink-2'), shade: T('--shade'), glint: T('--glint'), tgt: T('--tgt'), onTgt: T('--on-tgt'), accent: T('--accent'), pallet: T('--pallet'), occ: T('--st-occ'), due: T('--st-due'), blk: T('--st-blk'), chk: T('--st-chk'), surface: T('--surface'), sunken: T('--sunken')};
   ctx.setTransform(g.dpr, 0, 0, g.dpr, 0, 0);
   ctx.clearRect(0, 0, g.W, g.H);
   g.hits = [];
@@ -1460,7 +1525,6 @@ function paint3D(phase) {
   const fs = Math.max(9, Math.min(12, g.s * 0.34));
   ctx.font = '600 ' + fs + 'px ' + FONT_MONO; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillStyle = col.ink2;
   const dl = P3(xd + (flip ? 0.55 : -0.55), RD + AW / 2, 0);
-  ctx.fillText('PUERTA', dl[0], dl[1]);
   // Etiquetas de rack en el piso del pasillo
   const every = g.s >= 34 ? 1 : g.s >= 22 ? 2 : 4;
   for (let p = 1; p <= NP; p++) {
@@ -1509,6 +1573,10 @@ function paint3D(phase) {
     seg(P3(x0, y1, 0), P3(x0, y1, zt));
     for (let n = 2; n <= LV; n++) { const z = (n - 1) * LH; seg(P3(x0, y1, z), P3(x1, y1, z)); seg(P3(x0, y0, z), P3(x0, y1, z)); }
   });
+  // Rótulo de la puerta al final: en la vista desde el fondo queda detrás de los racks
+  ctx.font = '600 ' + fs + 'px ' + FONT_MONO; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ctx.lineJoin = 'round'; ctx.lineWidth = 4; ctx.strokeStyle = col.sunken; ctx.strokeText('PUERTA', dl[0], dl[1]);
+  ctx.fillStyle = col.ink2; ctx.fillText('PUERTA', dl[0], dl[1]);
   // Baliza sobre la posición objetivo
   if (tgtTop) {
     const top = [tgtTop[0], tgtTop[1] - Math.max(30, g.s * 1.5)];
@@ -1587,7 +1655,7 @@ function renderPut() {
     if (!u.sug || !sg.list.some(e => e.key === u.sug)) u.sug = sg.list.length ? sg.list[0].key : null;
     const ev = sg.list.find(e => e.key === u.sug);
     if (!ev) {
-      step2 = '<div class="step"><span class="step-n">2</span><div class="step-b">' + msgHTML({kind: 'bad', title: 'Sin posiciones compatibles', text: 'Todas las cámaras de ' + TYPE[ptype(p.sku)].name.toLowerCase() + ' están al límite de ocupación (95 %).'}) + '</div></div>';
+      step2 = '<div class="step"><span class="step-n">2</span><div class="step-b">' + msgHTML({kind: 'bad', title: 'Sin posiciones compatibles', text: 'Todas las cámaras de ' + TYPE[ptype(p.sku)].name.toLowerCase() + ' están al límite de ocupación (' + pct(MAXOCC) + ').'}) + '</div></div>';
     } else {
       const alts = sg.list.filter(e => e.key !== ev.key).slice(0, 3);
       step2 = '<div class="step" id="put-step2"><span class="step-n">2</span><div class="step-b">' +
@@ -1604,7 +1672,7 @@ function renderPut() {
         (u.msg && u.msg.at === 'loc' ? msgHTML(u.msg, 'put-msg-loc') : '') + '</div></div>';
     }
   }
-  el.innerHTML = secH('Entrada · acomodo', 'Acomodar tarima en cámara', 'La tarima llega de embalaje con su etiqueta master. UbicaFrío trae sus datos de Odoo, sugiere la mejor posición y valida el acomodo con un escaneo.') +
+  el.innerHTML = secH('Entrada · acomodo', 'Acomodar tarima en cámara', 'La tarima llega de embalaje con su etiqueta master. UbicaJC trae sus datos de Odoo, sugiere la mejor posición y valida el acomodo con un escaneo.') +
     '<div class="cols"><section class="panel">' + pendingHTML() + '</section><section class="panel flow">' +
     flow +
       '<div class="step' + (p ? ' is-done' : '') + '"><span class="step-n">1</span><div class="step-b"><h3>' + (u.done ? 'Siguiente tarima: escanea su etiqueta master' : 'Escanea la etiqueta master') + '</h3>' +
@@ -1653,8 +1721,12 @@ function putScanLoc(raw) {
   registerPut(pk.key, '');
 }
 function registerPut(key, note) {
-  const u = S.ui.put, p = S.pallets[u.m];
-  if (!p || S.pos[key].m || S.pos[key].chk) return;
+  const u = S.ui.put, p = u && u.m ? S.pallets[u.m] : null, pos = S.pos[key];
+  if (!p || p.st !== 'por_acomodar') { S.ui.put = null; render(); return; }
+  if (!pos || pos.m || pos.chk) {
+    u.msg = {at: 'loc', kind: 'bad', title: 'Posición ya no disponible', text: key + (pos && pos.chk ? ' está en verificación' : ' ya tiene una tarima registrada') + '. Escanea otra posición.'};
+    render(); reveal('#put-msg-loc'); return;
+  }
   p.loc = key; p.st = 'almacenada'; S.pos[key].m = p.m;
   S.pending = S.pending.filter(x => x !== p.m);
   const ri = S.reserved.indexOf(key); if (ri >= 0) S.reserved.splice(ri, 1);
@@ -1713,10 +1785,12 @@ function renderFind() {
   updateFind();
 }
 function resHTML(p, i, firsts) {
-  const first = !firsts.has(p.sku); firsts.add(p.sku);
   const chk = !!S.pos[p.loc].chk;
+  // "Sale primero" solo para la primera tarima surtible de cada producto (sin verificación pendiente y sin vencer)
+  const eligible = !chk && daysLeft(p) >= 0 && !p.blocked;
+  const first = eligible && !firsts.has(p.sku); if (eligible) firsts.add(p.sku);
   return '<li class="res"><span class="res-rank">' + (i + 1) + '</span>' +
-    '<div class="res-main"><div class="res-prod"><b>' + esc(pname(p.sku)) + '</b><span class="ttag t-' + ptype(p.sku) + '">' + TYPE[ptype(p.sku)].one + '</span>' + (first && !chk ? '<span class="chip chip-fefo">Sale primero (FEFO)</span>' : '') + '</div>' +
+    '<div class="res-main"><div class="res-prod"><b>' + esc(pname(p.sku)) + '</b><span class="ttag t-' + ptype(p.sku) + '">' + TYPE[ptype(p.sku)].one + '</span>' + (first ? '<span class="chip chip-fefo">Sale primero (FEFO)</span>' : '') + '</div>' +
     '<span class="mono small muted">' + p.lot + ' · ' + p.m + ' · ' + p.boxes + ' cajas · ' + fmtKg(p.kg) + '</span></div>' +
     '<div class="res-loc"><span class="placard sm">' + p.loc + '</span>' + stateChip(p.loc) + '<span class="small">' + dueText(p) + '</span></div>' +
     '<div class="res-act btn-row"><button type="button" class="btn btn-pri" data-act="find-locate" data-key="' + p.loc + '">' + icon('pin') + 'Ver en mapa</button><button type="button" class="btn" data-act="missing" data-key="' + p.loc + '"' + (chk ? ' disabled' : '') + '>No encontrado</button></div></li>';
@@ -1752,8 +1826,37 @@ function makeOrder(sku, qty, dock) {
   S.ui.out = {id: 'OS-' + pad(S.seq.order, 4), sku, qty, dock, lines: f.ok.slice(0, qty).map(p => ({m: p.m, key: p.loc, st: 'pend'})), step: 'loc', msg: null, excl: f.excl, short: Math.max(0, qty - f.ok.length)};
   S.ui.outForm = {sku, qty, dock};
 }
+// Revalida las líneas pendientes: la tarima pudo reubicarse, surtirse, darse de baja
+// o quedar en verificación desde otra pantalla después de generar la orden.
+const ST_TXT = {almacenada: 'en cámara', despachada: 'despachada', por_acomodar: 'por acomodar', baja: 'dada de baja'};
+function checkOrder() {
+  const o = S.ui.out; if (!o) return false;
+  const notes = [];
+  for (let i = 0; i < o.lines.length; i++) {
+    const l = o.lines[i];
+    if (l.st !== 'pend') continue;
+    const p = S.pallets[l.m], isCur = o.lines.find(x => x.st === 'pend') === l;
+    let why = null;
+    if (!p || p.st !== 'almacenada' || !p.loc) why = p ? ST_TXT[p.st] || p.st : 'sin registro';
+    else if (S.pos[p.loc].chk) why = 'en verificación';
+    else if (daysLeft(p) < 0 || p.blocked) why = 'vencida';
+    if (!why) {
+      if (p.loc !== l.key) { notes.push(l.m + ' se reubicó de ' + l.key + ' a ' + p.loc); l.key = p.loc; if (isCur) o.step = 'loc'; }
+      continue;
+    }
+    l.st = 'skip'; l.why = why;
+    if (isCur) o.step = 'loc';
+    const inOrder = new Set(o.lines.map(x => x.m));
+    const repl = fefoCandidates(o.sku).ok.find(q => !inOrder.has(q.m));
+    if (repl) { o.lines.push({m: repl.m, key: repl.loc, st: 'pend', repl: true}); notes.push(l.key + ' ya no se puede surtir (' + why + '); se agregó ' + repl.loc + ' por FEFO'); }
+    else { o.short = (o.short || 0) + 1; notes.push(l.key + ' ya no se puede surtir (' + why + ') y no hay sustituto'); }
+  }
+  if (notes.length) o.msg = {kind: 'warn', title: 'La orden cambió desde otra pantalla', text: notes.join('. ') + '.'};
+  return notes.length > 0;
+}
 function renderOut() {
   const el = $('#tab-out');
+  checkOrder();
   const avail = {};
   storedPallets().forEach(p => { if (!S.pos[p.loc].chk && daysLeft(p) >= 0) avail[p.sku] = (avail[p.sku] || 0) + 1; });
   const f = S.ui.outForm || {sku: 'RES-1101', qty: 2, dock: 'Cortina 1'};
@@ -1764,7 +1867,7 @@ function renderOut() {
     const done = o.lines.filter(l => l.st === 'ok');
     order = '<section class="panel" id="out-order"><div class="panel-h"><div><p class="eyebrow">Orden de surtido ' + o.id + '</p><h3>' + esc(pfull(o.sku)) + ' · ' + o.qty + ' tarima' + (o.qty > 1 ? 's' : '') + ' → ' + o.dock + '</h3></div><button type="button" class="btn" data-act="out-cancel">' + (cur ? 'Cancelar orden' : 'Cerrar') + '</button></div>' +
       '<p class="small muted">Lotes sugeridos por FEFO: primero el que vence antes; a igual fecha, el de nivel más bajo.</p>' +
-      '<ol class="picklist">' + o.lines.map((l, i) => { const p = S.pallets[l.m]; const c = l === cur; return '<li class="pk' + (c ? ' is-cur' : '') + (l.st === 'ok' ? ' is-ok' : '') + (l.st === 'skip' ? ' is-skip' : '') + '"><span class="pk-n">' + (i + 1) + '</span><div class="pk-main"><span><span class="mono b">' + l.key + '</span> · ' + esc(pname(p.sku)) + '</span><span class="mono small muted">' + p.lot + ' · ' + l.m + ' · vence ' + fmtD(p.exp) + '</span></div><span class="chip">' + (l.st === 'ok' ? icon('check') + 'Surtida' : l.st === 'skip' ? 'No encontrada' : c ? 'En curso' : 'Pendiente') + '</span></li>'; }).join('') + '</ol>' +
+      '<ol class="picklist">' + o.lines.map((l, i) => { const p = S.pallets[l.m]; const c = l === cur; return '<li class="pk' + (c ? ' is-cur' : '') + (l.st === 'ok' ? ' is-ok' : '') + (l.st === 'skip' ? ' is-skip' : '') + '"><span class="pk-n">' + (i + 1) + '</span><div class="pk-main"><span><span class="mono b">' + l.key + '</span> · ' + esc(pname(p.sku)) + '</span><span class="mono small muted">' + p.lot + ' · ' + l.m + ' · vence ' + fmtD(p.exp) + '</span></div><span class="chip">' + (l.st === 'ok' ? icon('check') + 'Surtida' : l.st === 'skip' ? (l.why ? 'No disponible' : 'No encontrada') : c ? 'En curso' : 'Pendiente') + '</span></li>'; }).join('') + '</ol>' +
       (o.excl.length ? '<p class="small muted">Excluidas por el sistema: ' + o.excl.map(e => '<span class="mono">' + e.key + '</span> (' + e.why + ')').join(', ') + '.</p>' : '') +
       (o.short ? msgHTML({kind: 'warn', title: 'Inventario insuficiente', text: 'Solo hay ' + (o.qty - o.short) + ' tarima(s) disponibles de este producto.'}) : '');
     if (cur) {
@@ -1798,6 +1901,8 @@ function outScan(raw) {
 }
 function outScanCore(raw) {
   const o = S.ui.out; if (!o) return;
+  const cur0 = o.lines.find(l => l.st === 'pend'), key0 = cur0 && cur0.key;
+  if (checkOrder()) { const c = o.lines.find(l => l.st === 'pend'); if (c !== cur0 || (c && c.key !== key0)) return render(); }
   const line = o.lines.find(l => l.st === 'pend'); if (!line) return;
   const v = String(raw || '').trim();
   if (o.step === 'loc') {
@@ -1822,13 +1927,14 @@ function outScanCore(raw) {
 }
 function doSalida(line) {
   const o = S.ui.out, p = S.pallets[line.m];
+  if (!p || p.st !== 'almacenada' || p.loc !== line.key || S.pos[line.key].m !== line.m || S.pos[line.key].chk) { checkOrder(); return render(); }
   S.pos[line.key].m = null; p.loc = null; p.st = 'despachada'; p.ghost = null;
   const id = addMove({type: 'SALIDA', m: p.m, from: line.key, to: o.dock, note: 'Surtido FEFO · orden ' + o.id});
   line.st = 'ok'; line.move = id; o.step = 'loc';
   if (S.ui.hl === line.key) S.ui.hl = null;
   const next = o.lines.find(l => l.st === 'pend');
   o.msg = next ? {kind: 'ok', title: 'Salida registrada · ' + id, text: 'Posición ' + line.key + ' liberada. Siguiente: ' + next.key + '.'} : null;
-  toast('Salida de ' + line.m + ' desde ' + line.key + ' a ' + o.dock + ' · ' + id, 'ok');
+  toast('Salida de ' + line.m + ' desde ' + line.key + ' a ' + o.dock + ' · ' + id + (S.online ? '' : ' · en cola para Odoo'), 'ok');
   render();
 }
 
@@ -1841,7 +1947,21 @@ function startMove(key) {
   S.ui.mv = {from: key, m: pos.m, mOk: false, msg: {at: 'from', kind: 'info', title: 'Origen tomado del mapa', text: 'Escanea la etiqueta master de la tarima en ' + key + ' para confirmar que es la correcta.'}};
   setTab('move');
 }
+// Revalida el origen: la tarima pudo surtirse, reubicarse o quedar en verificación desde otra pantalla.
+function checkMove() {
+  const v = S.ui.mv;
+  if (!v || v.done || !v.m || !v.from) return false;
+  const p = S.pallets[v.m], pos = S.pos[v.from];
+  let why = null;
+  if (!p || p.st !== 'almacenada') why = v.m + ' ya no está en cámara (' + (p ? ST_TXT[p.st] || p.st : 'sin registro') + ')';
+  else if (p.loc !== v.from || !pos || pos.m !== v.m) why = v.m + ' ya no está en ' + v.from + ': ahora está registrada en ' + p.loc;
+  else if (pos.chk) why = v.from + ' pasó a verificación (conteo ' + pos.chk + ')';
+  if (!why) return false;
+  S.ui.mv = {msg: {at: 'from', kind: 'warn', title: 'El origen cambió · reubicación cancelada', text: why + '. Escanea de nuevo el origen.'}};
+  return true;
+}
 function renderMove() {
+  checkMove();
   const el = $('#tab-move'), v = S.ui.mv || {}, p = v.m ? S.pallets[v.m] : null;
   const sub = 'Doble escaneo: la etiqueta master confirma qué tarima se mueve y la etiqueta de la posición destino confirma dónde quedó.';
   if (v.done) {
@@ -1900,6 +2020,7 @@ function mvFrom(raw) {
 }
 function mvMaster(raw) {
   const v = S.ui.mv; if (!v || !v.m) return;
+  if (checkMove()) return render();
   const m = normMaster(raw);
   if (m === v.m) { v.mOk = true; v.msg = {at: 'master', kind: 'ok', title: 'Tarima confirmada', text: m + ' coincide con ' + v.from + '. Ahora el destino.'}; render(); return reveal('#mv-step3'); }
   v.mOk = false;
@@ -1908,6 +2029,7 @@ function mvMaster(raw) {
 }
 function mvTo(raw) {
   const v = S.ui.mv; if (!v || !v.mOk) return;
+  if (checkMove()) return render();
   const p = S.pallets[v.m], pk = parseKey(raw);
   const bad = (title, text) => { v.msg = {at: 'to', kind: 'bad', title, text}; render(); reveal('#mv-step3'); };
   if (!pk) return bad('Código no válido', 'Formato de ubicación: C4-R07-N3.');
@@ -1921,7 +2043,7 @@ function mvTo(raw) {
   const id = addMove({type: 'REUBICACION', m: p.m, from: v.from, to: pk.key, note: v.sug && v.sug === pk.key ? 'Destino sugerido por el motor' : 'Destino elegido por el operador'});
   S.ui.mv = {done: {m: p.m, from: v.from, to: pk.key, id}};
   S.ui.hl = pk.key; if (S.ui.sel === v.from) S.ui.sel = pk.key;
-  toast('Reubicada: ' + v.from + ' → ' + pk.key + ' · ' + id, 'ok');
+  toast('Reubicada: ' + v.from + ' → ' + pk.key + ' · ' + id + (S.online ? '' : ' · en cola para Odoo'), 'ok');
   render();
   reveal('#tab-move', 'start');
 }
@@ -1951,7 +2073,7 @@ function renderCount() {
   const open = openTasks(), closed = S.tasks.filter(t => t.st !== 'open');
   const acc = S.counts.ok / S.counts.ver;
   el.innerHTML = secH('No encontrado · conteos cíclicos', 'Corregir lo que el sistema cree', 'Cuando una tarima no está donde dice el sistema, la posición pasa a “En verificación” y se crea una tarea de conteo. Al cerrarla se corrige el inventario y se actualiza la exactitud de ubicación.') +
-    '<div class="kpis"><div class="kpi"><span class="kpi-l">Exactitud de ubicación</span><span class="kpi-v">' + (acc * 100).toFixed(1) + '<small>%</small></span><span class="kpi-s">' + S.counts.ok + ' de ' + S.counts.ver + ' posiciones contadas coincidieron · meta ≥ 95 %</span><div class="meter" aria-hidden="true"><i style="width:' + (acc * 100).toFixed(1) + '%"></i><b style="left:95%"></b></div></div>' +
+    '<div class="kpis"><div class="kpi"><span class="kpi-l">Exactitud de ubicación</span><span class="kpi-v">' + (acc * 100).toFixed(1) + '<small>%</small></span><span class="kpi-s">' + S.counts.ok + ' de ' + S.counts.ver + ' posiciones contadas coincidieron · meta ≥\u00a0' + Math.round(ACC_GOAL * 100) + '\u00a0%</span><div class="meter" aria-hidden="true"><i style="width:' + (acc * 100).toFixed(1) + '%"></i><b style="left:' + Math.round(ACC_GOAL * 100) + '%"></b></div></div>' +
     '<div class="kpi"><span class="kpi-l">Tareas abiertas</span><span class="kpi-v">' + open.length + '</span><span class="kpi-s">posiciones bloqueadas para acomodo y surtido</span></div>' +
     '<div class="kpi"><span class="kpi-l">Cerradas en la demo</span><span class="kpi-v">' + closed.length + '</span><span class="kpi-s">' + closed.filter(t => t.res !== 'present').length + ' con corrección de inventario</span></div></div>' +
     '<div class="btn-row"><button type="button" class="btn btn-sim" data-act="task-random">' + icon('clip') + 'Programar conteo aleatorio en ' + S.ui.cam + '</button></div>' +
@@ -1989,7 +2111,7 @@ function taskMoved(id, raw) {
   closeTask(t, 'moved', pk.key);
   addMove({type: 'AJUSTE', m: p.m, from: t.key, to: pk.key, note: 'Conteo ' + t.id + ': estaba en otra ubicación'});
   S.ui.hl = pk.key;
-  toast('Inventario corregido: ' + t.m + ' ahora en ' + pk.key + '. Exactitud: ' + (S.counts.ok / S.counts.ver * 100).toFixed(1) + ' %.', 'ok');
+  toast('Inventario corregido: ' + t.m + ' ahora en ' + pk.key + '. Exactitud: ' + (S.counts.ok / S.counts.ver * 100).toFixed(1) + '\u00a0%.', 'ok');
   render();
 }
 
@@ -2071,17 +2193,17 @@ function renderKpi() {
   const tview = (id, head, rows) => '<details class="tview" data-tv="' + id + '"' + (TV_OPEN.has(id) ? ' open' : '') + '><summary>Ver como tabla</summary><div class="tbl-wrap"><table><thead><tr>' + head.map((h, i) => '<th' + (i ? ' class="r"' : '') + '>' + h + '</th>').join('') + '</tr></thead><tbody>' + rows.map(r => '<tr>' + r.map((c, i) => '<td' + (i ? ' class="r mono"' : '') + '>' + c + '</td>').join('') + '</tr>').join('') + '</tbody></table></div></details>';
   el.innerHTML = secH('Indicadores', 'Tablero de la operación', 'Datos simulados del prototipo para mostrar cómo se medirá el piloto. La línea base real se toma en la semana 1 del proyecto (20 búsquedas cronometradas).') +
     '<div class="kpis">' +
-      '<div class="kpi"><span class="kpi-l">Exactitud de ubicación</span><span class="kpi-v">' + (acc * 100).toFixed(1) + '<small>%</small></span><span class="kpi-s">' + S.counts.ok + ' de ' + S.counts.ver + ' conteos · meta ≥ 95 %</span><div class="meter" aria-hidden="true"><i style="width:' + (acc * 100).toFixed(1) + '%"></i><b style="left:95%"></b></div></div>' +
-      '<div class="kpi"><span class="kpi-l">Búsquedas fallidas</span><span class="kpi-v">' + fails + '</span><span class="kpi-s">de ' + se.length + ' búsquedas (' + pct(fails / Math.max(1, se.length), 1) + '), incluye “No encontrado”</span></div>' +
+      '<div class="kpi"><span class="kpi-l">Exactitud de ubicación</span><span class="kpi-v">' + (acc * 100).toFixed(1) + '<small>%</small></span><span class="kpi-s">' + S.counts.ok + ' de ' + S.counts.ver + ' conteos · meta ≥\u00a0' + Math.round(ACC_GOAL * 100) + '\u00a0%</span><div class="meter" aria-hidden="true"><i style="width:' + (acc * 100).toFixed(1) + '%"></i><b style="left:' + Math.round(ACC_GOAL * 100) + '%"></b></div></div>' +
+      '<div class="kpi"><span class="kpi-l">Búsquedas fallidas</span><span class="kpi-v">' + fails + '</span><span class="kpi-s">de ' + se.length + ' búsquedas (' + pct(fails / Math.max(1, se.length), 1) + '), incluye “No encontrado” · meta ≤ 2 %</span></div>' +
       '<div class="kpi"><span class="kpi-l">Tiempo promedio de búsqueda</span><span class="kpi-v">' + avg.toFixed(1) + '<small>s</small></span><span class="kpi-s">de la consulta a ubicar en mapa · ' + okS.length + ' búsquedas (simulado)</span></div>' +
       '<div class="kpi"><span class="kpi-l">Tarimas por vencer</span><span class="kpi-v">' + dueT + '</span><span class="kpi-s">≤ 30 d congelado · ≤ 5 d fresco · ' + blkT + ' vencidas bloqueadas</span></div>' +
       '<div class="kpi"><span class="kpi-l">Movimientos del día</span><span class="kpi-v">' + mt.length + '</span><span class="kpi-s">desde las 00:00 · todos con usuario y hora</span></div>' +
       '<div class="kpi"><span class="kpi-l">Cola pendiente con Odoo</span><span class="kpi-v" id="kpi-queue">' + q + '</span><span class="kpi-s">' + (S.online ? 'en línea · última sincronización ' + fmtT(S.lastSync) : 'sin internet · se envía al reconectar') + '</span></div>' +
     '</div>' +
     '<div class="charts">' +
-      '<section class="panel chart"><div class="panel-h"><h3>Ocupación por cámara</h3><span class="small muted">' + pct(usedT / capT) + ' total · línea: alerta 90 %</span></div><div class="hb">' +
+      '<section class="panel chart"><div class="panel-h"><h3>Ocupación por cámara</h3><span class="small muted">' + pct(usedT / capT) + ' total · línea: alerta 90\u00a0%</span></div><div class="hb">' +
         stats.map(s => '<div class="hb-row" tabindex="0" data-tip="<b>' + s.c.id + '</b> · ' + TYPE[s.c.type].name + '<br>' + s.used + ' de ' + s.cap + ' posiciones (' + pct(s.ratio, 1) + ')"><span class="hb-lab">' + s.c.id + '<small>' + TYPE[s.c.type].name + '</small></span><span class="hb-track meter-t"><i class="hb-fill" style="width:' + (s.ratio * 100).toFixed(1) + '%"></i><i class="hb-thr" style="left:90%"></i></span><span class="hb-val">' + pct(s.ratio) + '</span></div>').join('') +
-        '<div class="hb-axis"><span></span><span><span>0 %</span><span>50 %</span><span>100 %</span></span><span></span></div></div>' +
+        '<div class="hb-axis"><span></span><span><span>0\u00a0%</span><span>50\u00a0%</span><span>100\u00a0%</span></span><span></span></div></div>' +
         tview('occ', ['Cámara', 'Ocupadas', 'Capacidad', '%'], stats.map(s => [s.c.id + ' · ' + TYPE[s.c.type].name, s.used, s.cap, pct(s.ratio, 1)])) + '</section>' +
       '<section class="panel chart"><div class="panel-h"><h3>Por vencer y vencidas por cámara</h3><div class="lgd"><span><i class="due"></i>Por vencer</span><span><i class="blk"></i>Vencidas (bloqueadas)</span></div></div><div class="hb">' +
         stats.map(s => { const a = s.due / maxDue * 100, b = s.blk / maxDue * 100; return '<div class="hb-row" tabindex="0" data-tip="<b>' + s.c.id + '</b> · umbral ' + TYPE[s.c.type].due + ' d<br>' + s.due + ' por vencer · ' + s.blk + ' vencidas"><span class="hb-lab">' + s.c.id + '<small>≤ ' + TYPE[s.c.type].due + ' días</small></span><span class="hb-track">' + (s.due ? '<i class="hb-fill due" style="width:' + a.toFixed(1) + '%"></i>' : '') + (s.blk ? '<i class="hb-fill blk" style="left:calc(' + a.toFixed(1) + '% + ' + (s.due ? 2 : 0) + 'px);width:' + b.toFixed(1) + '%"></i>' : '') + '</span><span class="hb-val">' + (s.due + s.blk) + '</span></div>'; }).join('') +
@@ -2156,7 +2278,7 @@ const pickRand = a => a[Math.floor(Math.random() * a.length)];
 const ACT = {
   tab: d => setTab(d.tab),
   guide: () => toggleGuide(),
-  'guide-go': d => { toggleGuide(false); GUIDE[+d.i].go(); },
+  'guide-go': d => { toggleGuide(false, true); GUIDE[+d.i].go(); if (lostFocus()) $('#tab-' + S.ui.tab).focus({preventScroll: true}); },
   theme: () => { themeMode = {auto: 'dark', dark: 'light', light: 'auto'}[themeMode]; try { localStorage.setItem(KEY + '-tema', themeMode); } catch (e) { /* ignorar */ } applyTheme(); },
   'reset-ask': () => toast('¿Reiniciar la demo? Se regeneran los datos simulados y se borra lo registrado en esta sesión.', 'warn', {sticky: true, actions: [{label: 'Sí, reiniciar', cls: 'btn-pri', fn: doReset}, {label: 'Cancelar'}]}),
   'net-restore': () => setOnline(true),
@@ -2164,7 +2286,7 @@ const ACT = {
   view: d => { S.ui.view = d.v; render(); },
   flip: () => { S.ui.flip = !S.ui.flip; render(); },
   sel: d => { S.ui.sel = S.ui.sel === d.key ? null : d.key; render(); },
-  unsel: () => { S.ui.sel = null; render(); },
+  unsel: () => closeFicha(),
   locate: d => locate(d.key),
   'see-3d': d => locate(d.key, {view: '3d'}),
   'see-2d': d => locate(d.key, {view: '2d'}),
@@ -2205,7 +2327,7 @@ const ACT = {
   'put-retry': () => { if (S.ui.put) S.ui.put.msg = null; render(); const i = $('#put-loc'); if (i) i.focus(); },
   'put-reset': () => { S.ui.put = null; render(); },
   // Buscar
-  'find-q': d => { S.ui.q = d.q; findStart = performance.now(); renderFind(); save(); },
+  'find-q': d => { S.ui.q = d.q; findStart = performance.now(); keepFocus(renderFind); save(); },
   'find-locate': d => {
     const secs = findStart ? Math.round((performance.now() - findStart) / 100) / 10 : null;
     S.searches.push({ts: Date.now(), secs: secs != null ? Math.max(0.3, secs) : null, ok: true, q: S.ui.q});
@@ -2303,7 +2425,7 @@ const ACT = {
     S.pos[t.key].chk = null;
     closeTask(t, 'present');
     addMove({type: 'CONTEO', m: t.m, from: t.key, to: t.key, note: 'Conteo ' + t.id + ': confirma la ubicación'});
-    toast('Conteo ' + t.id + ' cerrado sin ajuste. Exactitud: ' + (S.counts.ok / S.counts.ver * 100).toFixed(1) + ' %.', 'ok');
+    toast('Conteo ' + t.id + ' cerrado sin ajuste. Exactitud: ' + (S.counts.ok / S.counts.ver * 100).toFixed(1) + '\u00a0%.', 'ok');
     render();
   },
   'task-missing': d => {
@@ -2327,13 +2449,13 @@ const ACT = {
     render();
   },
   // Bitácora
-  'log-lot': d => { S.ui.logLot = d.lot; S.ui.logLimit = 100; if (S.ui.tab !== 'log') setTab('log'); else { const i = $('#log-lot'); if (i) i.value = d.lot; updateLog(); save(); } },
-  'log-clear': () => { S.ui.logLot = ''; S.ui.logType = ''; S.ui.logQ = ''; S.ui.logLimit = 100; renderLog(); save(); },
-  'log-more': () => { S.ui.logLimit = (S.ui.logLimit || 100) + 100; updateLogTable(); }
+  'log-lot': d => { S.ui.logLot = d.lot; S.ui.logLimit = 100; if (S.ui.tab !== 'log') setTab('log'); else { const i = $('#log-lot'); if (i) i.value = d.lot; keepFocus(updateLog); save(); } },
+  'log-clear': () => { S.ui.logLot = ''; S.ui.logType = ''; S.ui.logQ = ''; S.ui.logLimit = 100; keepFocus(renderLog); save(); },
+  'log-more': () => { S.ui.logLimit = (S.ui.logLimit || 100) + 100; keepFocus(updateLogTable); save(); }
 };
 function doReset() {
   try { localStorage.removeItem(KEY); } catch (e) { /* ignorar */ }
-  clearTimeout(syncTimer); syncing = false; netProg = null; findStart = 0;
+  stopSync(); findStart = 0;
   S = seed();
   render();
   window.scrollTo(0, 0);
@@ -2384,7 +2506,7 @@ document.addEventListener('change', e => {
   const t = e.target;
   if (t.id === 'net-toggle') setOnline(!t.checked);
   else if (t.id === 'user-sel') { S.user = t.value; renderShell(); if (S.ui.tab === 'count') renderCount(); save(); toast('Usuario activo: ' + t.value + '. Sus movimientos quedan con su nombre.', 'info'); }
-  else if (t.id === 'map-filter') { S.ui.mapFilter = t.value; renderMap(); save(); }
+  else if (t.id === 'map-filter') { S.ui.mapFilter = t.value; keepFocus(renderMap); save(); }
   else if (t.id === 'log-type') { S.ui.logType = t.value; S.ui.logLimit = 100; updateLog(); save(); }
   else if (t.id === 'out-sku' || t.id === 'out-dock' || t.id === 'out-qty') { S.ui.outForm = {sku: $('#out-sku').value, qty: parseInt($('#out-qty').value, 10) || 1, dock: $('#out-dock').value}; save(); }
 });
@@ -2406,7 +2528,10 @@ document.addEventListener('toggle', e => {
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
     if (!$('#guide').hidden) { toggleGuide(false); return; }
-    if (S.ui.sel && S.ui.tab === 'map') { S.ui.sel = null; render(); }
+    if (S.ui.sel && S.ui.tab === 'map') { closeFicha(); return; }
+    // Suelta el campo de texto para que vuelvan a funcionar los atajos
+    const a = document.activeElement;
+    if (a && a.matches && a.matches('input:not([type="checkbox"]), select, textarea')) a.blur();
     return;
   }
   if (e.ctrlKey || e.metaKey || e.altKey) return;
