@@ -22,6 +22,7 @@ const GUINDA = '8E1F3B';
 const GUINDA_CLARO = 'F7EEF0';
 const BORDE = 'D8C3C9';
 const GRIS = '5A5A5A';
+const SENCILLO = process.env.ESTILO === 'sencillo';
 const FUENTE = 'Arial';
 const FUENTE_TITULOS = 'Times New Roman';
 
@@ -154,7 +155,7 @@ function anchosColumnas(filas) {
 
 function tabla(filas) {
   const anchos = anchosColumnas(filas);
-  const borde = { style: BorderStyle.SINGLE, size: 4, color: BORDE };
+  const borde = { style: BorderStyle.SINGLE, size: 4, color: SENCILLO ? '8C8C8C' : BORDE };
   const bordes = { top: borde, bottom: borde, left: borde, right: borde };
   const celda = (texto, c, esEncabezado, r) => new TableCell({
     width: { size: anchos[c], type: WidthType.DXA },
@@ -162,12 +163,12 @@ function tabla(filas) {
     verticalAlign: VerticalAlign.CENTER,
     margins: { top: 50, bottom: 50, left: 90, right: 90 },
     shading: esEncabezado
-      ? { type: ShadingType.CLEAR, color: 'auto', fill: GUINDA }
-      : (r % 2 === 0 ? { type: ShadingType.CLEAR, color: 'auto', fill: GUINDA_CLARO } : undefined),
+      ? { type: ShadingType.CLEAR, color: 'auto', fill: SENCILLO ? 'E7E6E6' : GUINDA }
+      : (!SENCILLO && r % 2 === 0 ? { type: ShadingType.CLEAR, color: 'auto', fill: GUINDA_CLARO } : undefined),
     children: texto.split(/<br\s*\/?>/).map((parte) => new Paragraph({
       spacing: { before: 0, after: 0, line: 240, lineRule: LineRuleType.AUTO },
       children: enLinea(parte, esEncabezado
-        ? { bold: true, color: 'FFFFFF', size: 17 }
+        ? { bold: true, color: SENCILLO ? '000000' : 'FFFFFF', size: 17 }
         : { size: 17 }),
     })),
   });
@@ -228,7 +229,7 @@ for (let i = 0; i < lineas.length; i++) {
     const datos = fs.readFileSync(ruta);
     const anchoPx = datos.readUInt32BE(16);
     const altoPx = datos.readUInt32BE(20);
-    const ancho = 600;
+    const ancho = Number(process.env.ANCHO_FIG) || 600;
     hijos.push(new Paragraph({
       alignment: AlignmentType.CENTER,
       keepNext: true,
@@ -305,6 +306,14 @@ for (let i = 0; i < lineas.length; i++) {
     }
     i--;
     hijos.push(espacio());
+    continue;
+  }
+
+  if (/^\*\*Tabla [IVXL]+\.\*\*/.test(l.trim())) {
+    hijos.push(new Paragraph({
+      alignment: AlignmentType.CENTER, keepNext: true, spacing: { before: 120, after: 80 },
+      children: enLinea(l.trim(), { size: 18 }),
+    }));
     continue;
   }
 
