@@ -2380,7 +2380,7 @@ document.addEventListener('keydown', e => {
     return;
   }
   if (e.ctrlKey || e.metaKey || e.altKey) return;
-  if (e.target.closest && e.target.closest('input, select, textarea, [contenteditable="true"]')) return;
+  if (e.target.closest && e.target.closest('input:not([type="checkbox"]), select, textarea, [contenteditable="true"]')) return;
   const k = e.key.toLowerCase();
   if (/^[1-8]$/.test(k)) { e.preventDefault(); setTab(TABS[+k - 1][0]); }
   else if (k === '/') { e.preventDefault(); setTab('find'); const q = $('#q'); if (q) q.focus(); }

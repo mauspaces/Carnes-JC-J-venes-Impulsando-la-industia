@@ -97,13 +97,13 @@
 ## Equipo (confirmado)
 - Mauro Acuña Olivarria — Ing. Mecatrónica.
 - Francisco Efraín Pazos Quintero — Ing. Mecatrónica.
-- [Tercer integrante / autor de las notas — nombre y carrera por confirmar].
+- Héctor Rafael Esquer Camacho — Ing. en Sistemas Computacionales.
 - Asesor: Jesús Renato Montoya Morales.
 - Carnes JC **sí usa Odoo**.
 
 ## Respuestas del equipo (6 oct 2026)
 - El usuario que aporta las notas es **Mauro Acuña Olivarria** (Ing. Mecatrónica).
-- Tercer integrante: **Héctor** (según el Gantt previo) — nombre completo y carrera por confirmar.
+- Tercer integrante: **Héctor Rafael Esquer Camacho** — Ing. en Sistemas Computacionales.
 - Etiqueta del canal en recepción: **probablemente NO trae código de barras** (solo número y datos impresos).
 - Etiqueta **master de tarima: SÍ es código de barras**.
 - Racks: **algunos están identificados, pero no todos**.
@@ -119,3 +119,13 @@
 - El asesor (Jesús Renato Montoya Morales) está de acuerdo en participar como maestro tutor.
 - No se tomaron fotos en la visita.
 - Carnes JC compartió un video con más información (youtube.com/watch?v=s3y63YV0OgQ); pendiente de revisar.
+
+## Equipo final (confirmado 5 oct 2026)
+| Integrante | Carrera | Rol en el proyecto |
+|---|---|---|
+| Héctor Rafael Esquer Camacho | Ing. en Sistemas Computacionales | Software, integración con Odoo, motor de asignación, coordinación |
+| Mauro Acuña Olivarria | Ing. Mecatrónica | Levantamiento físico, codificación de ubicaciones, mapa de cámaras, medición |
+| Francisco Efraín Pazos Quintero | Ing. Mecatrónica | Infraestructura y red local, hardware y etiquetas para -18 °C, pruebas, capacitación (confirmar que sigue en el equipo) |
+| Jesús Renato Montoya Morales | Asesor / maestro tutor | Acompañamiento académico |
+
+Institución: Instituto Tecnológico de Hermosillo (TecNM). Los datos de contacto (teléfonos y correos) van en la cédula y el formulario, no en el anteproyecto.
