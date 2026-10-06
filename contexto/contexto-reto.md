@@ -49,3 +49,54 @@
 - Proceso actual de entrada, acomodo y búsqueda.
 - Uso actual de Odoo (¿registra cajas, lotes, ubicaciones?).
 - Carreras del equipo y maestro tutor.
+
+---
+
+## Recorrido en planta (experiencia del equipo, visita a Carnes JC)
+
+### 1. Recepción de canales
+- Llegan normalmente **2 camiones al día** con un promedio de **~120 canales/día**.
+- Personal: descargadores; capturistas que registran cada canal en **Odoo** y además lo anotan **a mano en una hoja** (primer registro). En la misma computadora se vio también una ventana de **Excel** (uso desconocido) → indicio de **doble o triple captura**.
+- Cada canal se registra con su **lote** (tamaño variable, p. ej. ~72 canales; no hay número estándar).
+- Antes de pasar a la sala de corte hay **otra computadora donde se valida** el canal.
+- El canal trae una **etiqueta pegada** con un número y otros datos (trazabilidad).
+- **No hay escáner en recepción**: la captura es manual. Un trabajador estimó que con escáner **podrían procesar ~40 canales más por día** (~+33%; estimación de un trabajador, por validar).
+- Capacitación en recepción: de 1–2 semanas a ~1 mes.
+
+### 2. Sala de corte
+- Deshuesadores, pulperos y ayudantes de corte. ~3 líneas, 2 en uso actualmente (por confirmar).
+- De cada canal salen varios cortes; cada operador sabe qué corte le corresponde.
+- Capacitación de un operador de corte: ~3 meses (posiblemente la duración del contrato de prueba).
+
+### 3. Empacado al vacío
+- **Super Vac:** vacío automatizado, ciclo de ~20 s.
+- **Smart Vac:** de uso manual, ciclo de ~1 min.
+- Solo las bolsas de carne clasificada llevan etiqueta antes del embalaje.
+
+### 4. Embalaje
+- Las bolsas se colocan en cajas. Hay personal que embolsa, **2 etiquetadores** (uno por lado de la línea) y un montacargas.
+- Cada **caja recibe etiqueta**; las cajas forman una **tarima/pallet**; al llenarse se **emplaya** y se coloca una **etiqueta master** con todo el contenido de la tarima.
+- Computadora con **Odoo** (registro de producción) y otra donde el montacarguista **valida/registra la tarima** antes de llevarla a cámaras.
+- El montacarguista **sí tiene pistola de escaneo**.
+- Hay cámaras de **congelados y de frescos**.
+
+### 5. Valor agregado
+- Chorizo, cortes finos, etc. (no se observó a detalle).
+
+### 6. Logística / cámaras (la parte central del reto)
+- **6 cámaras:** C1, C2, C3A, C3B, C4 (congelados), C5 (frescos). En total **4 de congelados y 2 de frescos** (falta confirmar el tipo de C1, C2, C3A y C3B).
+- **4 cortinas (andenes)** donde se enrampan los camiones; **una computadora por cortina**.
+- Cámaras de **16 o 32 racks**, **5 niveles** (aparentemente todos). Entras a un pasillo y hay racks a la derecha y a la izquierda.
+- Se almacena por **tarima con etiqueta master** (probable; por confirmar si también hay cajas sueltas).
+- Software de logística llamado **"Zorro"** (por su ícono): registro, consulta de inventarios, asignación de ubicación, consulta de cajas. **Se ve antiguo y NO está conectado con Odoo.**
+- El montacargas llega con la tarima y su master a estas computadoras y ahí la da de alta en Zorro.
+- **Dependen de internet:** ya ha pasado que se cae y **no hay sistema**.
+- En esa misma sala también hay cajas almacenadas.
+- **Problema clave reportado por la empresa:** una ubicación queda registrada, alguien saca el producto sin actualizar el sistema, y quien llega después lo busca, el sistema dice que está ahí, **pero ya no está** ("ubicaciones fantasma"). Falta de control de movimientos.
+
+## Equipo (confirmado)
+- Mauro Acuña Olivarria — Ing. Mecatrónica.
+- Francisco Efraín Pazos Quintero — Ing. Mecatrónica.
+- [Tercer integrante / autor de las notas — nombre y carrera por confirmar].
+- Asesor: Jesús Renato Montoya Morales.
+- Carnes JC **sí usa Odoo**.
