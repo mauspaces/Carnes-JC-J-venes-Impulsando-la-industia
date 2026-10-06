@@ -100,3 +100,12 @@
 - [Tercer integrante / autor de las notas — nombre y carrera por confirmar].
 - Asesor: Jesús Renato Montoya Morales.
 - Carnes JC **sí usa Odoo**.
+
+## Respuestas del equipo (6 oct 2026)
+- El usuario que aporta las notas es **Mauro Acuña Olivarria** (Ing. Mecatrónica).
+- Tercer integrante: **Héctor** (según el Gantt previo) — nombre completo y carrera por confirmar.
+- Etiqueta del canal en recepción: **probablemente NO trae código de barras** (solo número y datos impresos).
+- Etiqueta **master de tarima: SÍ es código de barras**.
+- Racks: **algunos están identificados, pero no todos**.
+- **Odoo se usa desde el navegador** (Odoo siempre es web; falta confirmar si está en la nube o en servidor local).
+- No se cuenta con los logos del formato oficial en archivo; se toman de la convocatoria.
