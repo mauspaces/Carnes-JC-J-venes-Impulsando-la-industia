@@ -12,44 +12,45 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Big+Shoulders+Display:wght@600;700;800&family=Big+Shoulders+Stencil+Display:wght@800&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
 :root{
-  /* Diseño: consola de cámara frigorífica. Carcasa de acero oscuro (marca, estado de red y pestañas fijas)
-     sobre un área de trabajo color escarcha. PC de cortina: mapa | ficha. Terminal de mano: una columna,
-     ficha como hoja inferior. Códigos de ubicación y lotes en monoespaciada tabular, como la etiqueta del rack. */
-  --ground:#E3E9ED;
-  --surface:#F5F8FA;
-  --surface-2:#D6DFE5;
-  --sunken:#EBF0F3;
-  --ink:#0D1A23;
-  --ink-2:#4B5F6C;
-  --ink-3:#6E828F;
-  --line:#B6C4CD;
-  --line-2:#D3DCE2;
-  --shell:#0E1C26;
-  --shell-2:#182C3B;
-  --shell-ink:#DDE8EF;
-  --shell-ink-2:#93A8B6;
-  --shell-accent:#72B2F5;
-  --shell-ok:#5FD08F;
-  --shell-warn:#F2BC4D;
-  --accent:#1A5DA8;
+  /* Diseño: consola de cámara frigorífica con la identidad de Carnes JC. Carcasa color vino (marca, estado
+     de red y pestañas fijas) sobre un área de trabajo neutra; la estructura de los racks en vino y el producto
+     congelado en azul hielo. PC de cortina: mapa | ficha. Terminal de mano: una columna, ficha como hoja
+     inferior. Códigos de ubicación y lotes en monoespaciada tabular, como la etiqueta del rack. */
+  --ground:#EDE8E9;
+  --surface:#FBF9F9;
+  --surface-2:#E2D9DB;
+  --sunken:#F4F0F1;
+  --ink:#25151A;
+  --ink-2:#5C474D;
+  --ink-3:#76636A;
+  --line:#CBBCC1;
+  --line-2:#E0D5D8;
+  --shell:#4B1120;
+  --shell-2:#62192C;
+  --shell-ink:#FBEFF2;
+  --shell-ink-2:#DDB5BF;
+  --shell-accent:#F4B6C4;
+  --shell-ok:#86E3AC;
+  --shell-warn:#F7C960;
+  --accent:#8E1B32;
   --accent-ink:#FFFFFF;
-  --accent-soft:#D3E2F2;
+  --accent-soft:#F4DCE2;
   --tgt:#C6490A;
   --on-tgt:#FFFFFF;
   --tgt-soft:#F6C7A9;
   --lane:#D9A514;
-  --rack:#2C5D93;
+  --rack:#6E1F30;
   --pallet:#A9875C;
-  --floor:#CBD6DD;
-  --paper:#FCFDFD;
-  --paper-ink:#0D1A23;
+  --floor:#D8CED1;
+  --paper:#FCFBFB;
+  --paper-ink:#25151A;
   --ok:#17804A;
   --ok-soft:#D6EFDF;
   --warn:#9A6400;
   --warn-soft:#FBEBC6;
   --bad:#B02A22;
   --bad-soft:#F7DBD8;
-  --st-free:#F5F8FA;
+  --st-free:#FBF9F9;
   --st-occ:#6F9DC4;
   --on-occ:#0D1A23;
   --st-due:#D4930A;
@@ -59,11 +60,11 @@
   --st-chk:#7C55C7;
   --st-chk-2:#6743B0;
   --on-chk:#FFFFFF;
-  --shade:#04101A;
+  --shade:#14060A;
   --glint:#FFFFFF;
-  --pop:#0E1C26;
-  --pop-line:#0E1C26;
-  --shadow:0 1px 2px rgba(13,26,35,.08),0 8px 24px rgba(13,26,35,.14);
+  --pop:#4B1120;
+  --pop-line:#4B1120;
+  --shadow:0 1px 2px rgba(37,21,26,.08),0 8px 24px rgba(37,21,26,.14);
   --f-display:"Big Shoulders Display","Arial Narrow","Roboto Condensed",sans-serif;
   --f-stencil:"Big Shoulders Stencil Display","Big Shoulders Display","Arial Narrow",sans-serif;
   --f-body:"Barlow","Segoe UI",Roboto,system-ui,sans-serif;
@@ -73,31 +74,31 @@
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --ground:#0A1117;--surface:#111C24;--surface-2:#1B2933;--sunken:#0D161D;
-    --ink:#E1EAF0;--ink-2:#97AAB7;--ink-3:#71848F;--line:#2B3C48;--line-2:#1F2E38;
-    --shell:#050B10;--shell-2:#132433;--shell-ink:#DDE8EF;--shell-ink-2:#8197A6;--shell-accent:#72B2F5;--shell-ok:#5FD08F;--shell-warn:#F2BC4D;
-    --accent:#62A0EA;--accent-ink:#04111E;--accent-soft:#16304B;
+    --ground:#120A0D;--surface:#1B1115;--surface-2:#291A20;--sunken:#160D10;
+    --ink:#F2E7EA;--ink-2:#C2A9B0;--ink-3:#9A8188;--line:#3D2A31;--line-2:#2B1E23;
+    --shell:#2B0912;--shell-2:#43131F;--shell-ink:#F7E9ED;--shell-ink-2:#C99AA6;--shell-accent:#F4B6C4;--shell-ok:#7FDCA3;--shell-warn:#F2BC4D;
+    --accent:#E8899D;--accent-ink:#2A0710;--accent-soft:#4A1825;
     --tgt:#FF7A33;--on-tgt:#1A0A00;--tgt-soft:#5A2A10;
-    --lane:#B88A12;--rack:#4F86C2;--pallet:#7A6142;--floor:#17242E;
-    --paper:#D8DFE3;--paper-ink:#0D1A23;
+    --lane:#B88A12;--rack:#C0566D;--pallet:#7A6142;--floor:#22161A;
+    --paper:#E8DEE1;--paper-ink:#25151A;
     --ok:#4CC27E;--ok-soft:#10301F;--warn:#E9B13B;--warn-soft:#382A0B;--bad:#F2766C;--bad-soft:#3B1613;
-    --st-free:#111C24;--st-occ:#3A6C93;--on-occ:#EAF2F7;--st-due:#D99A17;--on-due:#1A1200;--st-blk:#E25247;--on-blk:#1A0605;--st-chk:#9A7BE3;--st-chk-2:#8A6AD8;--on-chk:#120A24;
-    --shade:#000000;--glint:#FFFFFF;--pop:#1B3042;--pop-line:#466681;
+    --st-free:#1B1115;--st-occ:#3A6C93;--on-occ:#EAF2F7;--st-due:#D99A17;--on-due:#1A1200;--st-blk:#E25247;--on-blk:#1A0605;--st-chk:#9A7BE3;--st-chk-2:#8A6AD8;--on-chk:#120A24;
+    --shade:#000000;--glint:#FFFFFF;--pop:#43131F;--pop-line:#7A3445;
     --shadow:0 1px 2px rgba(0,0,0,.45),0 10px 28px rgba(0,0,0,.45);
     color-scheme:dark;
   }
 }
 :root[data-theme="dark"]{
-  --ground:#0A1117;--surface:#111C24;--surface-2:#1B2933;--sunken:#0D161D;
-  --ink:#E1EAF0;--ink-2:#97AAB7;--ink-3:#71848F;--line:#2B3C48;--line-2:#1F2E38;
-  --shell:#050B10;--shell-2:#132433;--shell-ink:#DDE8EF;--shell-ink-2:#8197A6;--shell-accent:#72B2F5;--shell-ok:#5FD08F;--shell-warn:#F2BC4D;
-  --accent:#62A0EA;--accent-ink:#04111E;--accent-soft:#16304B;
+  --ground:#120A0D;--surface:#1B1115;--surface-2:#291A20;--sunken:#160D10;
+  --ink:#F2E7EA;--ink-2:#C2A9B0;--ink-3:#9A8188;--line:#3D2A31;--line-2:#2B1E23;
+  --shell:#2B0912;--shell-2:#43131F;--shell-ink:#F7E9ED;--shell-ink-2:#C99AA6;--shell-accent:#F4B6C4;--shell-ok:#7FDCA3;--shell-warn:#F2BC4D;
+  --accent:#E8899D;--accent-ink:#2A0710;--accent-soft:#4A1825;
   --tgt:#FF7A33;--on-tgt:#1A0A00;--tgt-soft:#5A2A10;
-  --lane:#B88A12;--rack:#4F86C2;--pallet:#7A6142;--floor:#17242E;
-  --paper:#D8DFE3;--paper-ink:#0D1A23;
+  --lane:#B88A12;--rack:#C0566D;--pallet:#7A6142;--floor:#22161A;
+  --paper:#E8DEE1;--paper-ink:#25151A;
   --ok:#4CC27E;--ok-soft:#10301F;--warn:#E9B13B;--warn-soft:#382A0B;--bad:#F2766C;--bad-soft:#3B1613;
-  --st-free:#111C24;--st-occ:#3A6C93;--on-occ:#EAF2F7;--st-due:#D99A17;--on-due:#1A1200;--st-blk:#E25247;--on-blk:#1A0605;--st-chk:#9A7BE3;--st-chk-2:#8A6AD8;--on-chk:#120A24;
-  --shade:#000000;--glint:#FFFFFF;--pop:#1B3042;--pop-line:#466681;
+  --st-free:#1B1115;--st-occ:#3A6C93;--on-occ:#EAF2F7;--st-due:#D99A17;--on-due:#1A1200;--st-blk:#E25247;--on-blk:#1A0605;--st-chk:#9A7BE3;--st-chk-2:#8A6AD8;--on-chk:#120A24;
+  --shade:#000000;--glint:#FFFFFF;--pop:#43131F;--pop-line:#7A3445;
   --shadow:0 1px 2px rgba(0,0,0,.45),0 10px 28px rgba(0,0,0,.45);
   color-scheme:dark;
 }
@@ -547,7 +548,7 @@ details.tview summary{cursor:pointer;min-height:44px;display:inline-flex;align-i
         </svg>
         <div>
           <h1 class="brand-name">UbicaJC</h1>
-          <div class="brand-sub">Ubicación y trazabilidad de tarimas en cámaras frigoríficas</div>
+          <div class="brand-sub">Tradición trazable: cada tarima en su lugar</div>
         </div>
         <span class="sim-tag">Prototipo · datos simulados</span>
       </div>
