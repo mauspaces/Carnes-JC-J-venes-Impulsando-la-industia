@@ -239,7 +239,7 @@ main.wrap,.tab,.panel,.ficha,.step-b,.kpi,.task,.task-res,.chart,.guide,.target,
 .placard.tgt{background:var(--tgt);color:var(--on-tgt)}
 
 /* Mensajes */
-.msg,.target,.step,.flow,.panel{scroll-margin-top:calc(env(safe-area-inset-top,0px) + 100px);scroll-margin-bottom:16px}
+.msg,.target,.step,.flow,.panel{scroll-margin-top:calc(env(safe-area-inset-top,0px) + var(--ops-h,90px) + 12px);scroll-margin-bottom:16px}
 .msg{display:grid;grid-template-columns:22px minmax(0,1fr);gap:4px 10px;padding:12px 14px;border-radius:var(--r);border:1px solid var(--line);background:var(--sunken)}
 .msg > svg.ic{width:22px;height:22px;margin-top:1px}
 .msg-x{display:grid;gap:8px;min-width:0}
@@ -274,7 +274,7 @@ main.wrap,.tab,.panel,.ficha,.step-b,.kpi,.task,.task-res,.chart,.guide,.target,
 .map-main{min-width:0;display:grid;gap:8px}
 .rackmap-scroll{overflow-x:auto;position:relative;background:var(--sunken);border:1px solid var(--line);border-radius:var(--r);padding:10px 10px 12px}
 .rackmap{display:grid;grid-template-columns:30px repeat(var(--cols),minmax(42px,1fr));gap:3px}
-.rm-side{grid-column:1 / -1;font:600 .75rem/1 var(--f-body);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);padding-block:2px 4px;position:sticky;left:0}
+.rm-side{grid-column:1 / -1;font:600 .75rem/1 var(--f-body);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);padding-block:2px 4px}
 .rm-side.b{padding-block:6px 0}
 .rm-lv{font:600 .75rem/44px var(--f-mono);color:var(--ink-2);text-align:center}
 .rm-rk{font:500 .6875rem/1 var(--f-mono);color:var(--ink-2);text-align:center;padding-block:3px}
@@ -451,6 +451,8 @@ tbody tr:last-child td{border-bottom:0}
 .hb-fill.due{background:var(--st-due)}
 .hb-fill.blk{background:var(--st-blk)}
 .hb-thr{position:absolute;top:-5px;bottom:-5px;width:1px;background:var(--ink)}
+.hb.wide .hb-row{grid-template-columns:112px minmax(0,1fr) 36px}
+.hb.wide .hb-lab{font:600 .8125rem/1.15 var(--f-body)}
 .hb-val{font:600 .8125rem/1 var(--f-body);font-variant-numeric:tabular-nums;text-align:right}
 .hb-axis{display:grid;grid-template-columns:76px minmax(0,1fr) 74px;gap:10px;padding-inline:4px;font:500 .6875rem/1 var(--f-mono);color:var(--ink-2)}
 .hb-axis span{display:flex;justify-content:space-between}
@@ -473,7 +475,7 @@ details.tview summary{cursor:pointer;min-height:44px;display:inline-flex;align-i
 .lgd i.blk{background:var(--st-blk)}
 
 /* ---------- Guion, toasts, tooltip, pie ---------- */
-.guide{scroll-margin-top:calc(env(safe-area-inset-top,0px) + 100px);display:grid;gap:14px;padding:18px;background:var(--surface);border:2px solid var(--ink);border-radius:var(--r)}
+.guide{scroll-margin-top:calc(env(safe-area-inset-top,0px) + var(--ops-h,90px) + 12px);display:grid;gap:14px;padding:18px;background:var(--surface);border:2px solid var(--ink);border-radius:var(--r)}
 .guide-h{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:10px}
 .guide-steps{list-style:none;display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));counter-reset:g}
 .guide-steps li{display:grid;grid-template-columns:30px minmax(0,1fr) auto;gap:10px;align-items:center;padding:10px 12px;border:1px solid var(--line);border-radius:var(--r);counter-increment:g}
@@ -503,11 +505,13 @@ details.tview summary{cursor:pointer;min-height:44px;display:inline-flex;align-i
   .brand-mark{width:34px;height:34px}
   .brand-name{font-size:1.65rem}
   .sim-tag{font-size:.5625rem;padding:4px 6px}
-  .mast-ctrls{width:100%;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
-  .mast-ctrls .ctl{grid-column:span 2}
+  .mast-ctrls{width:100%;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
+  .mast-ctrls .ctl,.mast-ctrls .switch{grid-column:span 3}
   .mast-ctrls .ctl select{width:100%}
-  .mast-ctrls .switch{grid-column:span 1;padding:0 8px;gap:6px;font-size:.8125rem}
-  .mast-ctrls .sbtn{justify-content:center;padding:0 8px}
+  .mast-ctrls .switch{padding:0 8px;gap:8px;font-size:.875rem}
+  .mast-ctrls .sbtn{grid-column:span 2;justify-content:center;padding:0 8px}
+  .toasts{top:calc(env(safe-area-inset-top,0px) + var(--ops-h,90px) + 8px);bottom:auto;left:12px;right:12px;width:auto}
+  .toast{padding:10px 12px;font-size:.875rem}
   .mast-ctrls .switch .sw-track{width:34px}
   .mast-ctrls .switch input:checked + .sw-track .sw-knob{transform:translateX(12px)}
   .cam-grid{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:minmax(112px,1fr);overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
@@ -544,7 +548,7 @@ details.tview summary{cursor:pointer;min-height:44px;display:inline-flex;align-i
             <option>Supervisor</option>
           </select>
         </label>
-        <label class="switch" for="net-toggle"><input type="checkbox" id="net-toggle" role="switch"><span class="sw-track" aria-hidden="true"><span class="sw-knob"></span></span><span class="lg-only">Simular caída de internet</span><span class="sm-only">Sin internet</span></label>
+        <label class="switch" for="net-toggle"><input type="checkbox" id="net-toggle" role="switch"><span class="sw-track" aria-hidden="true"><span class="sw-knob"></span></span><span class="lg-only">Simular caída de internet</span><span class="sm-only">Simular caída</span></label>
         <button type="button" class="sbtn" id="guide-btn" data-act="guide" aria-expanded="false" aria-controls="guide">Guion<span class="lg-only">&nbsp;de demo</span></button>
         <button type="button" class="sbtn" id="theme-btn" data-act="theme">Tema: sistema</button>
         <button type="button" class="sbtn" id="reset-btn" data-act="reset-ask">Reiniciar<span class="lg-only">&nbsp;demo</span></button>
@@ -1108,8 +1112,10 @@ function toast(text, kind, opts) {
     });
     el.querySelector('.t-body').appendChild(row);
   }
+  if (window.innerWidth <= 620) box.style.top = Math.max(8, Math.round($('.ops').getBoundingClientRect().bottom + 8)) + 'px';
+  else box.style.top = '';
   box.appendChild(el);
-  while (box.children.length > 3) box.firstChild.remove();
+  while (box.children.length > (window.innerWidth <= 620 ? 2 : 3)) box.firstChild.remove();
   if (!opts.sticky) setTimeout(() => el.remove(), opts.ms || 4600);
   return el;
 }
@@ -1153,6 +1159,7 @@ function toggleGuide(force) {
    ========================================================= */
 let wantScroll = false, findStart = 0;
 function render() {
+  hideTip();
   renderShell();
   TAB_IDS.forEach(id => { $('#tab-' + id).hidden = id !== S.ui.tab; });
   document.body.classList.toggle('has-sheet', S.ui.tab === 'map' && !!S.ui.sel);
@@ -1181,6 +1188,7 @@ function renderShell() {
   const off = $('#offline');
   off.hidden = S.online;
   if (!S.online) off.innerHTML = icon('wifiOff') + '<p><b>Sin internet.</b> UbicaFrío sigue operando con su servidor en la red local del almacén: mapa, búsqueda, acomodo y surtido funcionan igual. Los movimientos se guardan en cola y se envían a Odoo al volver la conexión.</p><button type="button" class="btn" data-act="net-restore">Restaurar internet</button>';
+  document.documentElement.style.setProperty('--ops-h', $('.ops').offsetHeight + 'px');
   const sel = $('#tabs [aria-selected="true"]');
   if (sel && sel.scrollIntoView) { const t = $('#tabs'); const l = sel.offsetLeft, r = l + sel.offsetWidth; if (l < t.scrollLeft || r > t.scrollLeft + t.clientWidth) t.scrollLeft = l - 16; }
 }
@@ -2082,7 +2090,7 @@ function renderKpi() {
       '<section class="panel chart"><div class="panel-h"><h3>Tiempo hasta ubicar · últimas búsquedas</h3><span class="small muted">segundos por búsqueda exitosa</span></div><div id="chart-search"></div>' +
         tview('srch', ['Búsqueda', 'Hora', 'Segundos'], okS.slice(-20).map((s, i) => [String(i + 1), fmtT(s.ts), s.secs.toFixed(1)])) + '</section>' +
       '<section class="panel chart"><div class="panel-h"><h3>Movimientos de hoy por tipo</h3><span class="small muted">' + mt.length + ' en total</span></div>' +
-        (byType.length ? '<div class="hb">' + byType.map(x => '<div class="hb-row" tabindex="0" data-tip="<b>' + MT[x[0]].l + '</b><br>' + x[1] + ' movimiento' + (x[1] > 1 ? 's' : '') + ' hoy"><span class="hb-lab">' + MT[x[0]].l + '</span><span class="hb-track"><i class="hb-fill" style="width:' + (x[1] / maxMt * 100).toFixed(1) + '%"></i></span><span class="hb-val">' + x[1] + '</span></div>').join('') + '</div>' : '<p class="muted">Sin movimientos hoy.</p>') +
+        (byType.length ? '<div class="hb wide">' + byType.map(x => '<div class="hb-row" tabindex="0" data-tip="<b>' + MT[x[0]].l + '</b><br>' + x[1] + ' movimiento' + (x[1] > 1 ? 's' : '') + ' hoy"><span class="hb-lab">' + MT[x[0]].l + '</span><span class="hb-track"><i class="hb-fill" style="width:' + (x[1] / maxMt * 100).toFixed(1) + '%"></i></span><span class="hb-val">' + x[1] + '</span></div>').join('') + '</div>' : '<p class="muted">Sin movimientos hoy.</p>') +
         tview('mov', ['Tipo', 'Movimientos'], byType.map(x => [MT[x[0]].l, x[1]])) + '</section>' +
     '</div>';
   drawSearchChart();
@@ -2389,6 +2397,7 @@ document.addEventListener('input', e => {
     updateFind(); save();
   } else if (t.id === 'log-lot') { S.ui.logLot = t.value; S.ui.logLimit = 100; updateLog(); save(); }
   else if (t.id === 'log-q') { S.ui.logQ = t.value; S.ui.logLimit = 100; updateLogTable(); save(); }
+  else if (t.id.indexOf('task-loc-') === 0) { const tk = S.tasks.find(x => 'task-loc-' + x.id === t.id); if (tk) tk.prefill = t.value.toUpperCase(); }
 });
 document.addEventListener('toggle', e => {
   const d = e.target;
@@ -2404,7 +2413,7 @@ document.addEventListener('keydown', e => {
   if (e.target.closest && e.target.closest('input:not([type="checkbox"]), select, textarea, [contenteditable="true"]')) return;
   const k = e.key.toLowerCase();
   if (/^[1-8]$/.test(k)) { e.preventDefault(); setTab(TABS[+k - 1][0]); }
-  else if (k === '/') { e.preventDefault(); setTab('find'); const q = $('#q'); if (q) q.focus(); }
+  else if (k === '/') { e.preventDefault(); setTab('find'); const q = $('#q'); if (q) { q.focus(); q.select(); } }
   else if (k === 'i') setOnline(!S.online);
   else if (k === 'g') toggleGuide();
   else if (k === 'v' && S.ui.tab === 'map') { S.ui.view = S.ui.view === '2d' ? '3d' : '2d'; render(); }
@@ -2440,7 +2449,7 @@ setInterval(() => {
   const el = $('#find-clock');
   if (el) el.textContent = ((performance.now() - findStart) / 1000).toFixed(1) + ' s';
 }, 100);
-setInterval(() => { if (S.ui.tab === 'count') { /* refresca “hace N min” sin perder lo escrito */ $$('#tab-count input').length || renderCount(); } }, 60000);
+setInterval(() => { if (S.ui.tab === 'count' && !(document.activeElement && document.activeElement.closest('#tab-count'))) renderCount(); }, 60000);
 
 /* =========================================================
    Arranque
@@ -2450,6 +2459,7 @@ if (!TAB_IDS.includes(S.ui.tab)) S.ui.tab = 'map';
 S.ui.hl = S.ui.hl && S.pos[S.ui.hl] ? S.ui.hl : null;
 applyTheme();
 render();
+if (S.online && queueLen()) scheduleSync();
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(redrawGraphics).catch(() => {});
 })();
 </script>
