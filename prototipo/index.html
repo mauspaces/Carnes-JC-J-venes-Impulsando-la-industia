@@ -131,7 +131,7 @@ svg.ic{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-wid
 .mast-ctrls{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
 .ctl{display:inline-flex;align-items:center;gap:8px;font-size:.8125rem;color:var(--shell-ink-2)}
 .ctl select{min-height:44px;background:var(--shell-2);color:var(--shell-ink);border:1px solid var(--shell-ink-2);border-radius:var(--r);padding:0 10px;font-weight:600;font-size:.9375rem}
-.sbtn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 12px;background:transparent;color:var(--shell-ink);border:1px solid var(--shell-ink-2);border-radius:var(--r);font-weight:600;font-size:.875rem}
+.sbtn{display:inline-flex;align-items:center;gap:0;min-height:44px;padding:0 12px;background:transparent;color:var(--shell-ink);border:1px solid var(--shell-ink-2);border-radius:var(--r);font-weight:600;font-size:.875rem}
 .sbtn:hover{background:var(--shell-2)}
 .switch{position:relative;display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:0 12px 0 10px;border:1px solid var(--shell-ink-2);border-radius:var(--r);cursor:pointer;font-size:.875rem;font-weight:600;user-select:none}
 .switch input{position:absolute;opacity:0;width:1px;height:1px;margin:0}
@@ -239,6 +239,7 @@ main.wrap,.tab,.panel,.ficha,.step-b,.kpi,.task,.task-res,.chart,.guide,.target,
 .placard.tgt{background:var(--tgt);color:var(--on-tgt)}
 
 /* Mensajes */
+.msg,.target,.step,.flow,.panel{scroll-margin-top:calc(env(safe-area-inset-top,0px) + 100px);scroll-margin-bottom:16px}
 .msg{display:grid;grid-template-columns:22px minmax(0,1fr);gap:4px 10px;padding:12px 14px;border-radius:var(--r);border:1px solid var(--line);background:var(--sunken)}
 .msg > svg.ic{width:22px;height:22px;margin-top:1px}
 .msg-x{display:grid;gap:8px;min-width:0}
@@ -329,7 +330,7 @@ main.wrap,.tab,.panel,.ficha,.step-b,.kpi,.task,.task-res,.chart,.guide,.target,
 /* ---------- Flujos ---------- */
 .flow{gap:20px}
 .step{display:grid;grid-template-columns:34px minmax(0,1fr);gap:12px;align-items:start}
-.step-n{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--ink);color:var(--surface);font:700 1.05rem/1 var(--f-display)}
+.step-n{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--ink);color:var(--surface);font:700 1rem/1 var(--f-body)}
 .step.is-done .step-n{background:var(--ok);color:var(--surface)}
 .step.is-off{opacity:.45}
 .step-b{display:grid;gap:10px;min-width:0}
@@ -358,7 +359,7 @@ details.more summary:focus-visible{outline:3px solid var(--accent);outline-offse
 .pk.is-ok{opacity:.7}
 .pk.is-skip{opacity:.55}
 .pk.is-skip .pk-main{text-decoration:line-through}
-.pk-n{font:700 1rem/1 var(--f-display);text-align:center}
+.pk-n{font:700 1rem/1 var(--f-body);text-align:center}
 .pk-main{display:grid;gap:2px;min-width:0}
 .out-form{display:grid;gap:12px;grid-template-columns:minmax(0,1fr)}
 @media (min-width:640px){.out-form{grid-template-columns:minmax(0,2fr) minmax(150px,1fr) minmax(150px,1fr)}}
@@ -381,7 +382,7 @@ details.more summary:focus-visible{outline:3px solid var(--accent);outline-offse
 .find-meta b{color:var(--ink)}
 .res-list{list-style:none;display:grid;gap:8px}
 .res{display:grid;grid-template-columns:30px minmax(0,1fr);gap:8px 12px;padding:14px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface);align-items:center}
-.res-rank{font:700 1.25rem/1 var(--f-display);color:var(--ink-2);text-align:center;align-self:start}
+.res-rank{font:700 1.15rem/1.2 var(--f-body);color:var(--ink-2);text-align:center;align-self:start}
 .res-main{display:grid;gap:4px;min-width:0}
 .res-prod{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px}
 .res-loc{grid-column:2;display:flex;flex-wrap:wrap;align-items:center;gap:8px}
@@ -472,11 +473,11 @@ details.tview summary{cursor:pointer;min-height:44px;display:inline-flex;align-i
 .lgd i.blk{background:var(--st-blk)}
 
 /* ---------- Guion, toasts, tooltip, pie ---------- */
-.guide{display:grid;gap:14px;padding:18px;background:var(--surface);border:2px solid var(--ink);border-radius:var(--r)}
+.guide{scroll-margin-top:calc(env(safe-area-inset-top,0px) + 100px);display:grid;gap:14px;padding:18px;background:var(--surface);border:2px solid var(--ink);border-radius:var(--r)}
 .guide-h{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:10px}
 .guide-steps{list-style:none;display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));counter-reset:g}
 .guide-steps li{display:grid;grid-template-columns:30px minmax(0,1fr) auto;gap:10px;align-items:center;padding:10px 12px;border:1px solid var(--line);border-radius:var(--r);counter-increment:g}
-.guide-steps li::before{content:counter(g);font:700 1.2rem/1 var(--f-display);color:var(--ink-2);text-align:center}
+.guide-steps li::before{content:counter(g);font:700 1.1rem/1 var(--f-body);color:var(--ink-2);text-align:center}
 .keys{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.8125rem;color:var(--ink-2)}
 .keys kbd{font:600 .75rem/1 var(--f-mono);padding:3px 6px;border:1px solid var(--line);border-radius:3px;background:var(--sunken);color:var(--ink)}
 .toasts{position:fixed;z-index:40;right:16px;left:auto;bottom:calc(16px + env(safe-area-inset-bottom,0px));display:grid;gap:8px;width:min(420px,calc(100vw - 32px));pointer-events:none}
@@ -592,7 +593,7 @@ const RM = window.matchMedia('(prefers-reduced-motion: reduce)');
 const NF = new Intl.NumberFormat('es-MX');
 const NF1 = new Intl.NumberFormat('es-MX', {minimumFractionDigits: 1, maximumFractionDigits: 1});
 const fmtInt = n => NF.format(Math.round(n));
-const fmtKg = n => NF1.format(n) + ' kg';
+const fmtKg = n => NF1.format(n) + '\u00a0kg';
 const pct = (x, d = 0) => (isFinite(x) ? (x * 100).toFixed(d) : '0') + ' %';
 const sod = ts => { const d = new Date(ts); d.setHours(0, 0, 0, 0); return d.getTime(); };
 const fmtD = ts => { const d = new Date(ts); return pad(d.getDate()) + '/' + pad(d.getMonth() + 1) + '/' + d.getFullYear(); };
@@ -1140,10 +1141,11 @@ function renderGuide() {
 function toggleGuide(force) {
   const g = $('#guide');
   const open = force === undefined ? g.hidden : force;
+  if (open && S.ui.sel) { S.ui.sel = null; render(); }
   if (open) renderGuide();
   g.hidden = !open;
   $('#guide-btn').setAttribute('aria-expanded', String(open));
-  if (open) g.scrollIntoView({block: 'nearest', behavior: RM.matches ? 'auto' : 'smooth'});
+  if (open) g.scrollIntoView({block: 'start', behavior: RM.matches ? 'auto' : 'smooth'});
 }
 
 /* =========================================================
@@ -1182,6 +1184,15 @@ function renderShell() {
   const sel = $('#tabs [aria-selected="true"]');
   if (sel && sel.scrollIntoView) { const t = $('#tabs'); const l = sel.offsetLeft, r = l + sel.offsetWidth; if (l < t.scrollLeft || r > t.scrollLeft + t.clientWidth) t.scrollLeft = l - 16; }
 }
+function reveal(sel, block) {
+  requestAnimationFrame(() => {
+    const el = typeof sel === 'string' ? $(sel) : sel;
+    if (!el) return;
+    const r = el.getBoundingClientRect(), top = $('.ops').offsetHeight + 8;
+    if (r.top >= top && r.bottom <= window.innerHeight - 8) return;
+    el.scrollIntoView({block: block || (r.height > window.innerHeight - top - 16 ? 'start' : 'nearest'), behavior: RM.matches ? 'auto' : 'smooth'});
+  });
+}
 function setTab(t) {
   if (!TAB_IDS.includes(t)) return;
   S.ui.tab = t;
@@ -1194,11 +1205,11 @@ function setTab(t) {
 function secH(eyebrow, title, sub, subCls) {
   return '<div class="sec-h"><div><p class="eyebrow">' + eyebrow + '</p><h2>' + title + '</h2></div>' + (sub ? '<p class="sec-sub muted ' + (subCls || '') + '">' + sub + '</p>' : '') + '</div>';
 }
-function msgHTML(m) {
+function msgHTML(m, id) {
   if (!m) return '';
   const ic = {ok: 'check', warn: 'alert', bad: 'lock', info: 'info'}[m.kind] || 'info';
   const acts = (m.actions || []).map(a => '<button type="button" class="btn ' + (a.cls || '') + '" data-act="' + a.act + '"' + Object.entries(a.data || {}).map(([k, v]) => ' data-' + k + '="' + esc(v) + '"').join('') + '>' + esc(a.label) + '</button>').join('');
-  return '<div class="msg msg-' + m.kind + '" role="' + (m.kind === 'bad' || m.kind === 'warn' ? 'alert' : 'status') + '">' + icon(ic) + '<div class="msg-x"><p class="msg-t">' + esc(m.title) + '</p>' + (m.text ? '<p>' + esc(m.text) + '</p>' : '') + (acts ? '<div class="btn-row">' + acts + '</div>' : '') + '</div></div>';
+  return '<div class="msg msg-' + m.kind + '"' + (id ? ' id="' + id + '"' : '') + ' role="' + (m.kind === 'bad' || m.kind === 'warn' ? 'alert' : 'status') + '">' + icon(ic) + '<div class="msg-x"><p class="msg-t">' + esc(m.title) + '</p>' + (m.text ? '<p>' + esc(m.text) + '</p>' : '') + (acts ? '<div class="btn-row">' + acts + '</div>' : '') + '</div></div>';
 }
 function barcodeSVG(text) {
   let x = 0, h = 2166136261;
@@ -1544,7 +1555,7 @@ function pendingHTML() {
   const u = S.ui.put || {};
   const items = S.pending.map(m => {
     const p = S.pallets[m];
-    return '<li class="pend-i' + (u.m === m ? ' is-on' : '') + '"><div class="pend-main"><span class="mono b">' + m + '</span><span>' + esc(pname(p.sku)) + ' <span class="ttag t-' + ptype(p.sku) + '">' + TYPE[ptype(p.sku)].one + '</span></span><span class="mono small muted">' + p.lot + ' · ' + p.boxes + ' cajas · ' + fmtKg(p.kg) + '</span><span class="small muted">' + esc(p.origin) + ' · ' + fmtT(p.qts || p.prod) + '</span></div><button type="button" class="btn" data-act="put-take" data-m="' + m + '">Tomar</button></li>';
+    return '<li class="pend-i' + (u.m === m ? ' is-on' : '') + '"><div class="pend-main"><span class="mono b">' + m + '</span><span>' + esc(pname(p.sku)) + ' <span class="ttag t-' + ptype(p.sku) + '">' + TYPE[ptype(p.sku)].one + '</span></span><span class="mono small muted">' + p.lot + ' · ' + p.boxes + '\u00a0cajas · ' + fmtKg(p.kg) + '</span><span class="small muted">' + esc(p.origin) + ' · ' + fmtT(p.qts || p.prod) + '</span></div><button type="button" class="btn" data-act="put-take" data-m="' + m + '">Tomar</button></li>';
   }).join('');
   return '<div class="panel-h"><h3>Por acomodar</h3><span class="chip">' + (S.online ? 'Odoo (simulado) · en línea' : 'Copia local · sin internet') + '</span></div>' +
     '<p class="small muted">Tarimas registradas en Odoo por embalaje o recepción que aún no entran a cámara. ' + (S.online ? '' : 'Sin internet se usa la última copia local; los datos también vienen en la etiqueta master (GS1-128).') + '</p>' +
@@ -1560,7 +1571,7 @@ function renderPut() {
   if (u.done) {
     const d = u.done, mv = S.moves.find(x => x.id === d.id);
     flow = '<div class="msg msg-ok">' + icon('check') + '<div class="msg-x"><p class="msg-t">Tarima acomodada</p><p><span class="mono">' + d.m + '</span> quedó registrada en <b class="mono">' + d.key + '</b> por ' + esc(mv ? mv.user : S.user) + '. Movimiento <span class="mono">' + d.id + '</span> · <span data-sync-of="' + d.id + '">' + (mv ? syncHTML(mv) : '') + '</span></p>' + (d.note ? '<p class="small">' + esc(d.note) + '</p>' : '') +
-      '<div class="btn-row"><button type="button" class="btn" data-act="locate" data-key="' + d.key + '">' + icon('pin') + 'Ver en mapa</button><button type="button" class="btn btn-pri" data-act="put-next" data-sim-primary="1">' + icon('scan') + 'Siguiente tarima</button></div></div></div>';
+      '<div class="btn-row"><button type="button" class="btn" data-act="locate" data-key="' + d.key + '">' + icon('pin') + 'Ver en mapa</button></div></div></div>';
   }
   let step2 = '', step3 = '';
   if (p && !u.done) {
@@ -1571,7 +1582,7 @@ function renderPut() {
       step2 = '<div class="step"><span class="step-n">2</span><div class="step-b">' + msgHTML({kind: 'bad', title: 'Sin posiciones compatibles', text: 'Todas las cámaras de ' + TYPE[ptype(p.sku)].name.toLowerCase() + ' están al límite de ocupación (95 %).'}) + '</div></div>';
     } else {
       const alts = sg.list.filter(e => e.key !== ev.key).slice(0, 3);
-      step2 = '<div class="step"><span class="step-n">2</span><div class="step-b">' +
+      step2 = '<div class="step" id="put-step2"><span class="step-n">2</span><div class="step-b">' +
         '<div class="panel-h"><h3>Posición sugerida</h3><span class="score">Puntaje ' + ev.score + '/100 <span class="score-bar" aria-hidden="true"><i style="width:' + ev.score + '%"></i></span></span></div>' +
         '<div class="sug-main"><span class="placard xl tgt">' + ev.key + '</span><button type="button" class="btn" data-act="locate" data-key="' + ev.key + '">' + icon('pin') + 'Ver en mapa</button></div>' +
         '<p class="small muted">' + whereText(ev.pk) + '</p>' +
@@ -1582,17 +1593,17 @@ function renderPut() {
         '<p class="small muted">El escaneo confirma el acomodo. Si escaneas otra posición, el sistema avisa antes de registrar (poka-yoke).</p>' +
         '<form data-form="put-loc" autocomplete="off"><label class="sr" for="put-loc">Etiqueta de ubicación</label><div class="scan" id="scan-put-loc">' + icon('scan') + '<input id="put-loc" class="scan-in" spellcheck="false" autocapitalize="characters" placeholder="' + ev.key + '"><button type="submit" class="btn btn-pri">Confirmar</button></div></form>' +
         '<div class="btn-row"><button type="button" class="btn btn-sim" data-act="put-sim-sug" data-sim-primary="1">' + icon('scan') + 'Escanear la sugerida</button><button type="button" class="btn btn-sim" data-act="put-sim-other">' + icon('scan') + 'Escanear otra libre</button><button type="button" class="btn btn-sim" data-act="put-sim-occ">' + icon('scan') + 'Escanear una ocupada</button></div>' +
-        (u.msg && u.msg.at === 'loc' ? msgHTML(u.msg) : '') + '</div></div>';
+        (u.msg && u.msg.at === 'loc' ? msgHTML(u.msg, 'put-msg-loc') : '') + '</div></div>';
     }
   }
   el.innerHTML = secH('Entrada · acomodo', 'Acomodar tarima en cámara', 'La tarima llega de embalaje con su etiqueta master. UbicaFrío trae sus datos de Odoo, sugiere la mejor posición y valida el acomodo con un escaneo.') +
     '<div class="cols"><section class="panel">' + pendingHTML() + '</section><section class="panel flow">' +
-    (u.done ? flow :
-      '<div class="step' + (p ? ' is-done' : '') + '"><span class="step-n">1</span><div class="step-b"><h3>Escanea la etiqueta master</h3>' +
+    flow +
+      '<div class="step' + (p ? ' is-done' : '') + '"><span class="step-n">1</span><div class="step-b"><h3>' + (u.done ? 'Siguiente tarima: escanea su etiqueta master' : 'Escanea la etiqueta master') + '</h3>' +
       '<form data-form="put-master" autocomplete="off"><label class="sr" for="put-master">Etiqueta master</label><div class="scan" id="scan-put-master">' + icon('scan') + '<input id="put-master" class="scan-in" spellcheck="false" autocapitalize="characters" placeholder="MST-26-000123" value="' + esc(u.m || u.raw || '') + '"><button type="submit" class="btn btn-pri">Consultar</button></div></form>' +
       '<div class="btn-row"><button type="button" class="btn btn-sim" data-act="put-sim-master"' + (p ? '' : ' data-sim-primary="1"') + '>' + icon('scan') + 'Simular escaneo</button>' + (p ? '<button type="button" class="btn" data-act="put-reset">Cancelar</button>' : '') + '</div>' +
-      (u.msg && u.msg.at === 'master' ? msgHTML(u.msg) : '') +
-      (p ? labelHTML(p) + palletKV(p, false) : '') + '</div></div>' + step2 + step3) +
+      (u.msg && u.msg.at === 'master' ? msgHTML(u.msg, 'put-msg-master') : '') +
+      (p ? labelHTML(p) + palletKV(p, false) : '') + '</div></div>' + step2 + step3 +
     '</section></div>';
 }
 function simScan(inputId, value, then) {
@@ -1605,21 +1616,22 @@ function simScan(inputId, value, then) {
 function putScanMaster(raw) {
   const m = normMaster(raw);
   const u = S.ui.put = {m: null, raw: String(raw || '').toUpperCase()};
-  if (!m) { u.msg = {at: 'master', kind: 'bad', title: 'Código no reconocido', text: 'Una etiqueta master tiene el formato MST-26-000123. Vuelve a escanear.'}; return render(); }
+  if (!m) { u.msg = {at: 'master', kind: 'bad', title: 'Código no reconocido', text: 'Una etiqueta master tiene el formato MST-26-000123. Vuelve a escanear.'}; render(); return reveal('#put-msg-master'); }
   const p = S.pallets[m];
-  if (!p) { u.msg = {at: 'master', kind: 'bad', title: 'No existe en Odoo', text: m + ' no aparece en producción ni en recepción. Revisa la etiqueta o consulta con embalaje.'}; return render(); }
-  if (p.st === 'almacenada') { u.msg = {at: 'master', kind: 'warn', title: 'Esta tarima ya está ubicada', text: m + ' está registrada en ' + p.loc + '.', actions: [{act: 'locate', label: 'Ver en mapa', data: {key: p.loc}}, {act: 'mv-start', label: 'Reubicarla', data: {key: p.loc}}]}; return render(); }
-  if (p.st !== 'por_acomodar') { u.msg = {at: 'master', kind: 'bad', title: 'Tarima fuera de inventario', text: m + ' figura como ' + (p.st === 'despachada' ? 'despachada' : 'dada de baja') + '. No debe entrar a cámara sin revisión.'}; return render(); }
+  if (!p) { u.msg = {at: 'master', kind: 'bad', title: 'No existe en Odoo', text: m + ' no aparece en producción ni en recepción. Revisa la etiqueta o consulta con embalaje.'}; render(); return reveal('#put-msg-master'); }
+  if (p.st === 'almacenada') { u.msg = {at: 'master', kind: 'warn', title: 'Esta tarima ya está ubicada', text: m + ' está registrada en ' + p.loc + '.', actions: [{act: 'locate', label: 'Ver en mapa', data: {key: p.loc}}, {act: 'mv-start', label: 'Reubicarla', data: {key: p.loc}}]}; render(); return reveal('#put-msg-master'); }
+  if (p.st !== 'por_acomodar') { u.msg = {at: 'master', kind: 'bad', title: 'Tarima fuera de inventario', text: m + ' figura como ' + (p.st === 'despachada' ? 'despachada' : 'dada de baja') + '. No debe entrar a cámara sin revisión.'}; render(); return reveal('#put-msg-master'); }
   u.m = m; u.raw = null;
   u.msg = S.online
     ? {at: 'master', kind: 'info', title: 'Datos obtenidos de Odoo (simulado)', text: 'Producto, lote, fechas, cajas y kilos leídos del registro de ' + p.origin.toLowerCase() + '.'}
     : {at: 'master', kind: 'warn', title: 'Datos de la copia local', text: 'Sin internet: se usó la copia local sincronizada a las ' + fmtT(S.lastSync) + ' y la etiqueta master. Se valida con Odoo al reconectar.'};
   render();
+  reveal('#put-step2');
 }
 function putScanLoc(raw) {
   const u = S.ui.put; if (!u || !u.m) return;
   const p = S.pallets[u.m], pk = parseKey(raw);
-  const setMsg = m => { m.at = 'loc'; u.msg = m; render(); };
+  const setMsg = m => { m.at = 'loc'; u.msg = m; render(); reveal('#put-msg-loc'); };
   if (!pk) return setMsg({kind: 'bad', title: 'Código de ubicación no válido', text: 'Formato: cámara-rack-nivel, por ejemplo C4-R07-N3.'});
   if (pk.invalid) return setMsg({kind: 'bad', title: pk.key + ' no existe', text: pk.cam + ' tiene ' + CH[pk.cam].racks + ' racks de ' + LV + ' niveles.'});
   const c = CH[pk.cam], pos = S.pos[pk.key];
@@ -1643,6 +1655,7 @@ function registerPut(key, note) {
   S.ui.hl = key;
   toast('Acomodada en ' + key + ' · ' + id + (S.online ? '' : ' · en cola para Odoo'), 'ok');
   render();
+  reveal('#tab-put .flow', 'start');
 }
 function newPending() {
   const prod = CATALOG[Math.floor(Math.random() * CATALOG.length)];
@@ -1741,14 +1754,14 @@ function renderOut() {
   if (o) {
     const cur = o.lines.find(l => l.st === 'pend');
     const done = o.lines.filter(l => l.st === 'ok');
-    order = '<section class="panel"><div class="panel-h"><div><p class="eyebrow">Orden de surtido ' + o.id + '</p><h3>' + esc(pfull(o.sku)) + ' · ' + o.qty + ' tarima' + (o.qty > 1 ? 's' : '') + ' → ' + o.dock + '</h3></div><button type="button" class="btn" data-act="out-cancel">' + (cur ? 'Cancelar orden' : 'Cerrar') + '</button></div>' +
+    order = '<section class="panel" id="out-order"><div class="panel-h"><div><p class="eyebrow">Orden de surtido ' + o.id + '</p><h3>' + esc(pfull(o.sku)) + ' · ' + o.qty + ' tarima' + (o.qty > 1 ? 's' : '') + ' → ' + o.dock + '</h3></div><button type="button" class="btn" data-act="out-cancel">' + (cur ? 'Cancelar orden' : 'Cerrar') + '</button></div>' +
       '<p class="small muted">Lotes sugeridos por FEFO: primero el que vence antes; a igual fecha, el de nivel más bajo.</p>' +
       '<ol class="picklist">' + o.lines.map((l, i) => { const p = S.pallets[l.m]; const c = l === cur; return '<li class="pk' + (c ? ' is-cur' : '') + (l.st === 'ok' ? ' is-ok' : '') + (l.st === 'skip' ? ' is-skip' : '') + '"><span class="pk-n">' + (i + 1) + '</span><div class="pk-main"><span><span class="mono b">' + l.key + '</span> · ' + esc(pname(p.sku)) + '</span><span class="mono small muted">' + p.lot + ' · ' + l.m + ' · vence ' + fmtD(p.exp) + '</span></div><span class="chip">' + (l.st === 'ok' ? icon('check') + 'Surtida' : l.st === 'skip' ? 'No encontrada' : c ? 'En curso' : 'Pendiente') + '</span></li>'; }).join('') + '</ol>' +
       (o.excl.length ? '<p class="small muted">Excluidas por el sistema: ' + o.excl.map(e => '<span class="mono">' + e.key + '</span> (' + e.why + ')').join(', ') + '.</p>' : '') +
       (o.short ? msgHTML({kind: 'warn', title: 'Inventario insuficiente', text: 'Solo hay ' + (o.qty - o.short) + ' tarima(s) disponibles de este producto.'}) : '');
     if (cur) {
       const p = S.pallets[cur.m];
-      order += '<div class="target"><div class="dsteps"><span class="dstep ' + (o.step === 'loc' ? 'on' : 'ok') + '">' + (o.step === 'mst' ? icon('check') : '') + '1 · Ubicación</span><span class="dstep ' + (o.step === 'mst' ? 'on' : '') + '">2 · Etiqueta master</span></div>' +
+      order += '<div class="target" id="out-target"><div class="dsteps"><span class="dstep ' + (o.step === 'loc' ? 'on' : 'ok') + '">' + (o.step === 'mst' ? icon('check') : '') + '1 · Ubicación</span><span class="dstep ' + (o.step === 'mst' ? 'on' : '') + '">2 · Etiqueta master</span></div>' +
         '<p class="eyebrow">Ve a</p><div class="sug-main"><span class="placard xl tgt">' + cur.key + '</span><button type="button" class="btn" data-act="locate" data-key="' + cur.key + '">' + icon('pin') + 'Ver en mapa</button></div>' +
         '<p>' + esc(pfull(p.sku)) + ' · lote <span class="mono">' + p.lot + '</span> · <span class="mono">' + cur.m + '</span> · ' + p.boxes + ' cajas · ' + fmtKg(p.kg) + '</p>' +
         '<form data-form="out-scan" autocomplete="off"><label class="fld-lab" for="out-scan">' + (o.step === 'loc' ? 'Paso 1: escanea la etiqueta de la ubicación' : 'Paso 2: escanea la etiqueta master de la tarima') + '</label><div class="scan" id="scan-out">' + icon('scan') + '<input id="out-scan" class="scan-in" spellcheck="false" autocapitalize="characters" placeholder="' + (o.step === 'loc' ? cur.key : 'MST-26-000123') + '"><button type="submit" class="btn btn-pri">Validar</button></div></form>' +
@@ -1772,6 +1785,10 @@ function renderOut() {
   const dk = $('#out-dock'); if (dk) dk.value = f.dock;
 }
 function outScan(raw) {
+  outScanCore(raw);
+  reveal(S.ui.out && S.ui.out.lines.some(l => l.st === 'pend') ? '#out-target' : '#out-order');
+}
+function outScanCore(raw) {
   const o = S.ui.out; if (!o) return;
   const line = o.lines.find(l => l.st === 'pend'); if (!line) return;
   const v = String(raw || '').trim();
@@ -1839,12 +1856,12 @@ function renderMove() {
       (v.msg && v.msg.at === 'from' ? msgHTML(v.msg) : '') +
       (p ? '<div class="mini"><span><span class="placard sm">' + v.from + '</span> ' + stateChip(v.from) + '</span><span>' + esc(pfull(p.sku)) + ' · lote <span class="mono">' + p.lot + '</span> · ' + dueText(p) + '</span><span class="mono small muted">' + p.m + ' · ' + p.boxes + ' cajas · ' + fmtKg(p.kg) + '</span></div>' : '') +
     '</div></div>' +
-    '<div class="step' + (v.mOk ? ' is-done' : '') + (off2 ? ' is-off' : '') + '"><span class="step-n">2</span><div class="step-b"><h3>Confirma la tarima (escaneo 1 de 2)</h3>' +
+    '<div class="step' + (v.mOk ? ' is-done' : '') + (off2 ? ' is-off' : '') + '" id="mv-step2"><span class="step-n">2</span><div class="step-b"><h3>Confirma la tarima (escaneo 1 de 2)</h3>' +
       '<form data-form="mv-master" autocomplete="off"><label class="fld-lab" for="mv-master">Etiqueta master de la tarima</label><div class="scan" id="scan-mv-master">' + icon('scan') + '<input id="mv-master" class="scan-in" spellcheck="false" autocapitalize="characters" placeholder="MST-26-000123"' + (off2 ? ' disabled' : '') + (v.mOk ? ' value="' + v.m + '"' : '') + '><button type="submit" class="btn btn-pri"' + (off2 ? ' disabled' : '') + '>Validar</button></div></form>' +
       '<div class="btn-row"><button type="button" class="btn btn-sim" data-act="mv-sim-master-ok"' + (off2 ? ' disabled' : '') + (p && !v.mOk ? ' data-sim-primary="1"' : '') + '>' + icon('scan') + 'Escanear master correcto</button><button type="button" class="btn btn-sim" data-act="mv-sim-master-bad"' + (off2 ? ' disabled' : '') + '>' + icon('scan') + 'Escanear otro master</button></div>' +
       (v.msg && v.msg.at === 'master' ? msgHTML(v.msg) : '') +
     '</div></div>' +
-    '<div class="step' + (off3 ? ' is-off' : '') + '"><span class="step-n">3</span><div class="step-b"><h3>Destino (escaneo 2 de 2)</h3>' +
+    '<div class="step' + (off3 ? ' is-off' : '') + '" id="mv-step3"><span class="step-n">3</span><div class="step-b"><h3>Destino (escaneo 2 de 2)</h3>' +
       '<div class="btn-row"><button type="button" class="btn" data-act="mv-suggest"' + (off3 ? ' disabled' : '') + '>' + icon('cube') + 'Sugerir destino</button></div>' + sugBlock +
       '<form data-form="mv-to" autocomplete="off"><label class="fld-lab" for="mv-to">Etiqueta de la posición destino</label><div class="scan" id="scan-mv-to">' + icon('scan') + '<input id="mv-to" class="scan-in" spellcheck="false" autocapitalize="characters" placeholder="' + (v.sug || 'C4-R12-N2') + '"' + (off3 ? ' disabled' : '') + '><button type="submit" class="btn btn-pri"' + (off3 ? ' disabled' : '') + '>Confirmar</button></div></form>' +
       '<div class="btn-row"><button type="button" class="btn btn-sim" data-act="mv-sim-to"' + (off3 ? ' disabled' : '') + (!off3 ? ' data-sim-primary="1"' : '') + '>' + icon('scan') + 'Escanear destino ' + (v.sug ? 'sugerido' : 'libre') + '</button><button type="button" class="btn btn-sim" data-act="mv-sim-to-occ"' + (off3 ? ' disabled' : '') + '>' + icon('scan') + 'Escanear una ocupada</button></div>' +
@@ -1859,14 +1876,16 @@ function mvFrom(raw) {
     if (!pos.m) return fail('Posición libre', 'En ' + pk.key + ' no hay tarima registrada para mover.');
     if (pos.chk) return fail('Posición en verificación', pk.key + ' tiene el conteo ' + pos.chk + ' pendiente; no se puede mover hasta cerrarlo.');
     S.ui.mv = {from: pk.key, m: pos.m, mOk: false, msg: {at: 'from', kind: 'info', title: 'Origen ' + pk.key, text: 'Ahora escanea la etiqueta master para confirmar la tarima.'}};
-    return render();
+    render();
+    return reveal('#mv-step2');
   }
   if (mm) {
     const p = S.pallets[mm];
     if (!p || p.st !== 'almacenada') return fail('Tarima no ubicada', mm + (p ? ' no está en cámara (' + p.st.replace('_', ' ') + ').' : ' no existe en el inventario.'));
     if (S.pos[p.loc].chk) return fail('Posición en verificación', p.loc + ' tiene un conteo pendiente.');
     S.ui.mv = {from: p.loc, m: mm, mOk: true, msg: {at: 'from', kind: 'info', title: 'Tarima ' + mm + ' en ' + p.loc, text: 'La etiqueta master ya confirma la tarima. Escanea el destino.'}};
-    return render();
+    render();
+    return reveal('#mv-step3');
   }
   if (pk && pk.invalid) return fail(pk.key + ' no existe', pk.cam + ' tiene ' + CH[pk.cam].racks + ' racks de ' + LV + ' niveles.');
   fail('Código no válido', 'Escanea una ubicación (C4-R07-N3) o una etiqueta master (MST-26-000123).');
@@ -1874,7 +1893,7 @@ function mvFrom(raw) {
 function mvMaster(raw) {
   const v = S.ui.mv; if (!v || !v.m) return;
   const m = normMaster(raw);
-  if (m === v.m) { v.mOk = true; v.msg = {at: 'master', kind: 'ok', title: 'Tarima confirmada', text: m + ' coincide con ' + v.from + '. Ahora el destino.'}; return render(); }
+  if (m === v.m) { v.mOk = true; v.msg = {at: 'master', kind: 'ok', title: 'Tarima confirmada', text: m + ' coincide con ' + v.from + '. Ahora el destino.'}; render(); return reveal('#mv-step3'); }
   v.mOk = false;
   v.msg = {at: 'master', kind: 'bad', title: 'No coincide · movimiento bloqueado', text: (m ? 'Escaneaste ' + m : 'El código no es una etiqueta master') + '; en ' + v.from + ' el sistema tiene ' + v.m + '. No muevas esta tarima.', actions: [{act: 'mv-missing', label: 'La tarima correcta no está: reportar'}]};
   render();
@@ -1882,7 +1901,7 @@ function mvMaster(raw) {
 function mvTo(raw) {
   const v = S.ui.mv; if (!v || !v.mOk) return;
   const p = S.pallets[v.m], pk = parseKey(raw);
-  const bad = (title, text) => { v.msg = {at: 'to', kind: 'bad', title, text}; render(); };
+  const bad = (title, text) => { v.msg = {at: 'to', kind: 'bad', title, text}; render(); reveal('#mv-step3'); };
   if (!pk) return bad('Código no válido', 'Formato de ubicación: C4-R07-N3.');
   if (pk.invalid) return bad(pk.key + ' no existe', pk.cam + ' tiene ' + CH[pk.cam].racks + ' racks de ' + LV + ' niveles.');
   if (pk.key === v.from) return bad('Es la misma posición', 'Escanea la posición a donde llevaste la tarima.');
@@ -1896,6 +1915,7 @@ function mvTo(raw) {
   S.ui.hl = pk.key; if (S.ui.sel === v.from) S.ui.sel = pk.key;
   toast('Reubicada: ' + v.from + ' → ' + pk.key + ' · ' + id, 'ok');
   render();
+  reveal('#tab-move', 'start');
 }
 
 /* =========================================================
@@ -2175,7 +2195,6 @@ const ACT = {
   },
   'put-accept': d => registerPut(d.key, 'Ubicación distinta a la sugerida (' + S.ui.put.sug + ')'),
   'put-retry': () => { if (S.ui.put) S.ui.put.msg = null; render(); const i = $('#put-loc'); if (i) i.focus(); },
-  'put-next': () => { S.ui.put = null; ACT['put-sim-master'](); },
   'put-reset': () => { S.ui.put = null; render(); },
   // Buscar
   'find-q': d => { S.ui.q = d.q; findStart = performance.now(); renderFind(); save(); },
@@ -2199,6 +2218,7 @@ const ACT = {
       setTimeout(() => {
         o.msg = {kind: 'bad', title: 'No hay tarima en la posición', text: 'El lector no encontró ninguna etiqueta en ' + line.key + ': la posición está físicamente vacía aunque el sistema la tenía ocupada (ubicación fantasma).', actions: [{act: 'out-missing', label: 'Reportar No encontrado y sustituir por la siguiente FEFO', cls: 'btn-pri'}]};
         render();
+        reveal('#out-target');
       }, RM.matches ? 0 : 420);
       return;
     }
@@ -2227,6 +2247,7 @@ const ACT = {
     if (repl) { o.lines.push({m: repl.m, key: repl.loc, st: 'pend', repl: true}); o.msg = {kind: 'info', title: 'Sustituida por la siguiente FEFO', text: 'Se agregó ' + repl.loc + ' (lote ' + repl.lot + ', vence ' + fmtD(repl.exp) + '). La posición reportada quedó en verificación.'}; }
     else o.msg = {kind: 'warn', title: 'Sin sustituto disponible', text: 'No hay más tarimas surtibles de este producto.'};
     render();
+    reveal('#out-target');
   },
   'out-retry': () => { if (S.ui.out) S.ui.out.msg = null; render(); const i = $('#out-scan'); if (i) i.focus(); },
   'out-cancel': () => { S.ui.out = null; render(); },
@@ -2340,7 +2361,7 @@ document.addEventListener('submit', e => {
     case 'out-new': {
       const sku = $('#out-sku').value, qty = Math.max(1, Math.min(12, parseInt($('#out-qty').value, 10) || 1)), dock = $('#out-dock').value;
       if (!sku) { toast('No hay productos con inventario surtible.', 'warn'); return; }
-      makeOrder(sku, qty, dock); render();
+      makeOrder(sku, qty, dock); render(); reveal('#out-order', 'start');
       break;
     }
     case 'out-scan': outScan(v); break;

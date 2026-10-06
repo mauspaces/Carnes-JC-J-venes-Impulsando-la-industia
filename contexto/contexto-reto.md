@@ -125,7 +125,7 @@
 |---|---|---|
 | Héctor Rafael Esquer Camacho | Ing. en Sistemas Computacionales | Software, integración con Odoo, motor de asignación, coordinación |
 | Mauro Acuña Olivarria | Ing. Mecatrónica | Levantamiento físico, codificación de ubicaciones, mapa de cámaras, medición |
-| Francisco Efraín Pazos Quintero | Ing. Mecatrónica | Infraestructura y red local, hardware y etiquetas para -18 °C, pruebas, capacitación (confirmar que sigue en el equipo) |
+| Francisco Efraín Pazos Quintero | Ing. Mecatrónica | Infraestructura y red local, hardware y etiquetas para -18 °C, pruebas, capacitación |
 | Jesús Renato Montoya Morales | Asesor / maestro tutor | Acompañamiento académico |
 
 Institución: Instituto Tecnológico de Hermosillo (TecNM). Los datos de contacto (teléfonos y correos) van en la cédula y el formulario, no en el anteproyecto.
