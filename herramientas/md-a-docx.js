@@ -324,7 +324,7 @@ const footer = new Footer({
           wrap: { type: TextWrappingType.NONE },
         },
       }),
-      new TextRun({ text: 'UbicaFrío · Anteproyecto · Reto Carnes JC · JII 2026    ', size: 15, color: GRIS }),
+      new TextRun({ text: 'UbicaJC · Anteproyecto · Reto Carnes JC · JII 2026    ', size: 15, color: GRIS }),
       new TextRun({ children: ['Página ', PageNumber.CURRENT, ' de ', PageNumber.TOTAL_PAGES], size: 15, color: GRIS }),
     ],
   })],
@@ -340,8 +340,8 @@ const numero = (nivel, formato, texto) => ({
 });
 
 const doc = new Document({
-  creator: 'Equipo UbicaFrío',
-  title: 'Anteproyecto UbicaFrío — Reto Carnes JC',
+  creator: 'Equipo UbicaJC',
+  title: 'Anteproyecto UbicaJC — Reto Carnes JC',
   styles: {
     default: { document: { run: { font: FUENTE, size: 21 }, paragraph: { spacing: { after: 110, line: 264, lineRule: LineRuleType.AUTO } } } },
     paragraphStyles: [

@@ -169,6 +169,7 @@ main.wrap{padding-block:20px 36px;display:grid;gap:16px;min-width:0}
 .sec-h > div{display:grid;gap:4px}
 .sec-sub{max-width:62ch;font-size:.9375rem}
 .h-temp{font:500 .55em/1 var(--f-mono);color:var(--ink-2);vertical-align:.25em;margin-left:6px}
+.h-id{font-family:var(--f-mono);font-weight:600;font-size:.86em;letter-spacing:-.03em}
 .panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px;display:grid;gap:14px;min-width:0;align-content:start}
 .panel-h{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 12px}
 .cols{display:grid;gap:16px;grid-template-columns:minmax(0,1fr)}
@@ -258,7 +259,7 @@ main.wrap,.tab,.panel,.ficha,.step-b,.kpi,.task,.task-res,.chart,.guide,.target,
 .cam:hover{border-color:var(--ink-3)}
 .cam[aria-pressed="true"]{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent);background:var(--accent-soft)}
 .cam-top{display:flex;justify-content:space-between;align-items:baseline;gap:6px;flex-wrap:wrap}
-.cam-id{font:700 1.45rem/1 var(--f-display)}
+.cam-id{font:600 1.2rem/1 var(--f-mono);letter-spacing:-.02em}
 .cam-temp{font:500 .75rem/1 var(--f-mono);color:var(--ink-2)}
 .cam-type{font-size:.75rem;color:var(--ink-2);line-height:1.2}
 .cam-bar{display:block;height:5px;background:var(--line-2);border-radius:3px;overflow:hidden}
@@ -297,8 +298,10 @@ main.wrap,.tab,.panel,.ficha,.step-b,.kpi,.task,.task-res,.chart,.guide,.target,
 
 /* Ficha */
 .ficha{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px;display:grid;gap:14px;align-content:start;min-width:0}
-.ficha-h{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px}
-.ficha-h .x{margin-left:auto}
+.ficha{position:relative}
+.ficha-h{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;padding-right:52px}
+.ficha-h .x{position:absolute;top:10px;right:10px;padding:0;width:44px}
+.ficha-h .placard{font-size:1.3rem}
 .ficha-sum{display:grid;gap:4px}
 .ficha-sum b{font-size:1.05rem}
 @media (max-width:999px){
@@ -489,12 +492,25 @@ details.tview summary{cursor:pointer;min-height:44px;display:inline-flex;align-i
 .tip{position:fixed;z-index:50;pointer-events:none;background:var(--shell);color:var(--shell-ink);font-size:.8125rem;line-height:1.35;padding:7px 9px;border-radius:3px;max-width:260px;box-shadow:var(--shadow)}
 .tip b{font-weight:700}
 .foot{padding-block:18px 28px;font-size:.8125rem;color:var(--ink-2);border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:space-between}
+.sm-only{display:none}
 @media (max-width:620px){
   .n-user,.n-time{display:none}
   .net{font-size:.75rem}
-  .brand-sub{display:none}
-  .mast-ctrls{width:100%}
-  .switch{flex:1 1 100%}
+  .brand-sub,.lg-only,.hide-sm,.cam-type{display:none}
+  .sm-only{display:inline}
+  .mast .shell-in{padding-block:10px;gap:10px}
+  .brand-mark{width:34px;height:34px}
+  .brand-name{font-size:1.65rem}
+  .sim-tag{font-size:.5625rem;padding:4px 6px}
+  .mast-ctrls{width:100%;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+  .mast-ctrls .ctl{grid-column:span 2}
+  .mast-ctrls .ctl select{width:100%}
+  .mast-ctrls .switch{grid-column:span 1;padding:0 8px;gap:6px;font-size:.8125rem}
+  .mast-ctrls .sbtn{justify-content:center;padding:0 8px}
+  .mast-ctrls .switch .sw-track{width:34px}
+  .mast-ctrls .switch input:checked + .sw-track .sw-knob{transform:translateX(12px)}
+  .cam-grid{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:minmax(112px,1fr);overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
+  .map-tools .inp{min-height:44px;font-size:.9375rem}
 }
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
@@ -520,17 +536,17 @@ details.tview summary{cursor:pointer;min-height:44px;display:inline-flex;align-i
         <span class="sim-tag">Prototipo · datos simulados</span>
       </div>
       <div class="mast-ctrls">
-        <label class="ctl" for="user-sel"><span>Usuario</span>
+        <label class="ctl" for="user-sel"><span class="lg-only">Usuario</span>
           <select id="user-sel">
             <option>Montacarguista 1</option>
             <option>Almacenista</option>
             <option>Supervisor</option>
           </select>
         </label>
-        <label class="switch" for="net-toggle"><input type="checkbox" id="net-toggle" role="switch"><span class="sw-track" aria-hidden="true"><span class="sw-knob"></span></span><span>Simular caída de internet</span></label>
-        <button type="button" class="sbtn" id="guide-btn" data-act="guide" aria-expanded="false" aria-controls="guide">Guion de demo</button>
+        <label class="switch" for="net-toggle"><input type="checkbox" id="net-toggle" role="switch"><span class="sw-track" aria-hidden="true"><span class="sw-knob"></span></span><span class="lg-only">Simular caída de internet</span><span class="sm-only">Sin internet</span></label>
+        <button type="button" class="sbtn" id="guide-btn" data-act="guide" aria-expanded="false" aria-controls="guide">Guion<span class="lg-only">&nbsp;de demo</span></button>
         <button type="button" class="sbtn" id="theme-btn" data-act="theme">Tema: sistema</button>
-        <button type="button" class="sbtn" id="reset-btn" data-act="reset-ask">Reiniciar demo</button>
+        <button type="button" class="sbtn" id="reset-btn" data-act="reset-ask">Reiniciar<span class="lg-only">&nbsp;demo</span></button>
       </div>
     </div>
   </header>
@@ -1108,7 +1124,7 @@ const hideTip = () => { tip.hidden = true; };
 const GUIDE = [
   {t: 'Mapa 2D y vista 3D', d: 'Cámara C4: estado de cada posición por color y forma. Cambia a Vista 3D, gírala y toca una tarima.', go() { S.ui.cam = 'C4'; S.ui.view = '3d'; S.ui.sel = null; S.ui.hl = null; setTab('map'); }},
   {t: 'Entrada con poka-yoke', d: 'Simula el escaneo de una tarima de embalaje, revisa por qué el motor sugiere esa posición y escanea otra para ver la advertencia.', go() { S.ui.put = null; setTab('put'); ACT['put-sim-master'](); }},
-  {t: 'Ubicación fantasma', d: 'Busca “arrachera”: la primera según FEFO ya no está físicamente. Usa “Ver en mapa” y después “No encontrado”.', go() { S.ui.q = 'arrachera'; findStart = 0; setTab('find'); }},
+  {t: 'Ubicación fantasma', d: 'Busca “arrachera congelado”: la primera según FEFO ya no está físicamente. Usa “Ver en mapa” y después “No encontrado”.', go() { S.ui.q = 'arrachera congelado'; findStart = 0; setTab('find'); }},
   {t: 'Surtido FEFO con doble escaneo', d: 'Orden de 2 tarimas de rib eye congelado. Prueba “master equivocado” y el caso de posición vacía.', go() { makeOrder('RES-1102', 2, 'Cortina 2'); setTab('out'); }},
   {t: 'Conteo cíclico y exactitud', d: 'Cierra las tareas: sí estaba, estaba en otra ubicación o no existe (autoriza Supervisor).', go() { setTab('count'); }},
   {t: 'Caída de internet', d: 'Activa la caída, registra un acomodo o una salida y restaura: la cola se sincroniza con Odoo.', go() { if (S.online) setOnline(false); setTab('put'); }},
@@ -1137,6 +1153,7 @@ let wantScroll = false, findStart = 0;
 function render() {
   renderShell();
   TAB_IDS.forEach(id => { $('#tab-' + id).hidden = id !== S.ui.tab; });
+  document.body.classList.toggle('has-sheet', S.ui.tab === 'map' && !!S.ui.sel);
   RENDER[S.ui.tab]();
   document.body.classList.toggle('has-sheet', S.ui.tab === 'map' && !!S.ui.sel);
   save();
@@ -1174,8 +1191,8 @@ function setTab(t) {
   const top = main.getBoundingClientRect().top + window.scrollY - $('.ops').offsetHeight;
   if (window.scrollY > top) window.scrollTo({top, behavior: 'auto'});
 }
-function secH(eyebrow, title, sub) {
-  return '<div class="sec-h"><div><p class="eyebrow">' + eyebrow + '</p><h2>' + title + '</h2></div>' + (sub ? '<p class="sec-sub muted">' + sub + '</p>' : '') + '</div>';
+function secH(eyebrow, title, sub, subCls) {
+  return '<div class="sec-h"><div><p class="eyebrow">' + eyebrow + '</p><h2>' + title + '</h2></div>' + (sub ? '<p class="sec-sub muted ' + (subCls || '') + '">' + sub + '</p>' : '') + '</div>';
 }
 function msgHTML(m) {
   if (!m) return '';
@@ -1315,7 +1332,7 @@ function renderMap() {
   if (S.ui.mapFilter && !['due', 'chk'].includes(S.ui.mapFilter) && !skus.includes(S.ui.mapFilter)) S.ui.mapFilter = '';
   if (S.ui.sel && camOf(S.ui.sel) !== c.id) S.ui.sel = null;
   el.innerHTML =
-    secH('Mapa de cámara', c.id + ' · ' + TYPE[c.type].name + '<span class="h-temp" data-temp="' + c.id + '">' + fmtTemp(c.id) + '</span>', c.racks + ' racks · ' + LV + ' niveles · ' + st.cap + ' posiciones (una tarima por rack-nivel) · pasillo central con ' + (c.racks / 2) + ' racks por lado. Código de ubicación: cámara-rack-nivel, por ejemplo ' + keyOf(c.id, 7, 3) + '.') +
+    secH('Mapa de cámara', '<span class="h-id">' + c.id + '</span> · ' + TYPE[c.type].name + '<span class="h-temp" data-temp="' + c.id + '">' + fmtTemp(c.id) + '</span>', c.racks + ' racks · ' + LV + ' niveles · ' + st.cap + ' posiciones (una tarima por rack-nivel) · pasillo central con ' + (c.racks / 2) + ' racks por lado. Código de ubicación: cámara-rack-nivel, por ejemplo ' + keyOf(c.id, 7, 3) + '.', 'hide-sm') +
     '<div class="cam-grid" role="group" aria-label="Cámaras">' + CHAMBERS.map(camChip).join('') + '</div>' +
     '<p class="note">' + icon('info') + '<span>Tipo y tamaño por cámara: configuración ilustrativa, a confirmar en el levantamiento físico.</span></p>' +
     '<div class="map-tools"><div class="seg" role="group" aria-label="Tipo de vista">' +
@@ -1431,7 +1448,7 @@ function paint3D(phase) {
     if ((p - 1) % every) continue;
     ['A', 'B'].forEach(side => {
       const r = side === 'A' ? 2 * p - 1 : 2 * p;
-      const yl = sideY(side) === 0 ? RD + 0.45 : RD + AW - 0.45;
+      const yl = sideY(side) === 0 ? RD + 0.45 : YT + 0.24;
       const q = P3(bayX(p) + 0.5, yl, 0);
       ctx.fillText('R' + pad(r), q[0], q[1]);
     });
@@ -1665,7 +1682,7 @@ function runSearch(q) {
 }
 function renderFind() {
   const el = $('#tab-find');
-  const quick = ['arrachera', 'rib eye', 'molida', S.demo.lot, 'por vencer'];
+  const quick = ['arrachera congelado', 'rib eye', 'molida', S.demo.lot, 'por vencer'];
   if (S.ui.q.trim() && !findStart) findStart = performance.now();
   el.innerHTML = secH('Buscar', '¿Dónde está?', 'Resultados en orden FEFO: primero lo que vence antes. Busca por producto, lote, etiqueta master o ubicación; funciona igual sin internet.') +
     '<section class="panel"><form data-form="find" autocomplete="off" role="search"><label class="fld-lab" for="q">Producto, lote, etiqueta master o ubicación</label>' +

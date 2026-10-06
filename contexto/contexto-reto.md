@@ -109,3 +109,13 @@
 - Racks: **algunos están identificados, pero no todos**.
 - **Odoo se usa desde el navegador** (Odoo siempre es web; falta confirmar si está en la nube o en servidor local).
 - No se cuenta con los logos del formato oficial en archivo; se toman de la convocatoria.
+
+## Decisiones y datos adicionales (5 oct 2026, noche)
+- **Nombre del sistema: UbicaJC.** Lema: "Tradición trazable: cada tarima en su lugar". (Reemplaza a "UbicaFrío".)
+- Nota legal: la marca JC es propiedad de Carnes JC; el nombre es una propuesta para uso interno de la empresa; la titularidad del desarrollo se acordará con Carnes JC y el TecNM.
+- **Entrega: lunes 5 de octubre de 2026 antes de medianoche (prórroga del COECYT)** vía Google Forms (forms.gle/djWTihymZZM6cJSSA): subir "Cédula de Registro" y "Anteproyecto".
+- **2 montacargas por turno** en logística.
+- No se mencionaron tiempos de búsqueda, tarimas por día ni frecuencia de las ubicaciones fantasma ("solo dijeron que ha pasado") → todo eso es línea base a medir en S1.
+- El asesor (Jesús Renato Montoya Morales) está de acuerdo en participar como maestro tutor.
+- No se tomaron fotos en la visita.
+- Carnes JC compartió un video con más información (youtube.com/watch?v=s3y63YV0OgQ); pendiente de revisar.
